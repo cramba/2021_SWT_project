@@ -1,6 +1,6 @@
 package GUI;
 
-public class EditShelfViewController {
+public class EditShelfViewController extends ViewController{
 
 
     public EditShelfViewController(){

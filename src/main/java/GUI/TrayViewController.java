@@ -1,6 +1,6 @@
 package GUI;
 
-public class TrayViewController {
+public class TrayViewController extends ViewController{
 
     public TrayViewController(){
 

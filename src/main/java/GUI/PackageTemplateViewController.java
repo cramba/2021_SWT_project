@@ -1,6 +1,6 @@
 package GUI;
 
-public class PackageTemplateViewController {
+public class PackageTemplateViewController extends ViewController{
 
     public PackageTemplateViewController(){
 

@@ -60,7 +60,7 @@ public class Validator {
             }
             return 0;
         });
-        List<Package> sorted_list = packageList.sort();
+        //List<Package> sorted_list = packageList.sort();
         
         return 0.0f;
     }

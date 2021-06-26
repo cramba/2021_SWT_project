@@ -19,7 +19,7 @@ public class ShelfManager {
         packageTemplate = new ArrayList<Package>();
     }
 
-    public void movePackage(Package pck, int positionX, int positionY){,
+    public void movePackage(Package pck, int positionX, int positionY){
 
 
 

@@ -1,6 +1,8 @@
 package GUI;
 
-public class ShelfView {
+import javafx.scene.layout.GridPane;
+
+public class ShelfView extends GridPane {
 
     public ShelfView(){
 

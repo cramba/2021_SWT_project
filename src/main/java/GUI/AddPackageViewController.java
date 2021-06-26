@@ -1,9 +1,13 @@
 package GUI;
 
-public class AddPackageViewController {
+import javafx.scene.layout.Pane;
+
+public class AddPackageViewController extends ViewController{
+    Pane view;
 
     public AddPackageViewController(){
-
+        view = new AddPackageView();
+        root = view;
         initialize();
     }
 

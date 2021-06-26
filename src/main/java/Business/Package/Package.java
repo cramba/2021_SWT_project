@@ -12,6 +12,7 @@ public class Package {
     private int positionX;
     private int positionY;
     private List<Colour> incompatibility;
+    private List<Package> packagesAbove;
 
     public Package(String name, int height, int width, float weight, Colour colour, int positionX, int positionY, List<Colour> incompatibility){
         this.name = name;
@@ -22,6 +23,7 @@ public class Package {
         this.positionX = positionX;
         this.positionY = positionY;
         this.incompatibility = incompatibility;
+        this.packagesAbove = new ArrayList<>();
     }
 
     public List<Colour> getIncompatibility(){
@@ -35,11 +37,11 @@ public class Package {
     public float getWeight(){
         return weight;
     }
-
+    
     public int getPositionX() {
         return positionX;
     }
-
+    
     public int getPositionY() {
         return positionY;
     }

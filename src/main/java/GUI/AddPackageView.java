@@ -1,6 +1,8 @@
 package GUI;
 
-public class AddPackageView {
+import javafx.scene.layout.BorderPane;
+
+public class AddPackageView extends BorderPane {
 
     public AddPackageView(){
         

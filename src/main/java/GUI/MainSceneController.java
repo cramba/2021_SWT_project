@@ -1,6 +1,6 @@
 package GUI;
 
-public class MainSceneController {
+public class MainSceneController extends ViewController{
 
     public MainSceneController(){
 
