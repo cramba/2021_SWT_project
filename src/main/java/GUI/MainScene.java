@@ -15,7 +15,35 @@ public class MainScene extends BorderPane {
 	TrayViewController trayViewController ; 
 	VBox setRightVBox;
 
-    public MainScene(ShelfManager shelfManager){
+	public AddPackageViewController getAddPackageViewController() {
+		return addPackageViewController;
+	}
+
+	public ConfigurationViewController getConfigurationViewController() {
+		return configurationViewController;
+	}
+
+	public EditShelfViewController getEditShelfViewController() {
+		return editShelfViewController;
+	}
+
+	public PackageTemplateViewController getPackageTemplateViewController() {
+		return packageTemplateViewController;
+	}
+
+	public ShelfViewController getShelfViewController() {
+		return shelfViewController;
+	}
+
+	public TrayViewController getTrayViewController() {
+		return trayViewController;
+	}
+
+	public VBox getSetRightVBox() {
+		return setRightVBox;
+	}
+
+	public MainScene(ShelfManager shelfManager){
 
         //Top
         //Left
@@ -42,8 +70,8 @@ public class MainScene extends BorderPane {
 
 //    	this.setTop();
 //   	this.setCenter(shelfViewController.getRoot());
-//    	this.setRight(setRightVBox);
-//    	this.setLeft();
+//    	this.setLeft(setRightVBox);
+    	this.setRight(addPackageViewController.getRoot());
     	this.setBottom(configurationViewController.getRoot());
     	
     }

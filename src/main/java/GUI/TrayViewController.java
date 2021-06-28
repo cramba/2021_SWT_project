@@ -10,7 +10,6 @@ public class TrayViewController extends ViewController{
 
     public TrayViewController(ShelfManager shelfManager){
     	super(shelfManager);
-        
     	initialize();
     }
     public void initialize(){

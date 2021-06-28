@@ -20,10 +20,36 @@ public class ConfigurationView extends BorderPane {
     Button safeConfigurationButton;
     HBox hBox1, hBox2, hBox3;
     VBox vBox1, vBox2;
-    
-    
 
-    
+
+    public Button getShelfEditButton() {
+        return shelfEditButton;
+    }
+
+    public Button getAddPackageButton() {
+        return addPackageButton;
+    }
+
+    public Label getErrorMessageLabel() {
+        return errorMessageLabel;
+    }
+
+    public Label getPacketInformationLabel() {
+        return packetInformationLabel;
+    }
+
+    public Button getDeleteButton() {
+        return deleteButton;
+    }
+
+    public Button getLoadConfigurationButton() {
+        return loadConfigurationButton;
+    }
+
+    public Button getSafeConfigurationButton() {
+        return safeConfigurationButton;
+    }
+
     public ConfigurationView(){
 
         shelfEditButton = new Button("Regal bearbeiten");

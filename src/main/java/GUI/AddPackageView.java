@@ -1,11 +1,11 @@
 package GUI;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import Business.Package.Colour;
+import javafx.collections.FXCollections;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class AddPackageView extends VBox {
     HBox name;
@@ -14,7 +14,7 @@ public class AddPackageView extends VBox {
 
     HBox colour;
     Label colourLabel;
-    ColorPicker colourInput;
+    ComboBox<Color> colourInput;
 
     HBox width;
     Label widthLabel;
@@ -43,25 +43,27 @@ public class AddPackageView extends VBox {
     Button newTemplateButton;
 
     public AddPackageView() {
-        
+
         nameLabel = new Label("Name:");
         nameInput = new TextField();
-        
+
         colourLabel = new Label("Farbe:");
-        colourInput = new ColorPicker();
-        
+        colourInput = new ComboBox<>();
+        colourInput.getItems().addAll(Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN);
+
         widthLabel = new Label("Breite:");
         widthInput = new TextField();
-        
+
         heightLabel = new Label("Höhe:");
         heightInput = new TextField();
-        
+
         weightLabel = new Label("Gewicht:");
         weightInput = new TextField();
-        
-        incompatibilityLabel = new Label("Unverträglicchkeit:");
+
+        incompatibilityLabel = new Label("Unverträglichkeit:");
+
         incompatibilityInput = new HBox();
-        
+
         maxLoadCapacityLabel = new Label("max. Traglast:");
         maxLoadCapacityInput = new TextField();
 
@@ -72,7 +74,7 @@ public class AddPackageView extends VBox {
 
         name = new HBox();
         name.getChildren().addAll(nameLabel, nameInput);
-        
+
 
         colour = new HBox();
         colour.getChildren().addAll(colourLabel, colourInput);
@@ -93,7 +95,7 @@ public class AddPackageView extends VBox {
         maxLoadCapacity.getChildren().addAll(maxLoadCapacityLabel, maxLoadCapacityInput);
 
         this.getChildren().addAll(closeButton, new Label("Paket hinzufügen"), name, colour, width, height, weight, incompatibility, maxLoadCapacity, new HBox(doneButton, newTemplateButton));
-        
+
     }
 
     public HBox getName() {
@@ -116,7 +118,7 @@ public class AddPackageView extends VBox {
         return colourLabel;
     }
 
-    public ColorPicker getColourInput() {
+    public ComboBox<Color> getColourInput() {
         return colourInput;
     }
 

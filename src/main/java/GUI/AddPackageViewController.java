@@ -3,15 +3,16 @@ package GUI;
 import Business.Package.Package;
 import Business.ShelfManager.ShelfManager;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Callback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddPackageViewController extends ViewController{
+public class AddPackageViewController extends ViewController {
     AddPackageView view;
 
     Button closeButton;
@@ -19,10 +20,12 @@ public class AddPackageViewController extends ViewController{
     Button doneButton;
     Button newTemplateButton;
 
+    ComboBox<Color> colorComboBox;
+
     ShelfManager shelfManager;
     TrayViewController trayViewController;
 
-    public AddPackageViewController(ShelfManager shelfManager, TrayViewController trayViewController){
+    public AddPackageViewController(ShelfManager shelfManager, TrayViewController trayViewController) {
         super(shelfManager);
         this.trayViewController = trayViewController;
         view = new AddPackageView();
@@ -31,12 +34,37 @@ public class AddPackageViewController extends ViewController{
         addIncompatibilityColour = view.getAddIncompatibilityColour();
         doneButton = view.getDoneButton();
 
-        initialize();
+        colorComboBox = view.getColourInput();
+
         root = view;
+        initialize();
 
     }
 
-    public void initialize(){
+    public void initialize() {
+        colorComboBox.setCellFactory(new Callback<ListView<Color>, ListCell<Color>>() {
+            @Override public ListCell<Color> call(ListView<Color> p) {
+                return new ListCell<Color>() {
+                    private final Rectangle rectangle;
+                    {
+                        setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                        rectangle = new Rectangle(10, 10);
+                    }
+
+                    @Override protected void updateItem(Color item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (item == null || empty) {
+                            setGraphic(null);
+                        } else {
+                            rectangle.setFill(item);
+                            setGraphic(rectangle);
+                        }
+                    }
+                };
+            }
+        });
+
         closeButton.setOnAction((e) -> {
             view.setVisible(false);
         });
@@ -53,13 +81,17 @@ public class AddPackageViewController extends ViewController{
             float weight = Float.parseFloat(view.getWeightInput().getText());
             Color colour = view.getColourInput().getValue();
             List<Color> incompatibilityColors = new ArrayList<>();
-            for(Node node: view.getIncompatibility().getChildren()){
-                if(node instanceof ColorPicker){
+            for (Node node : view.getIncompatibility().getChildren()) {
+                if (node instanceof ColorPicker) {
                     incompatibilityColors.add(((ColorPicker) node).getValue());
                 }
             }
             Package newPck = new Package(name, height, width, weight, colour, 0, 0, incompatibilityColors);
             trayViewController.setPackageinTray(newPck);
         });
+    }
+
+    public AddPackageView getView() {
+        return view;
     }
 }
