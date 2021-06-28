@@ -22,7 +22,7 @@ public class AddPackageViewController extends ViewController{
     TrayViewController trayViewController;
 
     public AddPackageViewController(ShelfManager shelfManager, TrayViewController trayViewController){
-        this.shelfManager = shelfManager;
+        super(shelfManager);
         this.trayViewController = trayViewController;
         view = new AddPackageView();
 
