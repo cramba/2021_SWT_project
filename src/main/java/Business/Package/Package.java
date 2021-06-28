@@ -1,5 +1,7 @@
 package Business.Package;
 
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +10,13 @@ public class Package {
     private int height;
     private int width;
     private float weight;
-    private Colour colour;
+    private Color colour;
     private int positionX;
     private int positionY;
-    private List<Colour> incompatibility;
+    private List<Color> incompatibility;
     private List<Package> packagesAbove;
 
-    public Package(String name, int height, int width, float weight, Colour colour, int positionX, int positionY, List<Colour> incompatibility){
+    public Package(String name, int height, int width, float weight, Color colour, int positionX, int positionY, List<Color> incompatibility){
         this.name = name;
         this.height = height;
         this.width = width;
@@ -26,11 +28,11 @@ public class Package {
         this.packagesAbove = new ArrayList<>();
     }
 
-    public List<Colour> getIncompatibility(){
+    public List<Color> getIncompatibility(){
         return incompatibility;
     }
 
-    public Colour getColour(){
+    public Color getColour(){
         return colour;
     }
 

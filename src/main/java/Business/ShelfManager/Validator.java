@@ -2,6 +2,7 @@ package Business.ShelfManager;
 
 import Business.Package.Package;
 import Business.Package.Colour;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ public class Validator {
         // für jedes aktuelle Paket wird verglichen, ob in der FarbListe der neuen PaketListe die Farbe enthalten ist
         for(Package pck: packageList){
             for(Package nPck: newPackageList){
-                for(Colour color: nPck.getIncompatibility()){
+                for(Color color: nPck.getIncompatibility()){
                     if(pck.getColour() == color){
                         return false;
                     }
@@ -26,7 +27,7 @@ public class Validator {
         //sich nicht vertragen sollten, reicht ein Vergleichsblock aus
         for(Package nPck: newPackageList){
             for(Package pck: packageList){
-                for(Colour color: pck.getIncompatibility()){
+                for(Color color: pck.getIncompatibility()){
                     if(nPck.getColour() == color){
                         return false;
                     }

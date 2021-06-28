@@ -1,5 +1,7 @@
 package GUI;
 
+import Business.Package.Package;
+
 public class TrayViewController extends ViewController{
 
     public TrayViewController(){
@@ -8,5 +10,9 @@ public class TrayViewController extends ViewController{
     }
     public void initialize(){
 
+    }
+
+    public void setPackageinTray(Package p){
+        //Paket in Ablage setzen
     }
 }
