@@ -6,6 +6,39 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class MainScene extends BorderPane {
+
+	public MainScene(ShelfManager shelfManager){
+
+		//Top
+		//Left
+		//Center -shelfView (Gridpane/Stackpane)
+		//Right -packageTemplateView - Marc , TrayView  - Florian
+		//Bottom - configurationView (Hbox)   - Florian
+
+		//popUPFenster - addPackageView, (EditShelfView)  - Lena
+
+
+		//Logic: jeder versucht schonmal seine logic der Funktion die er im Laufzeidiagramm hatte zu implementieren.
+
+		trayViewController = new TrayViewController(shelfManager);
+		addPackageViewController = new AddPackageViewController(shelfManager, trayViewController);
+		configurationViewController = new ConfigurationViewController(shelfManager);
+		editShelfViewController = new EditShelfViewController(shelfManager);
+		packageTemplateViewController = new PackageTemplateViewController(shelfManager);
+		shelfViewController = new ShelfViewController(shelfManager);
+		setRightVBox = new VBox();
+
+
+//    	setRightVBox.getChildren().addAll(packageTemplateViewController.getRoot(),trayViewController.getRoot());
+
+
+//    	this.setTop();
+//   	this.setCenter(shelfViewController.getRoot());
+		this.setRight(trayViewController.getRoot());
+		this.setLeft(addPackageViewController.getRoot());
+		this.setBottom(configurationViewController.getRoot());
+
+	}
 	
 	AddPackageViewController addPackageViewController;
 	ConfigurationViewController configurationViewController ; 
@@ -43,36 +76,5 @@ public class MainScene extends BorderPane {
 		return setRightVBox;
 	}
 
-	public MainScene(ShelfManager shelfManager){
 
-        //Top
-        //Left
-        //Center -shelfView (Gridpane/Stackpane)
-        //Right -packageTemplateView - Marc , TrayView  - Florian 
-        //Bottom - configurationView (Hbox)   - Florian 
-
-        //popUPFenster - addPackageView, (EditShelfView)  - Lena 
-
-
-        //Logic: jeder versucht schonmal seine logic der Funktion die er im Laufzeidiagramm hatte zu implementieren.
-
-    	trayViewController = new TrayViewController(shelfManager);
-    	addPackageViewController = new AddPackageViewController(shelfManager, trayViewController);
-    	configurationViewController = new ConfigurationViewController(shelfManager);
-    	editShelfViewController = new EditShelfViewController(shelfManager);
-    	packageTemplateViewController = new PackageTemplateViewController(shelfManager);
-    	shelfViewController = new ShelfViewController(shelfManager);
-    	setRightVBox = new VBox();
-    	
-    	
-//    	setRightVBox.getChildren().addAll(packageTemplateViewController.getRoot(),trayViewController.getRoot());
-    	
-
-//    	this.setTop();
-//   	this.setCenter(shelfViewController.getRoot());
-    	this.setRight(trayViewController.getRoot());
-    	this.setLeft(addPackageViewController.getRoot());
-    	this.setBottom(configurationViewController.getRoot());
-    	
-    }
 }

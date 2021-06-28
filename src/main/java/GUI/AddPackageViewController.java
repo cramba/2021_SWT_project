@@ -16,7 +16,7 @@ public class AddPackageViewController extends ViewController {
     AddPackageView view;
 
     Button closeButton;
-    Button addIncompatibilityColour;
+    Button addIncompatibilityColourButton;
     Button doneButton;
     Button newTemplateButton;
 
@@ -31,7 +31,7 @@ public class AddPackageViewController extends ViewController {
         view = new AddPackageView();
 
         closeButton = view.getCloseButton();
-        addIncompatibilityColour = view.getAddIncompatibilityColour();
+        addIncompatibilityColourButton = view.getAddIncompatibilityColourButton();
         doneButton = view.getDoneButton();
 
         colorComboBox = view.getColourInput();
@@ -65,14 +65,20 @@ public class AddPackageViewController extends ViewController {
             }
         });
 
+        addIncompatibilityColourButton.setOnAction((e) -> {
+            ComboBox<Color> comboBox = new ComboBox<>();
+            view.getIncompatibilityInput().getChildren().add(comboBox);
+        });
+
+        addIncompatibilityColourButton.setOnAction((e) -> {
+            ColorPicker newColor = new ColorPicker();
+            view.getIncompatibilityInput().getChildren().add(newColor);
+        });
+        
         closeButton.setOnAction((e) -> {
             view.setVisible(false);
         });
 
-        addIncompatibilityColour.setOnAction((e) -> {
-            ColorPicker newColor = new ColorPicker();
-            view.getIncompatibilityInput().getChildren().add(newColor);
-        });
 
         doneButton.setOnAction((e) -> {
             String name = view.getNameLabel().getText();

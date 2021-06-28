@@ -31,6 +31,7 @@ public class AddPackageView extends VBox {
     HBox incompatibility;
     Label incompatibilityLabel;
     HBox incompatibilityInput;
+    Button addIncompatibilityColourButton;
 
     HBox maxLoadCapacity;
     Label maxLoadCapacityLabel;
@@ -38,7 +39,6 @@ public class AddPackageView extends VBox {
 
 
     Button closeButton;
-    Button addIncompatibilityColour;
     Button doneButton;
     Button newTemplateButton;
 
@@ -61,14 +61,14 @@ public class AddPackageView extends VBox {
         weightInput = new TextField();
 
         incompatibilityLabel = new Label("Unverträglichkeit:");
-
+        addIncompatibilityColourButton = new Button("+");
         incompatibilityInput = new HBox();
 
         maxLoadCapacityLabel = new Label("max. Traglast:");
         maxLoadCapacityInput = new TextField();
 
         closeButton = new Button("x");
-        addIncompatibilityColour = new Button("+");
+        addIncompatibilityColourButton = new Button("+");
         doneButton = new Button("Fertig");
         newTemplateButton = new Button("neue Vorlage");
 
@@ -89,7 +89,7 @@ public class AddPackageView extends VBox {
         weight.getChildren().addAll(weightLabel, weightInput);
 
         incompatibility = new HBox();
-        incompatibility.getChildren().addAll(incompatibilityLabel, new ColorPicker(), incompatibilityInput);
+        incompatibility.getChildren().addAll(incompatibilityLabel, incompatibilityInput, addIncompatibilityColourButton);
 
         maxLoadCapacity = new HBox();
         maxLoadCapacity.getChildren().addAll(maxLoadCapacityLabel, maxLoadCapacityInput);
@@ -178,8 +178,8 @@ public class AddPackageView extends VBox {
         return closeButton;
     }
 
-    public Button getAddIncompatibilityColour() {
-        return addIncompatibilityColour;
+    public Button getAddIncompatibilityColourButton() {
+        return addIncompatibilityColourButton;
     }
 
     public Button getDoneButton() {
