@@ -5,6 +5,7 @@ import Business.ShelfManager.ShelfManager;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -31,6 +32,8 @@ public class AddPackageViewController extends ViewController{
         doneButton = view.getDoneButton();
 
         initialize();
+        root = view;
+
     }
 
     public void initialize(){

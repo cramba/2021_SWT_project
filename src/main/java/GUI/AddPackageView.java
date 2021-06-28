@@ -43,18 +43,25 @@ public class AddPackageView extends VBox {
     Button newTemplateButton;
 
     public AddPackageView() {
+        
         nameLabel = new Label("Name:");
         nameInput = new TextField();
+        
         colourLabel = new Label("Farbe:");
         colourInput = new ColorPicker();
+        
         widthLabel = new Label("Breite:");
         widthInput = new TextField();
+        
         heightLabel = new Label("Höhe:");
         heightInput = new TextField();
+        
         weightLabel = new Label("Gewicht:");
         weightInput = new TextField();
+        
         incompatibilityLabel = new Label("Unverträglicchkeit:");
         incompatibilityInput = new HBox();
+        
         maxLoadCapacityLabel = new Label("max. Traglast:");
         maxLoadCapacityInput = new TextField();
 
@@ -64,7 +71,8 @@ public class AddPackageView extends VBox {
         newTemplateButton = new Button("neue Vorlage");
 
         name = new HBox();
-        name.getChildren().addAll(nameLabel, nameLabel);
+        name.getChildren().addAll(nameLabel, nameInput);
+        
 
         colour = new HBox();
         colour.getChildren().addAll(colourLabel, colourInput);
@@ -85,6 +93,7 @@ public class AddPackageView extends VBox {
         maxLoadCapacity.getChildren().addAll(maxLoadCapacityLabel, maxLoadCapacityInput);
 
         this.getChildren().addAll(closeButton, new Label("Paket hinzufügen"), name, colour, width, height, weight, incompatibility, maxLoadCapacity, new HBox(doneButton, newTemplateButton));
+        
     }
 
     public HBox getName() {

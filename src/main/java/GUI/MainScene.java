@@ -15,7 +15,7 @@ public class MainScene extends BorderPane {
 	TrayViewController trayViewController ; 
 	VBox setRightVBox;
 
-    public MainScene(ShelfManager shelfManager ){
+    public MainScene(ShelfManager shelfManager){
 
         //Top
         //Left
