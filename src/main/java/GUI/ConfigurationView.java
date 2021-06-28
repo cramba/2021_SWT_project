@@ -32,7 +32,7 @@ public class ConfigurationView extends BorderPane {
         errorMessageLabel = new Label("Fehlermeldung:");
         hBox2 = new HBox();
         packetInformationLabel = new Label("Paket:");
-        deleteButton = new Button ("löschen");
+        deleteButton = new Button ("lÃ¶schen");
         hBox3 = new HBox();
         
         loadConfigurationButton = new Button("Konfiguration laden");

@@ -28,18 +28,16 @@ public class Main extends Application {
         shelfManager = new ShelfManager();
         rootController = new MainSceneController(shelfManager);
      
-        Pane root = rootController.getRoot() ; 
+        Pane root = rootController.getRoot();
         primaryStage.setTitle("Warehouse Masters!");
         scene = new Scene(root, 1200, 500);
 
         primaryStage.setScene(scene);
+        System.out.println("Fertig");
         primaryStage.show();
-
-
     }
 
     public void stop(){
         System.exit(0);
-
     }
 }

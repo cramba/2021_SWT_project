@@ -15,7 +15,7 @@ public class MainScene extends BorderPane {
 	TrayViewController trayViewController ; 
 	VBox setRightVBox;
 
-    public MainScene(ShelfManager shelfManager ){
+    public MainScene(ShelfManager shelfManager){
 
         //Top
         //Left
@@ -28,12 +28,12 @@ public class MainScene extends BorderPane {
 
         //Logic: jeder versucht schonmal seine logic der Funktion die er im Laufzeidiagramm hatte zu implementieren.
 
-    	addPackageViewController = new AddPackageViewController(shelfManager);
+    	trayViewController = new TrayViewController(shelfManager);
+    	addPackageViewController = new AddPackageViewController(shelfManager, trayViewController);
     	configurationViewController = new ConfigurationViewController(shelfManager);
     	editShelfViewController = new EditShelfViewController(shelfManager);
     	packageTemplateViewController = new PackageTemplateViewController(shelfManager);
     	shelfViewController = new ShelfViewController(shelfManager);
-    	trayViewController = new TrayViewController(shelfManager);
     	setRightVBox = new VBox();
     	
     	
