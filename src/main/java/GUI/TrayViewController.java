@@ -6,10 +6,13 @@ import Business.ShelfManager.ShelfManager;
 import javafx.scene.layout.Pane;
 
 public class TrayViewController extends ViewController{
-	Pane view;
+	TrayView view;
 
     public TrayViewController(ShelfManager shelfManager){
     	super(shelfManager);
+    	view = new TrayView();
+    	root = view  ;
+        
     	initialize();
     }
     public void initialize(){

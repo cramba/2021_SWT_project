@@ -13,12 +13,10 @@ public class MainSceneController extends ViewController{
 
     public MainSceneController(ShelfManager shelfManager){
     	super(shelfManager);
-
+    	
     	view = new MainScene(shelfManager) ;
         addPackageButton = view.getConfigurationViewController().getView().getAddPackageButton();
     	root = view;
-
-
 
         initialize();
     }

@@ -46,7 +46,7 @@ public class AddPackageView extends VBox {
 
         nameLabel = new Label("Name:");
         nameInput = new TextField();
-
+        
         colourLabel = new Label("Farbe:");
         colourInput = new ComboBox<>();
         colourInput.getItems().addAll(Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN);

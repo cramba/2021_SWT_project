@@ -70,8 +70,8 @@ public class MainScene extends BorderPane {
 
 //    	this.setTop();
 //   	this.setCenter(shelfViewController.getRoot());
-//    	this.setLeft(setRightVBox);
-    	this.setRight(addPackageViewController.getRoot());
+    	this.setRight(trayViewController.getRoot());
+    	this.setLeft(addPackageViewController.getRoot());
     	this.setBottom(configurationViewController.getRoot());
     	
     }
