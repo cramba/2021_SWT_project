@@ -1,6 +1,7 @@
 package Business.ShelfManager;
 
 import Business.Package.Colour;
+import Business.Package.Package;
 import Business.Shelf.Shelf;
 import Business.Shelf.ShelfFloor;
 import Business.Shelf.ShelfSupport;
@@ -12,13 +13,16 @@ public class ShelfManager {
 
     Shelf shelf;
     Object tray;
-    List<Package> packageTemplate;
+    ArrayList<Package> packageTemplate;
 
     public ShelfManager() {
 
         shelf = new Shelf();
         tray = new Object();
         packageTemplate = new ArrayList<Package>();
+        
+        packageTemplate.add(new Package("Testpaket", 40, 40, 3.5f));
+        packageTemplate.add(new Package("Kleines Paket", 20, 10, 1.5f));
     }
 
     public void movePackage(Package pck, int positionX, int positionY) {
@@ -62,6 +66,10 @@ public class ShelfManager {
 
     public void deleteShelfFloor(ShelfFloor shelFloor) {
 
+    }
+    
+    public ArrayList<Package> getTemplateList(){
+    	return packageTemplate;
     }
 
 }

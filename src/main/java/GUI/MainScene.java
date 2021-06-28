@@ -2,11 +2,19 @@ package GUI;
 
 import Business.ShelfManager.ShelfManager;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
 
 public class MainScene extends BorderPane {
 
+	AddPackageViewController addPackageViewController;
+	ConfigurationViewController configurationViewController ; 
+	EditShelfViewController editShelfViewController ; 
+	PackageTemplateViewController packageTemplateViewController ; 
+	ShelfViewController shelfViewController;
+	TrayViewController trayViewController ; 
+	VBox setRightVBox;
+	
 	public MainScene(ShelfManager shelfManager){
 
 		//Top
@@ -29,24 +37,18 @@ public class MainScene extends BorderPane {
 		setRightVBox = new VBox();
 
 
-//    	setRightVBox.getChildren().addAll(packageTemplateViewController.getRoot(),trayViewController.getRoot());
+		setRightVBox.getChildren().addAll(packageTemplateViewController.getRoot(), trayViewController.getRoot());
 
 
 //    	this.setTop();
 //   	this.setCenter(shelfViewController.getRoot());
-		this.setRight(trayViewController.getRoot());
+		this.setRight(setRightVBox);
 		this.setLeft(addPackageViewController.getRoot());
 		this.setBottom(configurationViewController.getRoot());
 
 	}
 	
-	AddPackageViewController addPackageViewController;
-	ConfigurationViewController configurationViewController ; 
-	EditShelfViewController editShelfViewController ; 
-	PackageTemplateViewController packageTemplateViewController ; 
-	ShelfViewController shelfViewController;
-	TrayViewController trayViewController ; 
-	VBox setRightVBox;
+	
 
 	public AddPackageViewController getAddPackageViewController() {
 		return addPackageViewController;

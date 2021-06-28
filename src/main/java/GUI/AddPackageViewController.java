@@ -92,8 +92,8 @@ public class AddPackageViewController extends ViewController {
                     incompatibilityColors.add(((ColorPicker) node).getValue());
                 }
             }
-            Package newPck = new Package(name, height, width, weight, colour, 0, 0, incompatibilityColors);
-            trayViewController.setPackageinTray(newPck);
+            //Package newPck = new Package(name, height, width, weight, colour, 0, 0, incompatibilityColors);
+            //trayViewController.setPackageinTray(newPck);
         });
     }
 
