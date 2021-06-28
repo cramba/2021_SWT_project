@@ -1,8 +1,17 @@
 package GUI;
 
-public class PackageTemplateViewController extends ViewController{
+import Business.ShelfManager.ShelfManager;
+import javafx.scene.layout.Pane;
 
-    public PackageTemplateViewController(){
+public class PackageTemplateViewController extends ViewController{
+	
+	Pane view;
+
+
+    public PackageTemplateViewController(ShelfManager shelfManager){
+    	super(shelfManager);
+    	
+    	
 
          initialize();
     }

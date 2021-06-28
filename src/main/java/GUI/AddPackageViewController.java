@@ -1,11 +1,15 @@
 package GUI;
 
 import javafx.scene.layout.Pane;
+import Business.ShelfManager.ShelfManager;
+
 
 public class AddPackageViewController extends ViewController{
-    Pane view;
+    
+	Pane view;
 
-    public AddPackageViewController(){
+    public AddPackageViewController(ShelfManager shelfManager){
+    	super(shelfManager);
         view = new AddPackageView();
         root = view;
         initialize();

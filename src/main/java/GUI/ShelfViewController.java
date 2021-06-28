@@ -1,8 +1,16 @@
 package GUI;
 
-public class ShelfViewController extends ViewController{
+import Business.ShelfManager.ShelfManager;
+import javafx.scene.layout.Pane;
 
-    public ShelfViewController(){
+public class ShelfViewController extends ViewController{
+	Pane view;
+
+
+    public ShelfViewController(ShelfManager shelfManager){
+    	super(shelfManager);
+    	view = new ShelfView();
+    	root = view;
 
          initialize();
     }

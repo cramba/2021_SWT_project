@@ -1,8 +1,13 @@
 package GUI;
 
-public class TrayViewController extends ViewController{
+import Business.ShelfManager.ShelfManager;
+import javafx.scene.layout.Pane;
 
-    public TrayViewController(){
+public class TrayViewController extends ViewController{
+	Pane view;
+
+    public TrayViewController(ShelfManager shelfManager){
+    	super(shelfManager);
 
          initialize();
     }

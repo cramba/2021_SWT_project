@@ -1,8 +1,17 @@
 package GUI;
 
-public class ConfigurationViewController extends ViewController{
+import Business.ShelfManager.ShelfManager;
+import javafx.scene.layout.Pane;
 
-    public ConfigurationViewController(){
+public class ConfigurationViewController extends ViewController{
+	
+	Pane view;
+
+    public ConfigurationViewController(ShelfManager shelfManager){
+    	super(shelfManager);
+    	view = new ConfigurationView() ;
+    	root = view  ;
+    	
         initialize();
     }
     public void initialize(){
