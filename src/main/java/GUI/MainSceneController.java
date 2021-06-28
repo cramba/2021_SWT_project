@@ -17,6 +17,8 @@ public class MainSceneController extends ViewController{
         initialize();
     }
     public void initialize(){
+    	
+    	
         
     }
 }
