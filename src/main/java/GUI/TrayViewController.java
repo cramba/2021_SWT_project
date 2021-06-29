@@ -61,23 +61,23 @@ public class TrayViewController extends ViewController{
     	  System.out.println(n.getTranslateY());
     	 }
     
-    private void checkBounds(Shape block) {
-    	boolean collisionDetected = false;
-    	 for (Shape static_bloc : nodes) {
-    		 if (static_bloc != block) {
-    		      static_bloc.setFill(Color.YELLOW); 
-    		      
-    		      if (block.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
-    			        collisionDetected = true;
-    			      }
-    		    }
-   	  		}
-   	  if (collisionDetected) {
-  	    block.setFill(Color.GREEN);
-  	  } else {
-  	    block.setFill(Color.BLUE);
-  	  }
-    }
+//    private void checkBounds(Shape block) {
+//    	boolean collisionDetected = false;
+//    	 for (Shape static_bloc : nodes) {
+//    		 if (static_bloc != block) {
+//    		      static_bloc.setFill(Color.YELLOW); 
+//    		      
+//    		      if (block.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
+//    			        collisionDetected = true;
+//    			      }
+//    		    }
+//   	  		}
+//   	  if (collisionDetected) {
+//  	    block.setFill(Color.GREEN);
+//  	  } else {
+//  	    block.setFill(Color.BLUE);
+//  	  }
+//    }
 
     public void setPackageinTray(Package p){
         //Paket in Ablage setzen
