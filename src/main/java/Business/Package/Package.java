@@ -16,18 +16,27 @@ public class Package {
     private List<Color> incompatibility;
     private List<Package> packagesAbove;
 
-    public Package(String name, int height, int width, float weight, Color colour, int positionX, int positionY, List<Color> incompatibility){
+    public Package(String name, int height, int width, float weight){
         this.name = name;
         this.height = height;
         this.width = width;
         this.weight = weight;
-        this.colour = colour;
-        this.positionX = positionX;
-        this.positionY = positionY;
-        this.incompatibility = incompatibility;
+//        this.colour = colour;
+//        this.positionX = positionX;
+//        this.positionY = positionY;
+//        this.incompatibility = incompatibility;
         this.packagesAbove = new ArrayList<>();
     }
 
+    public String getName() {
+    	return name;
+    }
+    
+    public String getSpecification() {
+    	String spec = height + " x " + width + "  " + weight + "kg";
+    	return spec;
+    }
+    
     public List<Color> getIncompatibility(){
         return incompatibility;
     }
