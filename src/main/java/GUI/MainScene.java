@@ -37,11 +37,11 @@ public class MainScene extends BorderPane {
     	setRightVBox = new VBox();
     	
     	
-//    	setRightVBox.getChildren().addAll(packageTemplateViewController.getRoot(),trayViewController.getRoot());
+    	//setRightVBox.getChildren().addAll(packageTemplateViewController.getRoot(),trayViewController.getRoot());
     	
 
 //    	this.setTop();
-//   	this.setCenter(shelfViewController.getRoot());
+    	this.setCenter(shelfViewController.getRoot());
     	this.setRight(trayViewController.getRoot());
     	this.setLeft(addPackageViewController.getRoot());
     	this.setBottom(configurationViewController.getRoot());

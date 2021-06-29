@@ -1,6 +1,7 @@
 package GUI;
 
 
+import javafx.scene.control.Button;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -16,11 +17,14 @@ import javafx.scene.shape.Rectangle;
 
 public class TrayView extends StackPane{
 	
-	Rectangle r ; 
+	Rectangle r,rectTarget ; 
 	StackPane group;
+	Button button;
     public TrayView(){
     	
-    	Rectangle r = new Rectangle(50,50,100,100);
+    	 r = new Rectangle(50,50,100,100);
+    	 rectTarget = new Rectangle(150, 150, 100, 100);
+    	 button = new Button();
     	
     	r.setFill(Color.RED);
     	
@@ -30,8 +34,18 @@ public class TrayView extends StackPane{
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     	
     	
-    	this.getChildren().add(r);
+    	this.getChildren().addAll(r);
        	
         
+    }
+    
+    public Rectangle getRectangle() {
+    	return r;
+    }
+    public Rectangle getRectTarget() {
+    	return rectTarget;
+    }
+    public Button getButton() {
+    	return button;
     }
 }
