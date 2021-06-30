@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
 public class ConfigurationViewController extends ViewController{
-    
+
 	ConfigurationView view;
 	Button loadConfigurationButton;
 	Button saveConfigurationButton;

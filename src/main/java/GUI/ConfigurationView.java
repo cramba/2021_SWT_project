@@ -55,7 +55,7 @@ public class ConfigurationView extends BorderPane {
         errorMessageLabel = new Label("Fehlermeldung:");
         hBox2 = new HBox();
         packetInformationLabel = new Label("Paket:");
-        deleteButton = new Button ("löschen");
+        deleteButton = new Button ("loeschen");
         hBox3 = new HBox();
         
         loadConfigurationButton = new Button("Konfiguration laden");
@@ -68,16 +68,35 @@ public class ConfigurationView extends BorderPane {
         hBox2.getChildren().addAll(errorMessageLabel);
         hBox3.getChildren().addAll(packetInformationLabel,deleteButton);
         
+        hBox1.setSpacing(10);
+        hBox2.setSpacing(10);
+        hBox3.setSpacing(10);
+        
         vBox1.getChildren().addAll(hBox1,hBox2,hBox3);
         
         vBox2.getChildren().addAll(loadConfigurationButton,safeConfigurationButton);
         
+        loadConfigurationButton.setId("grau");
+        safeConfigurationButton.setId("grau");
+        packetInformationLabel.setId("grau");
+        errorMessageLabel.setId("grau");
+        deleteButton.setId("rot");
+        shelfEditButton.setId("orange");
+        addPackageButton.setId("green");
+        
+        packetInformationLabel.setPadding(new Insets(05, 10, 05, 10));
+        errorMessageLabel.setPadding(new Insets(05, 10, 05, 10));
+        
+        vBox1.setSpacing(10);
+        vBox2.setSpacing(10);
+        vBox1.setAlignment(Pos.BASELINE_RIGHT);
+        vBox2.setAlignment(Pos.CENTER);
+        vBox1.setPadding(new Insets(30, 30, 20, 20));
+        vBox2.setPadding(new Insets(15, 30, 20, 25));
+        
         this.setLeft(vBox1);
         this.setRight(vBox2);
-        
-        
-        
-        
+        this.getStyleClass().addAll("background");
 
     }
 }
