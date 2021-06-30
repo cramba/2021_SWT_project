@@ -68,7 +68,10 @@ public class ShelfManager {
 
     }
 
-    public void deleteShelfSupport(ShelfSupport shelfSupport) {
+    public void deleteShelfSupport(int index) {
+    	
+    	shelf.removeShelfSupport(index);
+    	
 
     }
 
