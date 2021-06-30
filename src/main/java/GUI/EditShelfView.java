@@ -1,4 +1,5 @@
 package GUI;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -54,7 +55,11 @@ public class EditShelfView extends VBox {
     	moveShelfSupportLabel = new Label("Verschieben");
     	moveShelfSupportTextField = new TextField();
     	//Regalböden bearbeitung
-
+    	
+    	this.getStyleClass().addAll("background");
+    	
+    	this.setPadding(new Insets(55, 20, 20, 20));
+    	this.setSpacing(12);
     }
 
 	public Label getEditShelfSupportLabel() {

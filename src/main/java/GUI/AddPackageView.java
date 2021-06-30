@@ -101,7 +101,7 @@ public class AddPackageView extends VBox {
 
         maxLoadCapacity = new HBox();
         maxLoadCapacity.getChildren().addAll(maxLoadCapacityLabel, maxLoadCapacityInput);
-        maxLoadCapacity.setSpacing(20);
+        maxLoadCapacity.setSpacing(18);
         
         buttons = new HBox(doneButton, newTemplateButton);
         buttons.setSpacing(12);
@@ -111,9 +111,8 @@ public class AddPackageView extends VBox {
         closeButton = new Button("x");
         label = new HBox();
         label.getChildren().addAll(packageadded, closeButton);
-        packageadded.setPadding(new Insets(5, 130, 5, 1));
-        closeButton.setAlignment(Pos.BASELINE_LEFT);
-        label.setSpacing(12);
+        packageadded.setPadding(new Insets(5, 130, 5, 2));
+        label.setSpacing(10);
 
         this.getChildren().addAll(label, name, colour, width, height, weight, incompatibility, maxLoadCapacity);
         this.getChildren().addAll(buttons);
