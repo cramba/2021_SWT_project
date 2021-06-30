@@ -95,7 +95,7 @@ public class AddPackageView extends VBox {
         maxLoadCapacity.getChildren().addAll(maxLoadCapacityLabel, maxLoadCapacityInput);
 
         this.getChildren().addAll(closeButton, new Label("Paket hinzufügen"), name, colour, width, height, weight, incompatibility, maxLoadCapacity, new HBox(doneButton, newTemplateButton));
-
+        this.getStyleClass().addAll("background");
     }
 
     public HBox getName() {
