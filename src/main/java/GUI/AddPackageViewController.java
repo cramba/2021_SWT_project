@@ -22,7 +22,6 @@ public class AddPackageViewController extends ViewController {
 
     ComboBox<Color> colorComboBox;
 
-    ShelfManager shelfManager;
     TrayViewController trayViewController;
 
     public AddPackageViewController(ShelfManager shelfManager, TrayViewController trayViewController) {

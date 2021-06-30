@@ -23,7 +23,7 @@ public class TrayView extends StackPane{
     public TrayView(){
     	
     	 r = new Rectangle(50,50,100,100);
-    	 rectTarget = new Rectangle(150, 150, 100, 100);
+    	 //rectTarget = new Rectangle(150, 150, 100, 100);
     	 button = new Button();
     	
     	r.setFill(Color.RED);

@@ -5,6 +5,7 @@ import Business.Package.Package;
 import Business.Shelf.Shelf;
 import Business.Shelf.ShelfFloor;
 import Business.Shelf.ShelfSupport;
+import javafx.beans.property.SimpleObjectProperty;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -14,12 +15,14 @@ public class ShelfManager {
     Shelf shelf;
     Object tray;
     ArrayList<Package> packageTemplate;
+	SimpleObjectProperty<ShelfSupport> shelfSupportProp;
 
     public ShelfManager() {
 
         shelf = new Shelf();
         tray = new Object();
         packageTemplate = new ArrayList<Package>();
+        shelfSupportProp = new SimpleObjectProperty<ShelfSupport>() ;
         
         packageTemplate.add(new Package("Testpaket", 40, 40, 3.5f));
         packageTemplate.add(new Package("Kleines Paket", 20, 10, 1.5f));
@@ -52,17 +55,23 @@ public class ShelfManager {
 
     }
 
-    public void addShelfSupport(int length) {
+    public void addShelfSupport(int length, int positionX) {
+    	
     	
     	int random = (int)((Math.random()) * 1000 + 1) ; 
-    	ShelfSupport shelfSupport = new ShelfSupport(random, length, 0,0); //position noch unklar
+    	ShelfSupport shelfSupport = new ShelfSupport(random, length, positionX,0); //position noch unklar
     	
     	
     	shelf.addShelfSupport(shelfSupport);
+    	shelfSupportProp.setValue(shelfSupport);
+    
 
     }
 
-    public void deleteShelfSupport(ShelfSupport shelfSupport) {
+    public void deleteShelfSupport(int index) {
+    	
+    	shelf.removeShelfSupport(index);
+    	
 
     }
 
@@ -77,6 +86,10 @@ public class ShelfManager {
     public ArrayList<Package> getTemplateList(){
     	return packageTemplate;
     }
+    
+    public SimpleObjectProperty<ShelfSupport> getShelfSupportProp() {
+		return shelfSupportProp;
+	}
 
 }
 

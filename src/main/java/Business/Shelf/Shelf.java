@@ -5,7 +5,8 @@ import java.util.List;
 
 public class Shelf {
     private List<ShelfSupport> shelfSupports;
-    private List<ShelfFloor> shelfFloors;
+
+	private List<ShelfFloor> shelfFloors;
     
     public Shelf(){
         this.shelfSupports = new ArrayList<ShelfSupport>();
@@ -20,6 +21,10 @@ public class Shelf {
         shelfSupports.add(newShelfSupport);
     }
     
+    public void removeShelfSupport(int i) {
+    	shelfSupports.remove(i);
+    }
+    
     public void setNewShelfFloorPos(int shelfFloorID, int positionX, int positionY){
         int i=0;
         while(shelfFloors.get(i).getShelfFloorID() != shelfFloorID){
@@ -28,4 +33,14 @@ public class Shelf {
         shelfFloors.get(i).setPositionX(positionX);
         shelfFloors.get(i).setPositionY(positionY);
     }
+    
+    
+    
+    public List<ShelfSupport> getShelfSupports() {
+		return shelfSupports;
+	}
+
+	public List<ShelfFloor> getShelfFloors() {
+		return shelfFloors;
+	}
 }
