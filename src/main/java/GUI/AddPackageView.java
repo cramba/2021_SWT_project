@@ -2,6 +2,8 @@ package GUI;
 
 import Business.Package.Colour;
 import javafx.collections.FXCollections;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -36,9 +38,11 @@ public class AddPackageView extends VBox {
     HBox maxLoadCapacity;
     Label maxLoadCapacityLabel;
     TextField maxLoadCapacityInput;
+    HBox packageadded;
 
-
+    HBox buttons;
     Button closeButton;
+    HBox label;
     Button doneButton;
     Button newTemplateButton;
 
@@ -54,48 +58,75 @@ public class AddPackageView extends VBox {
         widthLabel = new Label("Breite:");
         widthInput = new TextField();
 
-        heightLabel = new Label("Höhe:");
+        heightLabel = new Label("Hoehe:");
         heightInput = new TextField();
 
         weightLabel = new Label("Gewicht:");
         weightInput = new TextField();
 
-        incompatibilityLabel = new Label("Unverträglichkeit:");
+        incompatibilityLabel = new Label("Unvertraeglichkeit:");
         addIncompatibilityColourButton = new Button("+");
         incompatibilityInput = new HBox();
 
         maxLoadCapacityLabel = new Label("max. Traglast:");
         maxLoadCapacityInput = new TextField();
 
-        closeButton = new Button("x");
         addIncompatibilityColourButton = new Button("+");
         doneButton = new Button("Fertig");
         newTemplateButton = new Button("neue Vorlage");
 
         name = new HBox();
         name.getChildren().addAll(nameLabel, nameInput);
-
-
+        name.setSpacing(63);
+       
         colour = new HBox();
         colour.getChildren().addAll(colourLabel, colourInput);
+        colour.setSpacing(65);
 
         width = new HBox();
         width.getChildren().addAll(widthLabel, widthInput);
+        width.setSpacing(65);
 
         height = new HBox();
         height.getChildren().addAll(heightLabel, heightInput);
+        height.setSpacing(60);
 
         weight = new HBox();
         weight.getChildren().addAll(weightLabel, weightInput);
+        weight.setSpacing(51);
 
         incompatibility = new HBox();
         incompatibility.getChildren().addAll(incompatibilityLabel, incompatibilityInput, addIncompatibilityColourButton);
+        incompatibility.setSpacing(9);
 
         maxLoadCapacity = new HBox();
         maxLoadCapacity.getChildren().addAll(maxLoadCapacityLabel, maxLoadCapacityInput);
+        maxLoadCapacity.setSpacing(20);
+        
+        buttons = new HBox(doneButton, newTemplateButton);
+        buttons.setSpacing(12);
+        buttons.setPadding(new Insets(20,0,0,0));
+        
+        packageadded = new HBox(new Label("Paket hinzufuegen"));
+        closeButton = new Button("x");
+        label = new HBox();
+        label.getChildren().addAll(packageadded, closeButton);
+        packageadded.setPadding(new Insets(5, 130, 5, 1));
+        closeButton.setAlignment(Pos.BASELINE_LEFT);
+        label.setSpacing(12);
 
-        this.getChildren().addAll(closeButton, new Label("Paket hinzufügen"), name, colour, width, height, weight, incompatibility, maxLoadCapacity, new HBox(doneButton, newTemplateButton));
+        this.getChildren().addAll(label, name, colour, width, height, weight, incompatibility, maxLoadCapacity);
+        this.getChildren().addAll(buttons);
+        
         this.getStyleClass().addAll("background");
+        
+        this.setPadding(new Insets(55, 20, 20, 20));
+        this.setSpacing(12);
+        
+        closeButton.setId("rot");
+        doneButton.setId("green");
+        newTemplateButton.setId("gelb");
+        packageadded.setId("grau");
     }
 
     public HBox getName() {

@@ -91,7 +91,7 @@ public class ConfigurationView extends BorderPane {
         vBox2.setSpacing(10);
         vBox1.setAlignment(Pos.BASELINE_RIGHT);
         vBox2.setAlignment(Pos.CENTER);
-        vBox1.setPadding(new Insets(30, 30, 20, 20));
+        vBox1.setPadding(new Insets(20, 30, 20, 20));
         vBox2.setPadding(new Insets(15, 30, 20, 25));
         
         this.setLeft(vBox1);
