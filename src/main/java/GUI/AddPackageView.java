@@ -2,6 +2,7 @@ package GUI;
 
 import Business.Package.Colour;
 import javafx.collections.FXCollections;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -37,7 +38,7 @@ public class AddPackageView extends VBox {
     Label maxLoadCapacityLabel;
     TextField maxLoadCapacityInput;
 
-
+    HBox buttons;
     Button closeButton;
     Button doneButton;
     Button newTemplateButton;
@@ -54,13 +55,13 @@ public class AddPackageView extends VBox {
         widthLabel = new Label("Breite:");
         widthInput = new TextField();
 
-        heightLabel = new Label("Höhe:");
+        heightLabel = new Label("Hoehe:");
         heightInput = new TextField();
 
         weightLabel = new Label("Gewicht:");
         weightInput = new TextField();
 
-        incompatibilityLabel = new Label("Unverträglichkeit:");
+        incompatibilityLabel = new Label("Unvertraeglichkeit:");
         addIncompatibilityColourButton = new Button("+");
         incompatibilityInput = new HBox();
 
@@ -93,9 +94,17 @@ public class AddPackageView extends VBox {
 
         maxLoadCapacity = new HBox();
         maxLoadCapacity.getChildren().addAll(maxLoadCapacityLabel, maxLoadCapacityInput);
+        
+        buttons = new HBox(doneButton, newTemplateButton);
 
-        this.getChildren().addAll(closeButton, new Label("Paket hinzufügen"), name, colour, width, height, weight, incompatibility, maxLoadCapacity, new HBox(doneButton, newTemplateButton));
+        this.getChildren().addAll(closeButton, new Label("Paket hinzufuegen"), name, colour, width, height, weight, incompatibility, maxLoadCapacity);
+        this.getChildren().addAll(buttons);
         this.getStyleClass().addAll("background");
+        
+        this.setPadding(new Insets(30, 30, 20, 20));
+        this.setSpacing(12);
+        buttons.setSpacing(12);
+        buttons.setPadding(new Insets(20,0,0,0));
     }
 
     public HBox getName() {
