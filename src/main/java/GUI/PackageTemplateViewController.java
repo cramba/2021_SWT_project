@@ -13,7 +13,6 @@ public class PackageTemplateViewController extends ViewController{
 	PackageTemplateView view;
 	
 	private ListView<Package>templateView;
-	private ShelfManager shelfManager;
 
 
     public PackageTemplateViewController(ShelfManager shelfManager){
