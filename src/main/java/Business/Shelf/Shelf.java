@@ -28,6 +28,10 @@ public class Shelf {
         shelfSupports.add(newShelfSupport);
     }
     
+    public void removeShelfSupport(int i) {
+    	shelfSupports.remove(i);
+    }
+    
     public void setNewShelfFloorPos(int shelfFloorID, int positionX, int positionY){
         int i=0;
         while(shelfFloors.get(i).getShelfFloorID() != shelfFloorID){

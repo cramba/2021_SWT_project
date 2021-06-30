@@ -34,7 +34,7 @@ public class MainScene extends BorderPane {
     	configurationViewController = new ConfigurationViewController(shelfManager);
     	editShelfViewController = new EditShelfViewController(shelfManager);
     	packageTemplateViewController = new PackageTemplateViewController(shelfManager);
-    	shelfViewController = new ShelfViewController(shelfManager);
+    	shelfViewController = new ShelfViewController(shelfManager,editShelfViewController);
     	setRightVBox = new VBox();
     	
     	
