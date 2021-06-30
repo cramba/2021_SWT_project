@@ -5,14 +5,21 @@ import java.util.List;
 
 public class Shelf {
     private List<ShelfSupport> shelfSupports;
-
-	private List<ShelfFloor> shelfFloors;
+    private List<ShelfFloor> shelfFloors;
     
     public Shelf(){
         this.shelfSupports = new ArrayList<ShelfSupport>();
         this.shelfFloors = new ArrayList<ShelfFloor>();
     }
-    
+
+    public void setShelfSupports(ArrayList<ShelfSupport> shelfSupports) {
+        this.shelfSupports = shelfSupports;
+    }
+
+    public void setShelfFloors(List<ShelfFloor> shelfFloors) {
+        this.shelfFloors = shelfFloors;
+    }
+
     public void addShelfFloor(ShelfFloor newShelfFloor){
         shelfFloors.add(newShelfFloor);
     }
@@ -33,14 +40,12 @@ public class Shelf {
         shelfFloors.get(i).setPositionX(positionX);
         shelfFloors.get(i).setPositionY(positionY);
     }
-    
-    
-    
-    public List<ShelfSupport> getShelfSupports() {
-		return shelfSupports;
-	}
 
-	public List<ShelfFloor> getShelfFloors() {
-		return shelfFloors;
-	}
+    public ArrayList<ShelfSupport> getShelfSupports(){
+        return (ArrayList<ShelfSupport>) shelfSupports;
+    }
+
+    public ArrayList<ShelfFloor> getShelfFloors(){
+        return (ArrayList<ShelfFloor>) shelfFloors;
+    }
 }

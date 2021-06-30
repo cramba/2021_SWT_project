@@ -24,10 +24,10 @@ public class EditShelfViewController extends ViewController{
 
     public void initialize(){
     	
-    	//Fertig Button - erstellt eine Regalstütze
+    	//Fertig Button - erstellt eine Regalstuetze
     	view.getDoneButton().setOnAction((e) -> {
         	
-    		//Textfelder für länge und Distance werden ausgelesen
+    		//Textfelder fuer laenge und Distance werden ausgelesen
         	int length = Integer.parseInt(view.getLengthInput().getText());
         	int distance = Integer.parseInt(view.getDistanceInput().getText());
         	
@@ -42,21 +42,21 @@ public class EditShelfViewController extends ViewController{
         
         });
     	
-    	//Listener auf ComboBox wo man auswählen kann zwischen Regalstützen und Regalböden 
+    	//Listener auf ComboBox wo man auswaehlen kann zwischen Regalstuetzen und Regalboeden
     	view.getShelfItemSelection().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				
-				//Wenn du Regalstütze auswähltst werden die GUI-Elemente .. für die Regalstütze angezeigt
-				if(newValue.equals("Regalstütze")) {
+				//Wenn du Regalstuetze auswaehltst werden die GUI-Elemente .. fuer die Regalstuetze angezeigt
+				if(newValue.equals("Regalstï¿½tze")) {
 					
-					//Alte	GUI-Elemente.. werden gelöscht außer der erste da das die Kombobox ist
+					//Alte	GUI-Elemente.. werden geloescht ausser der erste da das die Kombobox ist
 					view.getChildren().remove(1, view.getChildren().size()  );
 
 					view.getChildren().addAll(view.getHBox(),view.getHBox2(),view.getDoneButton());
 					
-					//Wenn du Regalboden auswähltst werden die GUI-Elemente .. für den Regalboden angezeigt
+					//Wenn du Regalboden auswaehltst werden die GUI-Elemente .. fuer den Regalboden angezeigt
 
 				}else if(newValue.equals("Regalboden")) {
 					

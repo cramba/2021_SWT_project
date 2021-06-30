@@ -1,9 +1,7 @@
 package Business.Shelf;
 
 public class ShelfSupport {
-
-
-	private int shelfSupportID;
+    private int shelfSupportID;
     private int length;
     private int positionX;
     private int positionY;
@@ -14,20 +12,20 @@ public class ShelfSupport {
         this.positionX = positionX;
         this.positionY = positionY;
     }
-    
+
     public int getShelfSupportID() {
-		return shelfSupportID;
-	}
+        return shelfSupportID;
+    }
 
-	public int getLength() {
-		return length;
-	}
+    public int getLength() {
+        return length;
+    }
 
-	public int getPositionX() {
-		return positionX;
-	}
+    public int getPositionX() {
+        return positionX;
+    }
 
-	public int getPositionY() {
-		return positionY;
-	}
+    public int getPositionY() {
+        return positionY;
+    }
 }
