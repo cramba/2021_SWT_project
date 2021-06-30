@@ -153,6 +153,7 @@ public class JsonHandler {
      */
     public static ArrayList<ShelfSupport> parseShelfSupportObject(JSONObject shelfSupportArrayObj){
         JSONArray shelfSupportArray = (JSONArray) shelfSupportArrayObj.get("shelfSupports");
+        @SuppressWarnings("unchecked")
         Iterator<JSONObject> shelfSupportIterator = shelfSupportArray.iterator();
         ArrayList<ShelfSupport> shelfSupports = new ArrayList<>();
         while(shelfSupportIterator.hasNext()){
@@ -184,6 +185,7 @@ public class JsonHandler {
      */
     public static ArrayList<ShelfFloor> parseShelfFloorObject(JSONObject shelfFloorArrayObj){
         JSONArray shelfFloorArray = (JSONArray) shelfFloorArrayObj.get("shelfSupports");
+        @SuppressWarnings("unchecked")
         Iterator<JSONObject> shelfFloorIterator = shelfFloorArray.iterator();
         ArrayList<ShelfFloor> shelfFloors = new ArrayList<>();
         while(shelfFloorIterator.hasNext()){
@@ -208,6 +210,7 @@ public class JsonHandler {
 
         JSONArray packageListArray = (JSONArray) shelfFloor.get("packageList");
         ArrayList<Package> packageList = new ArrayList<>();
+        @SuppressWarnings("unchecked")
         Iterator<JSONObject> packageIterator = packageListArray.iterator();
         while(packageIterator.hasNext()){
             Package pck = parsePackageObject((JSONObject) packageIterator.next());
@@ -246,6 +249,7 @@ public class JsonHandler {
      */
     public static ArrayList<Color> parseIncompatibilityColours(JSONArray colourArray){
         ArrayList<Color> colorArrayList = new ArrayList<>();
+        @SuppressWarnings("unchecked")
         Iterator<JSONObject> colourIterator = colourArray.iterator();
         while(colourIterator.hasNext()){
             colorArrayList.add(Color.valueOf(colourIterator.next().toString()));
@@ -260,7 +264,7 @@ public class JsonHandler {
      */
     public static ArrayList<Package> parsePackagesAbove(JSONArray packagesArray){
         ArrayList<Package> packagesList = new ArrayList<>();
-
+        @SuppressWarnings("unchecked")
         Iterator<JSONObject> pckListIterator = packagesArray.iterator();
         while(pckListIterator.hasNext()){
             packagesList.add(parsePackageObject(pckListIterator.next()));

@@ -29,12 +29,12 @@ public class EditShelfView extends VBox {
 
     public EditShelfView(){
     	
-    	//Regalstützen bearbeitung
+    	//Regalstuetzen bearbeitung
     	shelfItemSelection =  new ComboBox<String>();
-    	shelfItemSelection.getItems().addAll("Regalstütze","Regalboden");
+    	shelfItemSelection.getItems().addAll("Regalstï¿½tze","Regalboden");
     	shelfItemSelection.setId("ShelfItemSelection");
     	shelfItemSelection.getSelectionModel().selectFirst();
-    	lengthLabel = new Label("Länge:");
+    	lengthLabel = new Label("Lï¿½nge:");
     	lengthInput = new TextField();
     	hBox = new HBox();
     	distanceLabel = new Label("Abstand:");
@@ -47,13 +47,13 @@ public class EditShelfView extends VBox {
     	hBox2.getChildren().addAll(distanceLabel,distanceInput);
     	this.getChildren().addAll(shelfItemSelection,hBox,hBox2,doneButton);
     	
-    	//zusatz für Regalstützen löschen :
+    	//zusatz fï¿½r Regalstï¿½tzen lï¿½schen :
     	
     	editShelfSupportLabel = new Label("Bearbeiten:");
-    	deleteShelfSupportButton = new Button("Löschen");
+    	deleteShelfSupportButton = new Button("Lï¿½schen");
     	moveShelfSupportLabel = new Label("Verschieben");
     	moveShelfSupportTextField = new TextField();
-    	//Regalböden bearbeitung
+    	//Regalbï¿½den bearbeitung
 
     }
 

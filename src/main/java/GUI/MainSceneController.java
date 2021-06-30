@@ -31,7 +31,7 @@ public class MainSceneController extends ViewController{
     }
     public void initialize(){
     	
-    	//pop up addPackage öffnen
+    	//pop up addPackage oeffnen
         addPackageButton.setOnAction((e) -> {
             AddPackageView addPackageView = view.getAddPackageViewController().getView();
             view.setLeft(addPackageView);
@@ -40,7 +40,7 @@ public class MainSceneController extends ViewController{
             //view.getAddPackageViewController().getView().setManaged(false);
         });
         
-      //pop up EditShelf öffnen
+      //pop up EditShelf ï¿½ffnen
         editShelfButton.setOnAction((e) -> {
    
             EditShelfView editShelfView = (EditShelfView) view.getEditShelfViewController().getRoot();

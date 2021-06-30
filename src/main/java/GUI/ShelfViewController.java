@@ -34,17 +34,17 @@ public class ShelfViewController extends ViewController{
 
 		@Override
 		public void handle(MouseEvent t) {
-			//Löschen button erscheint... Die zeile ist so groß da ich den Löschen button dafür hier rein bekommen musste um damit zu arbeiten
+			//Loeschen button erscheint... Die zeile ist so groï¿½ da ich den Lï¿½schen button dafï¿½r hier rein bekommen musste um damit zu arbeiten
 			editShelfViewController.getRoot().getChildren().addAll(((EditShelfView) editShelfViewController.getRoot()).getDeleteShelfSupportButton());
 			
-			//Listener für Löschbutton.. 
+			//Listener fuer Loeschbutton..
 			((EditShelfView) editShelfViewController.getRoot()).getDeleteShelfSupportButton().setOnAction((e) -> {
 				
-				//Löscht Shelfsupport rectangles aus der ArrayList
+				//Loescht Shelfsupport rectangles aus der ArrayList
 				view.getShelfSupports().remove(i);
-				//Löscht ShelfSupport rectangles aus der View 
+				//Loescht ShelfSupport rectangles aus der View
 				view.getChildren().remove(i);
-				//Löscht Shelfsupport aus der Logic
+				//Loescht Shelfsupport aus der Logic
 				shelfManager.deleteShelfSupport(i);
 			});
 			
@@ -73,7 +73,7 @@ public class ShelfViewController extends ViewController{
     public void initialize(){
     	
     	
-    	//Zeigt Regalstütze in GUI an wenn sie erstellt wurde
+    	//Zeigt Regalstuetze in GUI an wenn sie erstellt wurde
     	shelfManager.getShelfSupportProp().addListener(new ChangeListener<ShelfSupport>() {
 
 			@Override
@@ -82,10 +82,10 @@ public class ShelfViewController extends ViewController{
 				//distance aus logic holen
 				int aktdistanceX = shelfManager.getShelfSupportProp().getValue().getPositionX();
 				
-				//endgültige distance
+				//endgueltige distance
 				int finaldistanceX ;
 
-				//Regalstütze für gui erstellen mit der Gewünschten länge - länge wir aus der Logic geholt
+				//Regalstuetze fuer gui erstellen mit der Gewuenschten laenge - laenge wir aus der Logic geholt
 				Rectangle shelfSupportRectangle = new Rectangle(0,0,10,shelfManager.getShelfSupportProp().getValue().getLength());
 				
 				//distance errechnen aus jetziger eingegebener Distance und den vorherigen
@@ -96,10 +96,10 @@ public class ShelfViewController extends ViewController{
 				
 				//distanceX = 100 * shelfSupports.size();
 				
-				//Finale distance für Regalstütze setzen
+				//Finale distance fuer Regalstuetze setzen
 				shelfSupportRectangle.setLayoutX(finaldistanceX);
 				
-				//Arraylist von Shelfsupport-Rectangles = neues Rectangle hinzufügen
+				//Arraylist von Shelfsupport-Rectangles = neues Rectangle hinzufuegen
 				((ShelfView) root).getShelfSupports().add(shelfSupportRectangle);
 
 				//Rectangle soll auf Boden stehen
@@ -110,7 +110,7 @@ public class ShelfViewController extends ViewController{
 				
 				
 				
-				//MouseListener für alle -ShelfSupport-Rectangles im Programm- Wird einer Geklickt wird Innere Klasse ShelfSupportHandler(Ganz oben in dieser Klasse zu finden) aufgerufen
+				//MouseListener fuer alle -ShelfSupport-Rectangles im Programm- Wird einer Geklickt wird Innere Klasse ShelfSupportHandler(Ganz oben in dieser Klasse zu finden) aufgerufen
 			  	for(int i= 0; i< ((ShelfView) root).getShelfSupports().size(); i++) {
 	
 		    		view.getShelfSupports().get(i).setOnMouseClicked(new ShelfSupportHandler(i));
