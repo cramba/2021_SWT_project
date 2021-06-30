@@ -53,6 +53,12 @@ public class ShelfManager {
     }
 
     public void addShelfSupport(int length) {
+    	
+    	int random = (int)((Math.random()) * 1000 + 1) ; 
+    	ShelfSupport shelfSupport = new ShelfSupport(random, length, 0,0); //position noch unklar
+    	
+    	
+    	shelf.addShelfSupport(shelfSupport);
 
     }
 

@@ -28,25 +28,35 @@ public class MainScene extends BorderPane {
 
 		//Logic: jeder versucht schonmal seine logic der Funktion die er im Laufzeidiagramm hatte zu implementieren.
 
-		trayViewController = new TrayViewController(shelfManager);
-		addPackageViewController = new AddPackageViewController(shelfManager, trayViewController);
-		configurationViewController = new ConfigurationViewController(shelfManager);
-		editShelfViewController = new EditShelfViewController(shelfManager);
-		packageTemplateViewController = new PackageTemplateViewController(shelfManager);
-		shelfViewController = new ShelfViewController(shelfManager);
-		setRightVBox = new VBox();
+
+    	trayViewController = new TrayViewController(shelfManager);
+    	addPackageViewController = new AddPackageViewController(shelfManager, trayViewController);
+    	configurationViewController = new ConfigurationViewController(shelfManager);
+    	editShelfViewController = new EditShelfViewController(shelfManager);
+    	packageTemplateViewController = new PackageTemplateViewController(shelfManager);
+    	shelfViewController = new ShelfViewController(shelfManager);
+    	setRightVBox = new VBox();
+    	
+    	
+    	//setRightVBox.getChildren().addAll(packageTemplateViewController.getRoot(),trayViewController.getRoot());
+    	
 
 
 		setRightVBox.getChildren().addAll(packageTemplateViewController.getRoot(), trayViewController.getRoot());
 
-
 //    	this.setTop();
-//   	this.setCenter(shelfViewController.getRoot());
-		this.setRight(setRightVBox);
-		this.setLeft(addPackageViewController.getRoot());
-		this.setBottom(configurationViewController.getRoot());
 
-	}
+    	this.setCenter(shelfViewController.getRoot());
+    	this.setRight(setRightVBox);
+    	this.setLeft(addPackageViewController.getRoot());
+    	this.setBottom(configurationViewController.getRoot());
+    	
+    }
+
+//   	this.setCenter(shelfViewController.getRoot());
+
+
+	
 	
 	
 
@@ -77,6 +87,7 @@ public class MainScene extends BorderPane {
 	public VBox getSetRightVBox() {
 		return setRightVBox;
 	}
+
 
 
 }

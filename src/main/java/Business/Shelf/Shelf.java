@@ -8,8 +8,8 @@ public class Shelf {
     private List<ShelfFloor> shelfFloors;
     
     public Shelf(){
-        this.shelfSupports = new ArrayList<>();
-        this.shelfFloors = new ArrayList<>();
+        this.shelfSupports = new ArrayList<ShelfSupport>();
+        this.shelfFloors = new ArrayList<ShelfFloor>();
     }
     
     public void addShelfFloor(ShelfFloor newShelfFloor){

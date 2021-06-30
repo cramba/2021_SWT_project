@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
 public class MainSceneController extends ViewController{
 
     Button addPackageButton;
+    Button editShelfButton;
 
 	MainScene view;
 	ShelfManager shelfManager ;
@@ -16,6 +17,7 @@ public class MainSceneController extends ViewController{
     	
     	view = new MainScene(shelfManager) ;
         addPackageButton = view.getConfigurationViewController().getView().getAddPackageButton();
+        editShelfButton = view.getConfigurationViewController().getView().getShelfEditButton();
     	root = view;
 
         initialize();
@@ -23,8 +25,21 @@ public class MainSceneController extends ViewController{
     public void initialize(){
         addPackageButton.setOnAction((e) -> {
             AddPackageView addPackageView = view.getAddPackageViewController().getView();
+            view.setLeft(addPackageView);
             addPackageView.setVisible(true);
             addPackageView.managedProperty().bind(addPackageView.visibleProperty());
+            //view.getAddPackageViewController().getView().setManaged(false);
+        });
+        
+        editShelfButton.setOnAction((e) -> {
+   
+            EditShelfView editShelfView = (EditShelfView) view.getEditShelfViewController().getRoot();
+            view.setLeft(editShelfView);
+            editShelfView.setVisible(true);
+            editShelfView.managedProperty().bind(editShelfView.visibleProperty());
+        	
+
+
             //view.getAddPackageViewController().getView().setManaged(false);
         });
     }
