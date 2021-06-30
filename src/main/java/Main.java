@@ -26,7 +26,7 @@ public class Main extends Application {
 
         this.primaryStage = primaryStage;
         shelfManager = new ShelfManager();
-        rootController = new MainSceneController(shelfManager);
+        rootController = new MainSceneController(shelfManager, primaryStage);
      
         Pane root = rootController.getRoot();
         primaryStage.setTitle("Warehouse Masters!");

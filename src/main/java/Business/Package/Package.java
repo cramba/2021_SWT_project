@@ -16,6 +16,26 @@ public class Package {
     private List<Color> incompatibility;
     private List<Package> packagesAbove;
 
+    public void setColour(Color colour) {
+        this.colour = colour;
+    }
+
+    public void setPositionX(int positionX) {
+        this.positionX = positionX;
+    }
+
+    public void setPositionY(int positionY) {
+        this.positionY = positionY;
+    }
+
+    public void setIncompatibility(List<Color> incompatibility) {
+        this.incompatibility = incompatibility;
+    }
+
+    public void setPackagesAbove(List<Package> packagesAbove) {
+        this.packagesAbove = packagesAbove;
+    }
+
     public Package(String name, int height, int width, float weight){
         this.name = name;
         this.height = height;
@@ -43,6 +63,18 @@ public class Package {
 
     public Color getColour(){
         return colour;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public List<Package> getPackagesAbove() {
+        return packagesAbove;
     }
 
     public float getWeight(){

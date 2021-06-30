@@ -15,6 +15,10 @@ public class ShelfManager {
     Object tray;
     ArrayList<Package> packageTemplate;
 
+    public void setShelf(Shelf shelf) {
+        this.shelf = shelf;
+    }
+
     public ShelfManager() {
 
         shelf = new Shelf();
@@ -50,6 +54,18 @@ public class ShelfManager {
 
     public void deletePackage(Package pck) {
 
+    }
+
+    public Shelf getShelf() {
+        return shelf;
+    }
+
+    public Object getTray() {
+        return tray;
+    }
+
+    public ArrayList<Package> getPackageTemplate() {
+        return packageTemplate;
     }
 
     public void addShelfSupport(int length) {

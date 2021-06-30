@@ -11,7 +11,15 @@ public class Shelf {
         this.shelfSupports = new ArrayList<ShelfSupport>();
         this.shelfFloors = new ArrayList<ShelfFloor>();
     }
-    
+
+    public void setShelfSupports(ArrayList<ShelfSupport> shelfSupports) {
+        this.shelfSupports = shelfSupports;
+    }
+
+    public void setShelfFloors(List<ShelfFloor> shelfFloors) {
+        this.shelfFloors = shelfFloors;
+    }
+
     public void addShelfFloor(ShelfFloor newShelfFloor){
         shelfFloors.add(newShelfFloor);
     }
@@ -27,5 +35,13 @@ public class Shelf {
         }
         shelfFloors.get(i).setPositionX(positionX);
         shelfFloors.get(i).setPositionY(positionY);
+    }
+
+    public ArrayList<ShelfSupport> getShelfSupports(){
+        return (ArrayList<ShelfSupport>) shelfSupports;
+    }
+
+    public ArrayList<ShelfFloor> getShelfFloors(){
+        return (ArrayList<ShelfFloor>) shelfFloors;
     }
 }
