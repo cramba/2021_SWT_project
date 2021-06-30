@@ -41,6 +41,17 @@ public class EditShelfViewController extends ViewController{
         	
         
         });
+    	//Fertig Button - erstellt ein Regalboden
+    	view.getDoneButton2().setOnAction((e)->{
+    		int loadCapacity = Integer.parseInt(view.getLoadCapacityTextField().getText());
+    		
+    		shelfManager.addShelfFloor(loadCapacity);
+    		shelfManager.getShelfFloorProp().getValue().setPositionX(50);
+	    	shelfManager.getShelfFloorProp().getValue().setPositionY(50);
+
+    	});
+    	
+    	
     	
     	//Listener auf ComboBox wo man auswaehlen kann zwischen Regalstuetzen und Regalboeden
     	view.getShelfItemSelection().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -54,13 +65,15 @@ public class EditShelfViewController extends ViewController{
 					//Alte	GUI-Elemente.. werden geloescht ausser der erste da das die Kombobox ist
 					view.getChildren().remove(1, view.getChildren().size()  );
 
-					view.getChildren().addAll(view.getHBox(),view.getHBox2(),view.getDoneButton());
+					view.getChildren().addAll(view.getHBox(),view.getHBox2(),view.getDoneButton(),view.getDeleteShelfSupportButton());
 					
 					//Wenn du Regalboden auswaehltst werden die GUI-Elemente .. fuer den Regalboden angezeigt
 
 				}else if(newValue.equals("Regalboden")) {
 					
 					view.getChildren().remove(1, view.getChildren().size()   );
+					view.getChildren().addAll(view.getLoadCapacityLabel(),view.getLoadCapacityTextField(),view.getDoneButton2(),view.getDeleteShelfFloorButton());
+
 				}
 				
 				

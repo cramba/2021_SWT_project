@@ -2,6 +2,7 @@ package GUI;
 
 import java.util.ArrayList;
 
+import Business.Shelf.ShelfFloor;
 import Business.Shelf.ShelfSupport;
 import Business.ShelfManager.ShelfManager;
 import javafx.beans.value.ChangeListener;
@@ -18,6 +19,7 @@ public class ShelfViewController extends ViewController{
 	ShelfView view;
 	private ArrayList<Rectangle> shelfSupports;
 	private ArrayList<Rectangle> oldshelfSupportsList;
+	private ArrayList<Rectangle> oldshelfFloorsList;
 	int lastdistanceX = 0;
 	EditShelfViewController editShelfViewController ;
 	
@@ -63,7 +65,7 @@ public class ShelfViewController extends ViewController{
 				
 	
 				
-				view.getChildren().remove(i);
+				view.getChildren().remove(view.getShelfSupports().get(i));
 				//Loescht Shelfsupport aus der Logic
 				shelfManager.deleteShelfSupport(i);
 				//Loescht Shelfsupport rectangles aus der ArrayList
@@ -72,13 +74,83 @@ public class ShelfViewController extends ViewController{
 				
 			});
 			
-			
-//			root.getChildren().clear();
-//			System.out.println("halloooo");
-//			((ShelfView) root).getShelfSupports().get(i).setFill(Color.RED);
-						
 		}
 	}
+	
+	private class ShelfSupportHandlerForDrag implements EventHandler<MouseEvent>{
+
+		
+		int i ; 
+		public ShelfSupportHandlerForDrag(int i) {
+			
+			this.i = i ; 
+			
+		}
+
+		@Override
+		public void handle(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+
+			
+
+		}
+		
+	}
+	
+private class ShelfFloorHandler implements EventHandler<MouseEvent>{
+
+		
+		int i ; 
+		public ShelfFloorHandler(int i) {
+			
+			this.i = i ; 
+			
+		}
+
+		@Override
+		public void handle(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+			((EditShelfView) editShelfViewController.getRoot()).getDeleteShelfFloorButton().setVisible(true);
+			
+			if(!oldshelfFloorsList.equals(((ShelfView) root).getShelfFloors())) {
+
+			  	for(int i= 0; i< ((ShelfView) root).getShelfFloors().size(); i++) {
+			  		
+			  		//remove alte hanldder
+			  		
+			  		view.getShelfFloors().get(i).removeEventHandler(MouseEvent.MOUSE_CLICKED,  new ShelfFloorHandler(i));
+
+			  		// add neue handler
+		    		view.getShelfFloors().get(i).addEventHandler(MouseEvent.MOUSE_CLICKED,  new ShelfFloorHandler(i));   	
+
+		    	}
+
+			  	oldshelfFloorsList = new ArrayList<Rectangle>(((ShelfView) root).getShelfFloors());
+
+				
+			}
+			
+			
+			((EditShelfView) editShelfViewController.getRoot()).getDeleteShelfFloorButton().setOnAction((e) -> {
+				
+	
+				
+				view.getChildren().remove(view.getShelfFloors().get(i));
+				//Loescht Shelfsupport aus der Logic
+				shelfManager.deleteShelfFloor(i);
+				//Loescht Shelfsupport rectangles aus der ArrayList
+				((ShelfView) root).getShelfFloors().remove(i);
+				//Loescht ShelfSupport rectangles aus der View 
+				
+			});
+
+			
+
+		}
+		
+	}
+	
 
 
     public ShelfViewController(ShelfManager shelfManager,EditShelfViewController editShelfViewController ){
@@ -90,7 +162,7 @@ public class ShelfViewController extends ViewController{
 
     	shelfSupports = new ArrayList<Rectangle>();
 
-	  	
+    	
 
     	
     	root = view;
@@ -119,6 +191,7 @@ public class ShelfViewController extends ViewController{
 				
 				// neue letzte distance setzen
 				lastdistanceX = finaldistanceX ;
+				shelfManager.getShelfSupportProp().getValue().setPositionX(finaldistanceX);
 				
 				//distanceX = 100 * shelfSupports.size();
 				
@@ -140,12 +213,14 @@ public class ShelfViewController extends ViewController{
 			  	for(int i= 0; i< ((ShelfView) root).getShelfSupports().size(); i++) {
 	
 		    		//view.getShelfSupports().get(i).setOnMouseClicked(new ShelfSupportHandler(i));
-		    		view.getShelfSupports().get(i).addEventHandler(MouseEvent.MOUSE_CLICKED,  new ShelfSupportHandler(i));   	
+		    		view.getShelfSupports().get(i).addEventHandler(MouseEvent.MOUSE_CLICKED,  new ShelfSupportHandler(i));   
+		    		view.getShelfSupports().get(i).addEventHandler(MouseEvent.MOUSE_DRAGGED,  new ShelfSupportHandlerForDrag(i));
 
 		    	}
 			  	
 			  	
 		    	oldshelfSupportsList = new ArrayList<Rectangle>(((ShelfView) root).getShelfSupports());
+		    	
 
 				
 
@@ -153,6 +228,34 @@ public class ShelfViewController extends ViewController{
 			}
 
 		});
+    	
+    	shelfManager.getShelfFloorProp().addListener(new ChangeListener<ShelfFloor>() {
+
+			@Override
+			public void changed(ObservableValue<? extends ShelfFloor> observable, ShelfFloor oldValue, ShelfFloor newValue) {
+				// TODO Auto-generated method stub
+				
+				Rectangle shelfFloorRectangle = new Rectangle(0,0,100,10);
+				shelfFloorRectangle.setLayoutX(shelfManager.getShelfFloorProp().getValue().getPositionX());
+				shelfFloorRectangle.setLayoutY(shelfManager.getShelfFloorProp().getValue().getPositionY());
+			
+				view.getShelfFloors().add(shelfFloorRectangle);
+				
+				((ShelfView) root).getChildren().addAll(shelfFloorRectangle);
+				
+				
+				
+				
+				for(int i= 0; i< ((ShelfView) root).getShelfFloors().size(); i++) {
+					
+					view.getShelfFloors().get(i).addEventHandler(MouseEvent.MOUSE_CLICKED,  new ShelfFloorHandler(i));   
+				}
+
+		    	oldshelfFloorsList = new ArrayList<Rectangle>(((ShelfView) root).getShelfFloors());
+
+			}
+    		
+    	});
     	
   
     	

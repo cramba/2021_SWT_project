@@ -13,7 +13,15 @@ public class ShelfSupport {
         this.positionY = positionY;
     }
 
-    public int getShelfSupportID() {
+    public void setPositionX(int positionX) {
+		this.positionX = positionX;
+	}
+
+	public void setPositionY(int positionY) {
+		this.positionY = positionY;
+	}
+
+	public int getShelfSupportID() {
         return shelfSupportID;
     }
 

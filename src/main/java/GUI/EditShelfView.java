@@ -26,6 +26,11 @@ public class EditShelfView extends VBox {
     Label moveShelfSupportLabel;
     TextField moveShelfSupportTextField;
 
+    
+    Label loadCapacityLabel;
+    TextField loadCapacityTextField;
+    Button doneButton2 ;
+    Button deleteShelfFloorButton ; 
 
     public EditShelfView(){
     	
@@ -57,8 +62,27 @@ public class EditShelfView extends VBox {
     	this.getChildren().addAll(shelfItemSelection,hBox,hBox2,doneButton, deleteShelfSupportButton);
 
     	//Regalb�den bearbeitung
+    	
+    	
+    	loadCapacityLabel = new Label("Tragkraft:");
+    	loadCapacityTextField = new TextField();
+    	doneButton2 = new Button("Fertig"); 
+    	deleteShelfFloorButton = new Button("L�schen");
+    	deleteShelfFloorButton.setVisible(false);
 
     }
+
+	public Button getDoneButton2() {
+		return doneButton2;
+	}
+
+	public Label getLoadCapacityLabel() {
+		return loadCapacityLabel;
+	}
+
+	public TextField getLoadCapacityTextField() {
+		return loadCapacityTextField;
+	}
 
 	public Label getEditShelfSupportLabel() {
 		return editShelfSupportLabel;
@@ -112,6 +136,12 @@ public class EditShelfView extends VBox {
 	public HBox getHBox2() {
 		// TODO Auto-generated method stub
 		return hBox2;
+	}
+	
+	
+	
+	public Button getDeleteShelfFloorButton() {
+		return deleteShelfFloorButton;
 	}
 
 

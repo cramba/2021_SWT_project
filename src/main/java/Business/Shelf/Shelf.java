@@ -31,6 +31,9 @@ public class Shelf {
     public void removeShelfSupport(int i) {
     	shelfSupports.remove(i);
     }
+    public void removeShelfFloor(int i) {
+    	shelfFloors.remove(i);
+    }
     
     public void setNewShelfFloorPos(int shelfFloorID, int positionX, int positionY){
         int i=0;

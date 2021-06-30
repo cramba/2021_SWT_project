@@ -16,6 +16,7 @@ public class ShelfManager {
     Object tray;
     ArrayList<Package> packageTemplate;
     SimpleObjectProperty<ShelfSupport> shelfSupportProp;
+    SimpleObjectProperty<ShelfFloor> shelfFloorProp;
 
     public void setShelf(Shelf shelf) {
         this.shelf = shelf;
@@ -27,6 +28,7 @@ public class ShelfManager {
         tray = new Object();
         packageTemplate = new ArrayList<Package>();
         shelfSupportProp = new SimpleObjectProperty<ShelfSupport>();
+        shelfFloorProp = new  SimpleObjectProperty<ShelfFloor>();
 
         packageTemplate.add(new Package("Testpaket", 40, 40, 3.5f));
         packageTemplate.add(new Package("Kleines Paket", 20, 10, 1.5f));
@@ -81,10 +83,16 @@ public class ShelfManager {
     }
 
     public void addShelfFloor(float loadCapacity) {
+    	
+    	ShelfFloor shelfFloor = new ShelfFloor(0,loadCapacity,50,50); //obligatorische Werte
+    	shelf.addShelfFloor(shelfFloor);
+    	shelfFloorProp.setValue(shelfFloor);
 
     }
 
-    public void deleteShelfFloor(ShelfFloor shelFloor) {
+    public void deleteShelfFloor(int index) {
+    	
+    	shelf.removeShelfFloor(index);
 
     }
 
@@ -94,6 +102,9 @@ public class ShelfManager {
 
     public SimpleObjectProperty<ShelfSupport> getShelfSupportProp() {
         return shelfSupportProp;
+    }
+    public SimpleObjectProperty<ShelfFloor> getShelfFloorProp() {
+        return shelfFloorProp;
     }
 
 }
