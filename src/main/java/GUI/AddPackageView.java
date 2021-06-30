@@ -120,7 +120,7 @@ public class AddPackageView extends VBox {
         
         this.getStyleClass().addAll("background");
         
-        this.setPadding(new Insets(60, 20, 20, 20));
+        this.setPadding(new Insets(55, 20, 20, 20));
         this.setSpacing(12);
         
         closeButton.setId("rot");
