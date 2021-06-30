@@ -45,14 +45,17 @@ public class EditShelfView extends VBox {
     	
     	hBox.getChildren().addAll(lengthLabel, lengthInput);
     	hBox2.getChildren().addAll(distanceLabel,distanceInput);
-    	this.getChildren().addAll(shelfItemSelection,hBox,hBox2,doneButton);
     	
     	//zusatz für Regalstützen löschen :
     	
     	editShelfSupportLabel = new Label("Bearbeiten:");
     	deleteShelfSupportButton = new Button("Löschen");
+    	deleteShelfSupportButton.setVisible(false);
     	moveShelfSupportLabel = new Label("Verschieben");
     	moveShelfSupportTextField = new TextField();
+    	
+    	this.getChildren().addAll(shelfItemSelection,hBox,hBox2,doneButton, deleteShelfSupportButton);
+
     	//Regalböden bearbeitung
 
     }

@@ -17,6 +17,7 @@ public class ShelfViewController extends ViewController{
 	
 	ShelfView view;
 	private ArrayList<Rectangle> shelfSupports;
+	private ArrayList<Rectangle> oldshelfSupportsList;
 	int lastdistanceX = 0;
 	EditShelfViewController editShelfViewController ;
 	
@@ -35,17 +36,40 @@ public class ShelfViewController extends ViewController{
 		@Override
 		public void handle(MouseEvent t) {
 			//Löschen button erscheint... Die zeile ist so groß da ich den Löschen button dafür hier rein bekommen musste um damit zu arbeiten
-			editShelfViewController.getRoot().getChildren().addAll(((EditShelfView) editShelfViewController.getRoot()).getDeleteShelfSupportButton());
+			
+			((EditShelfView) editShelfViewController.getRoot()).getDeleteShelfSupportButton().setVisible(true);
+
+			if(!oldshelfSupportsList.equals(((ShelfView) root).getShelfSupports())) {
+
+			  	for(int i= 0; i< ((ShelfView) root).getShelfSupports().size(); i++) {
+			  		
+			  		//remove alte hanldder
+			  		
+			  		view.getShelfSupports().get(i).removeEventHandler(MouseEvent.MOUSE_CLICKED,  new ShelfSupportHandler(i));
+
+			  		// add neue handler
+		    		view.getShelfSupports().get(i).addEventHandler(MouseEvent.MOUSE_CLICKED,  new ShelfSupportHandler(i));   	
+
+		    	}
+
+		    	oldshelfSupportsList = new ArrayList<Rectangle>(((ShelfView) root).getShelfSupports());
+
+				
+			}
+		
 			
 			//Listener für Löschbutton.. 
 			((EditShelfView) editShelfViewController.getRoot()).getDeleteShelfSupportButton().setOnAction((e) -> {
 				
-				//Löscht Shelfsupport rectangles aus der ArrayList
-				view.getShelfSupports().remove(i);
-				//Löscht ShelfSupport rectangles aus der View 
+	
+				
 				view.getChildren().remove(i);
 				//Löscht Shelfsupport aus der Logic
 				shelfManager.deleteShelfSupport(i);
+				//Löscht Shelfsupport rectangles aus der ArrayList
+				((ShelfView) root).getShelfSupports().remove(i);
+				//Löscht ShelfSupport rectangles aus der View 
+				
 			});
 			
 			
@@ -65,7 +89,9 @@ public class ShelfViewController extends ViewController{
 		
 
     	shelfSupports = new ArrayList<Rectangle>();
-    	
+
+	  	
+
     	
     	root = view;
          initialize();
@@ -113,8 +139,14 @@ public class ShelfViewController extends ViewController{
 				//MouseListener für alle -ShelfSupport-Rectangles im Programm- Wird einer Geklickt wird Innere Klasse ShelfSupportHandler(Ganz oben in dieser Klasse zu finden) aufgerufen
 			  	for(int i= 0; i< ((ShelfView) root).getShelfSupports().size(); i++) {
 	
-		    		view.getShelfSupports().get(i).setOnMouseClicked(new ShelfSupportHandler(i));
+		    		//view.getShelfSupports().get(i).setOnMouseClicked(new ShelfSupportHandler(i));
+		    		view.getShelfSupports().get(i).addEventHandler(MouseEvent.MOUSE_CLICKED,  new ShelfSupportHandler(i));   	
+
 		    	}
+			  	
+			  	
+		    	oldshelfSupportsList = new ArrayList<Rectangle>(((ShelfView) root).getShelfSupports());
+
 				
 
 				

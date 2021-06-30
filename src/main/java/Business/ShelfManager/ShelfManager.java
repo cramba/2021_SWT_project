@@ -72,6 +72,7 @@ public class ShelfManager {
     	
     	shelf.removeShelfSupport(index);
     	
+    	
 
     }
 
@@ -90,6 +91,9 @@ public class ShelfManager {
     public SimpleObjectProperty<ShelfSupport> getShelfSupportProp() {
 		return shelfSupportProp;
 	}
+    public Shelf getShelf() {
+    	return shelf;
+    }
 
 }
 
