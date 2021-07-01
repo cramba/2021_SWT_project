@@ -143,7 +143,7 @@ public class AddPackageView extends ScrollPane {
 
         maxLoadCapacity = new HBox();
         maxLoadCapacity.getChildren().addAll(maxLoadCapacityLabel, maxLoadCapacityInput);
-        maxLoadCapacity.setSpacing(20);
+        maxLoadCapacity.setSpacing(18);
         
         errorMessage = new Label("");
         errorMessage.setTextFill(Color.RED);
@@ -156,9 +156,8 @@ public class AddPackageView extends ScrollPane {
         closeButton = new Button("x");
         label = new HBox();
         label.getChildren().addAll(packageadded, closeButton);
-        packageadded.setPadding(new Insets(5, 130, 5, 1));
-        closeButton.setAlignment(Pos.BASELINE_LEFT);
-        label.setSpacing(12);
+        packageadded.setPadding(new Insets(5, 130, 5, 2));
+        label.setSpacing(10);
 
         vbox.getChildren().addAll(label, name, colour, width, height, weight, incompatibility, maxLoadCapacity, errorMessage);
         vbox.getChildren().addAll(buttons);
