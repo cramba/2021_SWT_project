@@ -27,15 +27,20 @@ public class EditShelfView extends VBox {
     Label moveShelfSupportLabel;
     TextField moveShelfSupportTextField;
 
+    
+    Label loadCapacityLabel;
+    TextField loadCapacityTextField;
+    Button doneButton2 ;
+    Button deleteShelfFloorButton ; 
 
     public EditShelfView(){
     	
-    	//Regalstützen bearbeitung
+    	//Regalstuetzen bearbeitung
     	shelfItemSelection =  new ComboBox<String>();
-    	shelfItemSelection.getItems().addAll("Regalstütze","Regalboden");
+    	shelfItemSelection.getItems().addAll("Regalstï¿½tze","Regalboden");
     	shelfItemSelection.setId("ShelfItemSelection");
     	shelfItemSelection.getSelectionModel().selectFirst();
-    	lengthLabel = new Label("Länge:");
+    	lengthLabel = new Label("Lï¿½nge:");
     	lengthInput = new TextField();
     	hBox = new HBox();
     	distanceLabel = new Label("Abstand:");
@@ -46,16 +51,18 @@ public class EditShelfView extends VBox {
     	
     	hBox.getChildren().addAll(lengthLabel, lengthInput);
     	hBox2.getChildren().addAll(distanceLabel,distanceInput);
-    	this.getChildren().addAll(shelfItemSelection,hBox,hBox2,doneButton);
     	
     	hBox.setSpacing(65);
     	hBox2.setSpacing(50);
     	//zusatz für Regalstützen löschen :
+    	//zusatz fï¿½r Regalstï¿½tzen lï¿½schen :
     	
     	editShelfSupportLabel = new Label("Bearbeiten:");
-    	deleteShelfSupportButton = new Button("Löschen");
+    	deleteShelfSupportButton = new Button("Lï¿½schen");
+    	deleteShelfSupportButton.setVisible(false);
     	moveShelfSupportLabel = new Label("Verschieben");
     	moveShelfSupportTextField = new TextField();
+
     	//Regalböden bearbeitung
     	
     	this.getStyleClass().addAll("background");
@@ -64,7 +71,31 @@ public class EditShelfView extends VBox {
     	this.setSpacing(12);
     	
     	doneButton.setId("green");
+    	
+    	this.getChildren().addAll(shelfItemSelection,hBox,hBox2,doneButton, deleteShelfSupportButton);
+
+    	//Regalbï¿½den bearbeitung
+    	
+    	
+    	loadCapacityLabel = new Label("Tragkraft:");
+    	loadCapacityTextField = new TextField();
+    	doneButton2 = new Button("Fertig"); 
+    	deleteShelfFloorButton = new Button("Lï¿½schen");
+    	deleteShelfFloorButton.setVisible(false);
+
     }
+
+	public Button getDoneButton2() {
+		return doneButton2;
+	}
+
+	public Label getLoadCapacityLabel() {
+		return loadCapacityLabel;
+	}
+
+	public TextField getLoadCapacityTextField() {
+		return loadCapacityTextField;
+	}
 
 	public Label getEditShelfSupportLabel() {
 		return editShelfSupportLabel;
@@ -119,9 +150,11 @@ public class EditShelfView extends VBox {
 		// TODO Auto-generated method stub
 		return hBox2;
 	}
-
-
-    
-    
+	
+	
+	
+	public Button getDeleteShelfFloorButton() {
+		return deleteShelfFloorButton;
+	}
 
 }
