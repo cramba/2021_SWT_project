@@ -12,8 +12,6 @@ import javafx.util.Callback;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 public class AddPackageViewController extends ViewController {
     AddPackageView view;
@@ -22,7 +20,8 @@ public class AddPackageViewController extends ViewController {
     Button addIncompatibilityColourButton;
     Button doneButton;
     Button newTemplateButton;
-    TextField nameInput;
+    Label errorMessage;
+    
 
     ComboBox<Color> colorComboBox;
 
@@ -36,9 +35,9 @@ public class AddPackageViewController extends ViewController {
         closeButton = view.getCloseButton();
         addIncompatibilityColourButton = view.getAddIncompatibilityColourButton();
         doneButton = view.getDoneButton();
+        errorMessage = view.getErrorMessageLabel();
 
         colorComboBox = view.getColourInput();
-        nameInput = view.getNameInput();
 
         root = view;
         initialize();
@@ -93,42 +92,43 @@ public class AddPackageViewController extends ViewController {
     }
     //überptüft alle Eingabefelder auf Richtigkeit
     public boolean validInput() {
+    	errorMessage.setText("");
     	//name Input
-    	if(nameInput.getText().equals("")) {
-    		System.out.println("Gib deinem Paket noch einen Namen");
+    	if(view.getNameInput().getText().equals("")) {
+    		errorMessage.setText("Gib deinem Paket noch einen Namen");
     		return false;
     		
-    	}else if(nameInput.getText().length() >= 15) {
-    		System.out.println("Der Name darf nicht länger als 15 Zeichen sein");
+    	}else if(view.getNameInput().getText().length() >= 15) {
+    		errorMessage.setText("Der Name darf nicht länger als 15 Zeichen sein");
     		return false;
     	}
     	
     	//Farbe
     	if(view.getColourInput().getValue() == null) {
-    		System.out.println("Bitte wähle eine Farbe aus");
+    		errorMessage.setText("Bitte wähle eine Farbe aus");
     		return false;
     	}
     	//Breite
     	if(!isInt(view.getWidthInput().getText())) {
-    		System.out.println("Bitte gebe eine gültige Breite ein");
+    		errorMessage.setText("Bitte gebe eine gültige Breite ein");
     		return false;
     	}
     	
     	//Höhe
     	if(!isInt(view.getHeightInput().getText())) {
-    		System.out.println("Bitte gebe eine gültige Höhe ein");
+    		errorMessage.setText("Bitte gebe eine gültige Höhe ein");
     		return false;
     	}
     	
     	//Gewicht
     	if(!isFloat(view.getWeightInput().getText())) {
-    		System.out.println("Bitte gebe ein gültiges Gewicht ein");
+    		errorMessage.setText("Bitte gebe ein gültiges Gewicht ein");
     		return false;
     	}
     	
     	//Traglast
     	if(!isFloat(view.getMaxLoadCapacityInput().getText())) {
-    		System.out.println("Bitte gebe eine gültige Traglast ein");
+    		errorMessage.setText("Bitte gebe eine gültige Traglast ein");
     		return false;
     	}
     	return true;

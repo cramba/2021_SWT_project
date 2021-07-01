@@ -40,6 +40,8 @@ public class AddPackageView extends VBox {
     TextField maxLoadCapacityInput;
     HBox packageadded;
 
+    Label errorMessage;
+    
     HBox buttons;
     Button closeButton;
     HBox label;
@@ -103,6 +105,9 @@ public class AddPackageView extends VBox {
         maxLoadCapacity.getChildren().addAll(maxLoadCapacityLabel, maxLoadCapacityInput);
         maxLoadCapacity.setSpacing(20);
         
+        errorMessage = new Label("");
+        errorMessage.setTextFill(Color.RED);
+        
         buttons = new HBox(doneButton, newTemplateButton);
         buttons.setSpacing(12);
         buttons.setPadding(new Insets(20,0,0,0));
@@ -115,7 +120,7 @@ public class AddPackageView extends VBox {
         closeButton.setAlignment(Pos.BASELINE_LEFT);
         label.setSpacing(12);
 
-        this.getChildren().addAll(label, name, colour, width, height, weight, incompatibility, maxLoadCapacity);
+        this.getChildren().addAll(label, name, colour, width, height, weight, incompatibility, maxLoadCapacity, errorMessage);
         this.getChildren().addAll(buttons);
         
         this.getStyleClass().addAll("background");
@@ -203,6 +208,10 @@ public class AddPackageView extends VBox {
 
     public TextField getMaxLoadCapacityInput() {
         return maxLoadCapacityInput;
+    }
+    
+    public Label getErrorMessageLabel() {
+    	return errorMessage;
     }
 
     public Button getCloseButton() {
