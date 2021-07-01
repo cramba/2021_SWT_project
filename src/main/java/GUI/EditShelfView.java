@@ -48,6 +48,8 @@ public class EditShelfView extends VBox {
     	hBox2.getChildren().addAll(distanceLabel,distanceInput);
     	this.getChildren().addAll(shelfItemSelection,hBox,hBox2,doneButton);
     	
+    	hBox.setSpacing(65);
+    	hBox2.setSpacing(50);
     	//zusatz für Regalstützen löschen :
     	
     	editShelfSupportLabel = new Label("Bearbeiten:");
@@ -60,6 +62,8 @@ public class EditShelfView extends VBox {
     	
     	this.setPadding(new Insets(55, 20, 20, 20));
     	this.setSpacing(12);
+    	
+    	doneButton.setId("green");
     }
 
 	public Label getEditShelfSupportLabel() {
