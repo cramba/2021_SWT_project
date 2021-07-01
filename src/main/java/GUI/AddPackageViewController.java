@@ -85,14 +85,22 @@ public class AddPackageViewController extends ViewController {
             int width = Integer.parseInt(view.getWidthInput().getText());
             float weight = Float.parseFloat(view.getWeightInput().getText());
             Color colour = view.getColourInput().getValue();
-            List<Color> incompatibilityColors = new ArrayList<>();
+            /*List<Color> incompatibilityColors = new ArrayList<>();
             for (Node node : view.getIncompatibility().getChildren()) {
                 if (node instanceof ColorPicker) {
                     incompatibilityColors.add(((ColorPicker) node).getValue());
                 }
-            }
-            //Package newPck = new Package(name, height, width, weight, colour, 0, 0, incompatibilityColors);
-            //trayViewController.setPackageinTray(newPck);
+            }*/
+            float loadCapacity = Float.parseFloat(view.getMaxLoadCapacityInput().getText());
+            System.out.println("Name: " + name);
+            System.out.println("Höhe: " + height);
+            System.out.println("Breite: " + width);
+            System.out.println("Gewicht: " + weight);
+            System.out.println("Farbe: " + colour);
+            System.out.println("Traglast: " + loadCapacity);
+            //System.out.println("Unverträglichkeit: " + incompatibilityColors);
+            Package newPck = new Package(name, height, width, weight, colour, loadCapacity);
+            shelfManager.addPackageTemplate(newPck);
         });
     }
 
