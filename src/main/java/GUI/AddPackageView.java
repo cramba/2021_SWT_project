@@ -1,7 +1,5 @@
 package GUI;
 
-import Business.Package.Colour;
-import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -9,14 +7,21 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class AddPackageView extends VBox {
+public class AddPackageView extends ScrollPane {
+    VBox vbox;
+
     HBox name;
     Label nameLabel;
     TextField nameInput;
 
     HBox colour;
     Label colourLabel;
-    ComboBox<Color> colourInput;
+    VBox colourInput;
+    ToggleGroup colourGroup;
+    ToggleButton redButton;
+    ToggleButton greenButton;
+    ToggleButton yellowButton;
+    ToggleButton blueButton;
 
     HBox width;
     Label widthLabel;
@@ -32,8 +37,12 @@ public class AddPackageView extends VBox {
 
     HBox incompatibility;
     Label incompatibilityLabel;
-    HBox incompatibilityInput;
-    Button addIncompatibilityColourButton;
+    VBox incompatibilityColors;
+    ToggleButton incompRed;
+    ToggleButton incompGreen;
+    ToggleButton incompYellow;
+    ToggleButton incompBlue;
+    //Button addIncompatibilityColourButton;
 
     HBox maxLoadCapacity;
     Label maxLoadCapacityLabel;
@@ -41,7 +50,7 @@ public class AddPackageView extends VBox {
     HBox packageadded;
 
     Label errorMessage;
-    
+
     HBox buttons;
     Button closeButton;
     HBox label;
@@ -49,13 +58,31 @@ public class AddPackageView extends VBox {
     Button newTemplateButton;
 
     public AddPackageView() {
+        vbox = new VBox();
 
         nameLabel = new Label("Name:");
         nameInput = new TextField();
         
         colourLabel = new Label("Farbe:");
-        colourInput = new ComboBox<>();
-        colourInput.getItems().addAll(Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN);
+        greenButton = new ToggleButton("gruen");
+        greenButton.setUserData(Color.GREEN);
+        greenButton.setStyle("-fx-base: green");
+        redButton = new ToggleButton("rot");
+        redButton.setUserData(Color.RED);
+        redButton.setStyle("-fx-base: red");
+        yellowButton = new ToggleButton("gelb");
+        yellowButton.setUserData(Color.YELLOW);
+        yellowButton.setStyle("-fx-base: orange");
+        blueButton = new ToggleButton("blau");
+        blueButton.setUserData(Color.BLUE);
+        blueButton.setStyle("-fx-base: blue");
+        colourInput = new VBox();
+        colourInput.getChildren().addAll(greenButton, redButton, yellowButton, blueButton);
+        colourGroup = new ToggleGroup();
+        greenButton.setToggleGroup(colourGroup);
+        redButton.setToggleGroup(colourGroup);
+        yellowButton.setToggleGroup(colourGroup);
+        blueButton.setToggleGroup(colourGroup);
 
         widthLabel = new Label("Breite:");
         widthInput = new TextField();
@@ -67,13 +94,26 @@ public class AddPackageView extends VBox {
         weightInput = new TextField();
 
         incompatibilityLabel = new Label("Unvertraeglichkeit:");
-        addIncompatibilityColourButton = new Button("+");
-        incompatibilityInput = new HBox();
+        incompatibilityColors = new VBox();
+        incompRed = new ToggleButton("rot");
+        incompRed.setUserData(Color.RED);
+        incompRed.setStyle("-fx-base: red");
+        incompGreen = new ToggleButton("gruen");
+        incompGreen.setUserData(Color.GREEN);
+        incompGreen.setStyle("-fx-base: green");
+        incompYellow = new ToggleButton("gelb");
+        incompYellow.setUserData(Color.YELLOW);
+        incompYellow.setStyle("-fx-base: orange");
+        incompBlue = new ToggleButton("blau");
+        incompBlue.setUserData(Color.BLUE);
+        incompBlue.setStyle("-fx-base: blue");
+        incompatibilityColors.getChildren().addAll(incompGreen, incompRed, incompYellow, incompBlue);
+
 
         maxLoadCapacityLabel = new Label("max. Traglast:");
         maxLoadCapacityInput = new TextField();
 
-        addIncompatibilityColourButton = new Button("+");
+        //addIncompatibilityColourButton = new Button("+");
         doneButton = new Button("Fertig");
         newTemplateButton = new Button("neue Vorlage");
 
@@ -98,7 +138,7 @@ public class AddPackageView extends VBox {
         weight.setSpacing(51);
 
         incompatibility = new HBox();
-        incompatibility.getChildren().addAll(incompatibilityLabel, incompatibilityInput, addIncompatibilityColourButton);
+        incompatibility.getChildren().addAll(incompatibilityLabel, incompatibilityColors);
         incompatibility.setSpacing(9);
 
         maxLoadCapacity = new HBox();
@@ -107,7 +147,7 @@ public class AddPackageView extends VBox {
         
         errorMessage = new Label("");
         errorMessage.setTextFill(Color.RED);
-        
+
         buttons = new HBox(doneButton, newTemplateButton);
         buttons.setSpacing(12);
         buttons.setPadding(new Insets(20,0,0,0));
@@ -120,18 +160,20 @@ public class AddPackageView extends VBox {
         closeButton.setAlignment(Pos.BASELINE_LEFT);
         label.setSpacing(12);
 
-        this.getChildren().addAll(label, name, colour, width, height, weight, incompatibility, maxLoadCapacity, errorMessage);
-        this.getChildren().addAll(buttons);
-        
-        this.getStyleClass().addAll("background");
-        
-        this.setPadding(new Insets(55, 20, 20, 20));
-        this.setSpacing(12);
+        vbox.getChildren().addAll(label, name, colour, width, height, weight, incompatibility, maxLoadCapacity, errorMessage);
+        vbox.getChildren().addAll(buttons);
+
+        vbox.getStyleClass().addAll("background");
+
+        vbox.setPadding(new Insets(55, 20, 20, 20));
+        vbox.setSpacing(12);
         
         closeButton.setId("rot");
         doneButton.setId("green");
         newTemplateButton.setId("gelb");
         packageadded.setId("grau");
+
+        this.setContent(vbox);
     }
 
     public HBox getName() {
@@ -146,6 +188,22 @@ public class AddPackageView extends VBox {
         return nameInput;
     }
 
+    public ToggleButton getIncompRed() {
+        return incompRed;
+    }
+
+    public ToggleButton getIncompGreen() {
+        return incompGreen;
+    }
+
+    public ToggleButton getIncompYellow() {
+        return incompYellow;
+    }
+
+    public ToggleButton getIncompBlue() {
+        return incompBlue;
+    }
+
     public HBox getColour() {
         return colour;
     }
@@ -154,8 +212,12 @@ public class AddPackageView extends VBox {
         return colourLabel;
     }
 
-    public ComboBox<Color> getColourInput() {
+    public VBox getColourInput() {
         return colourInput;
+    }
+
+    public ToggleGroup getColourGroup(){
+        return colourGroup;
     }
 
     public Label getWidthLabel() {
@@ -194,8 +256,8 @@ public class AddPackageView extends VBox {
         return incompatibilityLabel;
     }
 
-    public HBox getIncompatibilityInput() {
-        return incompatibilityInput;
+    public VBox getIncompatibilityColors() {
+        return incompatibilityColors;
     }
 
     public HBox getMaxLoadCapacity() {
@@ -209,17 +271,13 @@ public class AddPackageView extends VBox {
     public TextField getMaxLoadCapacityInput() {
         return maxLoadCapacityInput;
     }
-    
+
     public Label getErrorMessageLabel() {
     	return errorMessage;
     }
 
     public Button getCloseButton() {
         return closeButton;
-    }
-
-    public Button getAddIncompatibilityColourButton() {
-        return addIncompatibilityColourButton;
     }
 
     public Button getDoneButton() {
@@ -230,4 +288,11 @@ public class AddPackageView extends VBox {
         return newTemplateButton;
     }
 
+    public VBox getVbox(){
+        return vbox;
+    }
+
+    public VBox getIncompatibilityColours(){
+        return incompatibilityColors;
+    }
 }
