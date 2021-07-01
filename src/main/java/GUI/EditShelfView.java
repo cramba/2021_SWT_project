@@ -54,8 +54,8 @@ public class EditShelfView extends VBox {
     	
     	hBox.setSpacing(65);
     	hBox2.setSpacing(50);
-    	//zusatz für Regalstützen löschen :
-    	//zusatz fï¿½r Regalstï¿½tzen lï¿½schen :
+    	//zusatz fuer Regalstuetzen loeschen :
+    	//zusatz fuer Regalstuetzen loeschen :
     	
     	editShelfSupportLabel = new Label("Bearbeiten:");
     	deleteShelfSupportButton = new Button("Lï¿½schen");
@@ -63,7 +63,7 @@ public class EditShelfView extends VBox {
     	moveShelfSupportLabel = new Label("Verschieben");
     	moveShelfSupportTextField = new TextField();
 
-    	//Regalböden bearbeitung
+    	//Regalbï¿½den bearbeitung
     	
     	this.getStyleClass().addAll("background");
     	
