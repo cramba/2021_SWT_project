@@ -12,6 +12,9 @@ import javafx.util.Callback;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 public class AddPackageViewController extends ViewController {
     AddPackageView view;
 
@@ -19,6 +22,7 @@ public class AddPackageViewController extends ViewController {
     Button addIncompatibilityColourButton;
     Button doneButton;
     Button newTemplateButton;
+    TextField nameInput;
 
     ComboBox<Color> colorComboBox;
 
@@ -34,6 +38,7 @@ public class AddPackageViewController extends ViewController {
         doneButton = view.getDoneButton();
 
         colorComboBox = view.getColourInput();
+        nameInput = view.getNameInput();
 
         root = view;
         initialize();
@@ -77,31 +82,97 @@ public class AddPackageViewController extends ViewController {
         closeButton.setOnAction((e) -> {
             view.setVisible(false);
         });
+        
 
 
         doneButton.setOnAction((e) -> {
-            String name = view.getNameLabel().getText();
-            int height = Integer.parseInt(view.getHeightInput().getText());
-            int width = Integer.parseInt(view.getWidthInput().getText());
-            float weight = Float.parseFloat(view.getWeightInput().getText());
-            Color colour = view.getColourInput().getValue();
-            /*List<Color> incompatibilityColors = new ArrayList<>();
-            for (Node node : view.getIncompatibility().getChildren()) {
-                if (node instanceof ColorPicker) {
-                    incompatibilityColors.add(((ColorPicker) node).getValue());
-                }
-            }*/
-            float loadCapacity = Float.parseFloat(view.getMaxLoadCapacityInput().getText());
-            System.out.println("Name: " + name);
-            System.out.println("Höhe: " + height);
-            System.out.println("Breite: " + width);
-            System.out.println("Gewicht: " + weight);
-            System.out.println("Farbe: " + colour);
-            System.out.println("Traglast: " + loadCapacity);
-            //System.out.println("Unverträglichkeit: " + incompatibilityColors);
-            Package newPck = new Package(name, height, width, weight, colour, loadCapacity);
-            shelfManager.addPackageTemplate(newPck);
+            if(validInput()) {
+            	 shelfManager.addPackageTemplate(newPackage());
+            }
         });
+    }
+    //überptüft alle Eingabefelder auf Richtigkeit
+    public boolean validInput() {
+    	//name Input
+    	if(nameInput.getText().equals("")) {
+    		System.out.println("Gib deinem Paket noch einen Namen");
+    		return false;
+    		
+    	}else if(nameInput.getText().length() >= 15) {
+    		System.out.println("Der Name darf nicht länger als 15 Zeichen sein");
+    		return false;
+    	}
+    	
+    	//Farbe
+    	if(view.getColourInput().getValue() == null) {
+    		System.out.println("Bitte wähle eine Farbe aus");
+    		return false;
+    	}
+    	//Breite
+    	if(!isInt(view.getWidthInput().getText())) {
+    		System.out.println("Bitte gebe eine gültige Breite ein");
+    		return false;
+    	}
+    	
+    	//Höhe
+    	if(!isInt(view.getHeightInput().getText())) {
+    		System.out.println("Bitte gebe eine gültige Höhe ein");
+    		return false;
+    	}
+    	
+    	//Gewicht
+    	if(!isFloat(view.getWeightInput().getText())) {
+    		System.out.println("Bitte gebe ein gültiges Gewicht ein");
+    		return false;
+    	}
+    	
+    	//Traglast
+    	if(!isFloat(view.getMaxLoadCapacityInput().getText())) {
+    		System.out.println("Bitte gebe eine gültige Traglast ein");
+    		return false;
+    	}
+    	return true;
+    }
+    
+    public boolean isInt(String number) {
+    	if(number == null) {
+    		return false;
+    	}
+    	try {
+    		int i = Integer.parseInt(number);
+    	} catch(NumberFormatException nfe) {
+    		return false;
+    	}
+    	return true;
+    }
+    
+    public boolean isFloat(String number) {
+    	if(number == null) {
+    		return false;
+    	}
+    	try {
+    		float f = Float.parseFloat(number);
+    	} catch(NumberFormatException nfe) {
+    		return false;
+    	}
+    	return true;
+    }
+    
+    public Package newPackage() {
+    	 String name = view.getNameLabel().getText();
+         int height = Integer.parseInt(view.getHeightInput().getText());
+         int width = Integer.parseInt(view.getWidthInput().getText());
+         float weight = Float.parseFloat(view.getWeightInput().getText());
+         Color colour = view.getColourInput().getValue();
+         /*List<Color> incompatibilityColors = new ArrayList<>();
+         for (Node node : view.getIncompatibility().getChildren()) {
+             if (node instanceof ColorPicker) {
+                 incompatibilityColors.add(((ColorPicker) node).getValue());
+             }
+         }*/
+         float loadCapacity = Float.parseFloat(view.getMaxLoadCapacityInput().getText());
+         Package newPck = new Package(name, height, width, weight, colour, loadCapacity);
+         return newPck;
     }
 
     public AddPackageView getView() {
