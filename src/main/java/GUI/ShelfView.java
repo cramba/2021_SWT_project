@@ -16,6 +16,7 @@ import javafx.scene.shape.Rectangle;
 public class ShelfView extends AnchorPane {
 	
 	private ArrayList<Rectangle> shelfSupports;
+	private ArrayList<Rectangle> shelfFloors;
 
 
 
@@ -23,6 +24,7 @@ public class ShelfView extends AnchorPane {
 
 	public ShelfView(){
     	shelfSupports = new ArrayList<Rectangle>();
+    	shelfFloors = new ArrayList<Rectangle>();
 
     	
     	
@@ -36,5 +38,9 @@ public class ShelfView extends AnchorPane {
 	
     public ArrayList<Rectangle> getShelfSupports() {
 		return shelfSupports;
+	}
+	
+    public ArrayList<Rectangle> getShelfFloors() {
+		return shelfFloors;
 	}
 }

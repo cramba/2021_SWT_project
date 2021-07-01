@@ -6,6 +6,7 @@ import Business.Shelf.Shelf;
 import Business.Shelf.ShelfFloor;
 import Business.Shelf.ShelfSupport;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.paint.Color;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -15,17 +16,22 @@ public class ShelfManager {
     Shelf shelf;
     Object tray;
     ArrayList<Package> packageTemplate;
-	SimpleObjectProperty<ShelfSupport> shelfSupportProp;
+    SimpleObjectProperty<ShelfSupport> shelfSupportProp;
+    SimpleObjectProperty<ShelfFloor> shelfFloorProp;
+
+    public void setShelf(Shelf shelf) {
+        this.shelf = shelf;
+    }
 
     public ShelfManager() {
 
         shelf = new Shelf();
         tray = new Object();
         packageTemplate = new ArrayList<Package>();
-        shelfSupportProp = new SimpleObjectProperty<ShelfSupport>() ;
-        
-        packageTemplate.add(new Package("Testpaket", 40, 40, 3.5f));
-        packageTemplate.add(new Package("Kleines Paket", 20, 10, 1.5f));
+        shelfSupportProp = new SimpleObjectProperty<ShelfSupport>();
+        shelfFloorProp = new  SimpleObjectProperty<ShelfFloor>();
+        packageTemplate.add(new Package("Testpaket", 40, 40, 3.5f, Color.BLACK, 6.7f));
+        //packageTemplate.add(new Package("Kleines Paket", 20, 10, 1.5f));
     }
 
     public void movePackage(Package pck, int positionX, int positionY) {
@@ -72,24 +78,38 @@ public class ShelfManager {
     	
     	shelf.removeShelfSupport(index);
     	
+    	
 
     }
 
     public void addShelfFloor(float loadCapacity) {
+    	
+    	ShelfFloor shelfFloor = new ShelfFloor(0,loadCapacity,50,50); //obligatorische Werte
+    	shelf.addShelfFloor(shelfFloor);
+    	shelfFloorProp.setValue(shelfFloor);
 
     }
 
-    public void deleteShelfFloor(ShelfFloor shelFloor) {
+    public void deleteShelfFloor(int index) {
+    	
+    	shelf.removeShelfFloor(index);
 
     }
     
-    public ArrayList<Package> getTemplateList(){
-    	return packageTemplate;
+    public void addPackageTemplate(Package pck) {
+    	packageTemplate.add(pck);
     }
-    
+
+    public ArrayList<Package> getTemplateList() {
+        return packageTemplate;
+    }
+
     public SimpleObjectProperty<ShelfSupport> getShelfSupportProp() {
-		return shelfSupportProp;
-	}
+        return shelfSupportProp;
+    }
+    public SimpleObjectProperty<ShelfFloor> getShelfFloorProp() {
+        return shelfFloorProp;
+    }
 
 }
 
