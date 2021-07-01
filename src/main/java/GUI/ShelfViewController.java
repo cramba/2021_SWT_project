@@ -37,7 +37,7 @@ public class ShelfViewController extends ViewController{
 
 		@Override
 		public void handle(MouseEvent t) {
-			//Loeschen button erscheint... Die zeile ist so groﬂ da ich den Loeschen button dafuer hier rein bekommen musste um damit zu arbeiten
+			//Loeschen button erscheint... Die zeile ist so gross da ich den Loeschen button dafuer hier rein bekommen musste um damit zu arbeiten
 			
 			((EditShelfView) editShelfViewController.getRoot()).getDeleteShelfSupportButton().setVisible(true);
 
