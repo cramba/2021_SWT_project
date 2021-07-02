@@ -81,7 +81,7 @@ public class AddPackageViewController extends ViewController {
 
         doneButton.setOnAction((e) -> {
             if (validInput()) {
-               
+               shelfManager.packageProp().setValue(newPackage());
             }
         });
         

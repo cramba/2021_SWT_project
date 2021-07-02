@@ -3,8 +3,10 @@ package GUI;
 import java.util.ArrayList;
 
 import Business.Package.Package;
-
+import Business.Shelf.ShelfFloor;
 import Business.ShelfManager.ShelfManager;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
@@ -50,6 +52,17 @@ public class TrayViewController extends ViewController{
     	
     	 r.setOnMouseDragged(event -> drag(event));
 
+    	 shelfManager.packageProp().addListener(new ChangeListener<Package>() {
+
+    			@Override
+    			public void changed(ObservableValue<? extends Package> observable, Package oldValue, Package newValue) {
+    				// TODO Auto-generated method stub
+    				view.setTrayPackage(newValue);
+    				System.out.println("NIX");
+
+    			}
+    			
+    		});
 
 
     }
@@ -78,6 +91,9 @@ public class TrayViewController extends ViewController{
 //  	    block.setFill(Color.BLUE);
 //  	  }
 //    }
+
+    
+    
 
     public void setPackageinTray(Package p){
         //Paket in Ablage setzen

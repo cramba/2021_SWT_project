@@ -1,5 +1,6 @@
 package GUI;
 
+import Business.Package.Package;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.Border;
@@ -20,10 +21,11 @@ public class TrayView extends StackPane{
 	Rectangle r,rectTarget ; 
 	StackPane group;
 	Button button;
+	private Package trayPackage;
     public TrayView(){
-    	
-    	 r = new Rectangle(-50,-50,100,100);
-    	 //rectTarget = new Rectangle(150, 150, 100, 100);
+    	//breite x höhe
+    	 r = new Rectangle();
+    	 rectTarget = new Rectangle(150, 150, 100, 100);
     	 button = new Button();
     	
     	r.setFill(Color.RED);
@@ -34,7 +36,6 @@ public class TrayView extends StackPane{
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     	
     	
-    	this.getChildren().addAll(r);
        	
         
     }
@@ -47,5 +48,24 @@ public class TrayView extends StackPane{
     }
     public Button getButton() {
     	return button;
+    }
+    
+    public void setTrayPackage(Package pack) {
+    	if(trayPackage == null ) {
+    		trayPackage = pack;
+    		int width = trayPackage.getWidth();
+        	int height = trayPackage.getHeight();
+        	int posWidth = (width/2)*(-1);
+        	int posHeight = (height/2)*(-1);
+        	r.setX(posWidth);
+        	r.setY(posHeight);
+        	r.setWidth(width);
+        	r.setHeight(height);
+        	r.setFill(trayPackage.getColour());
+        	this.getChildren().addAll(r);
+    	}else {
+    		System.out.println("Es befindet sich bereits ein Paket in der Ablage");
+    	}
+    	
     }
 }
