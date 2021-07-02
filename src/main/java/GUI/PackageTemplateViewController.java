@@ -1,6 +1,10 @@
 package GUI;
 
 import Business.ShelfManager.ShelfManager;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import Business.Package.Package;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
@@ -38,8 +42,9 @@ public class PackageTemplateViewController extends ViewController{
 			
 		});
     	
-    	ObservableList<Package> uiModel = templateView.getItems();
-		uiModel.addAll(shelfManager.getTemplateList()); 
-
+    	ObservableList<Package> lstTemplate = templateView.getItems();
+    	lstTemplate.addAll(shelfManager.getTemplateList()); 
+    	
+    	
     }
 }
