@@ -37,7 +37,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         System.out.println("Fertig");
         primaryStage.show();
-        primaryStage.setResizable(false);
+
     }
 
     public void stop(){
