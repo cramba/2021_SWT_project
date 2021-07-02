@@ -82,7 +82,7 @@ public class EditShelfView extends VBox {
     	doneButton2 = new Button("Fertig"); 
     	deleteShelfFloorButton = new Button("L�schen");
     	deleteShelfFloorButton.setVisible(false);
-
+		
     }
 
 	public Button getDoneButton2() {
