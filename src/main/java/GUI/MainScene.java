@@ -50,6 +50,8 @@ public class MainScene extends BorderPane {
     	this.setRight(setRightVBox);
     	this.setLeft(addPackageViewController.getRoot());
     	this.setBottom(configurationViewController.getRoot());
+
+		this.getStyleClass().addAll("background");
     	
     }
 

@@ -163,7 +163,7 @@ public class AddPackageView extends ScrollPane {
 
         buttons = new HBox(doneButton, newTemplateButton);
         buttons.setSpacing(12);
-        buttons.setPadding(new Insets(20,0,0,0));
+        buttons.setPadding(new Insets(30,0,128,0));
         
         packageadded = new HBox(new Label("Paket hinzufuegen"));
         closeButton = new Button("x");
