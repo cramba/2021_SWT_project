@@ -46,6 +46,7 @@ public class AddPackageViewController extends ViewController {
         colorGroup = view.getColourGroup();
         closeButton = view.getCloseButton();
         doneButton = view.getDoneButton();
+        newTemplateButton = view.getNewTemplateButton();
         packageColour = Color.WHITE;
         nameInput = view.getNameInput();
         errorMessage = view.getErrorMessageLabel();
@@ -80,9 +81,18 @@ public class AddPackageViewController extends ViewController {
 
         doneButton.setOnAction((e) -> {
             if (validInput()) {
-                shelfManager.addPackageTemplate(newPackage());
+               
             }
         });
+        
+        newTemplateButton.setOnAction((e) -> {
+            if (validInput()) {
+                shelfManager.addPackageTemplate(newPackage());
+                shelfManager.newTemplateProp().setValue(true);
+            }
+        });
+        
+        
     }
 
     /**
@@ -152,7 +162,7 @@ public class AddPackageViewController extends ViewController {
     }
     
     public Package newPackage() {
-        String name = view.getNameLabel().getText();
+        String name = view.getNameInput().getText();
         int height = Integer.parseInt(view.getHeightInput().getText());
         int width = Integer.parseInt(view.getWidthInput().getText());
         float weight = Float.parseFloat(view.getWeightInput().getText());
@@ -172,6 +182,12 @@ public class AddPackageViewController extends ViewController {
         for(Color c: incompColours){
             System.out.println(c);
         }
+        view.getNameInput().clear();
+        view.getHeightInput().clear();
+        view.getWidthInput().clear();
+        view.getWeightInput().clear();
+        view.getMaxLoadCapacityInput().clear();
+        
         return newPck;
     }
 

@@ -5,6 +5,7 @@ import Business.Package.Package;
 import Business.Shelf.Shelf;
 import Business.Shelf.ShelfFloor;
 import Business.Shelf.ShelfSupport;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.paint.Color;
 
@@ -18,6 +19,7 @@ public class ShelfManager {
     ArrayList<Package> packageTemplate;
     SimpleObjectProperty<ShelfSupport> shelfSupportProp;
     SimpleObjectProperty<ShelfFloor> shelfFloorProp;
+    private SimpleBooleanProperty newTemplateProp;
 
     public void setShelf(Shelf shelf) {
         this.shelf = shelf;
@@ -30,6 +32,7 @@ public class ShelfManager {
         packageTemplate = new ArrayList<Package>();
         shelfSupportProp = new SimpleObjectProperty<ShelfSupport>();
         shelfFloorProp = new  SimpleObjectProperty<ShelfFloor>();
+        newTemplateProp = new SimpleBooleanProperty(false);
         packageTemplate.add(new Package("Testpaket", 40, 40, 3.5f, Color.BLACK, 6.7f));
         //packageTemplate.add(new Package("Kleines Paket", 20, 10, 1.5f));
     }
@@ -98,6 +101,9 @@ public class ShelfManager {
     
     public void addPackageTemplate(Package pck) {
     	packageTemplate.add(pck);
+//    	for(Package p : packageTemplate) {
+//    		System.out.println(p);
+//    	}
     }
 
     public ArrayList<Package> getTemplateList() {
@@ -109,6 +115,10 @@ public class ShelfManager {
     }
     public SimpleObjectProperty<ShelfFloor> getShelfFloorProp() {
         return shelfFloorProp;
+    }
+    
+    public SimpleBooleanProperty newTemplateProp() {
+    	return newTemplateProp;
     }
 
 }
