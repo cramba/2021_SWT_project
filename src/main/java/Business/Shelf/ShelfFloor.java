@@ -1,5 +1,5 @@
 package Business.Shelf;
-
+import Business.Package.Package;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +13,8 @@ public class ShelfFloor {
     private int height;
 
     private int id_nr = 0;
+
+
 
     public ShelfFloor(int width, float loadCapacity, int posX, int posY){
         this.shelfFloorID = id_nr;
@@ -30,6 +32,7 @@ public class ShelfFloor {
 
     public void setPositionX(int positionX) {
         this.positionX = positionX;
+
     }
 
     public void setPositionY(int positionY){
@@ -39,4 +42,33 @@ public class ShelfFloor {
     public int getShelfFloorID() {
         return shelfFloorID;
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public float getLoadCapacity() {
+        return loadCapacity;
+    }
+
+    public int getPositionX() {
+        return positionX;
+    }
+
+    public int getPositionY() {
+        return positionY;
+    }
+
+    public List<Package> getPackageList() {
+        return packageList;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
 }
+

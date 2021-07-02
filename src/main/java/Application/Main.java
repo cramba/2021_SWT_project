@@ -1,3 +1,4 @@
+package Application;
 import GUI.MainScene;
 import GUI.MainSceneController;
 import javafx.application.Application;
@@ -30,8 +31,9 @@ public class Main extends Application {
      
         Pane root = rootController.getRoot();
         primaryStage.setTitle("Warehouse Masters!");
-        scene = new Scene(root, 1200, 500);
-
+        scene = new Scene(root, 1200, 650);
+        scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+        
         primaryStage.setScene(scene);
         System.out.println("Fertig");
         primaryStage.show();
