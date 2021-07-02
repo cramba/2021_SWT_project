@@ -177,7 +177,7 @@ public class AddPackageView extends ScrollPane {
 
         vbox.getStyleClass().addAll("background");
 
-        vbox.setPadding(new Insets(55, 20, 20, 20));
+        vbox.setPadding(new Insets(20, 20, 20, 20));
         vbox.setSpacing(12);
         
         closeButton.setId("rot");
