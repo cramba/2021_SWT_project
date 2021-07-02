@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.paint.Color;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -21,6 +22,8 @@ public class ShelfManager {
     SimpleObjectProperty<ShelfFloor> shelfFloorProp;
     SimpleObjectProperty<Package> packageProp;
     private SimpleBooleanProperty newTemplateProp;
+    private int shelfSupportId = 0;
+
 
     public void setShelf(Shelf shelf) {
         this.shelf = shelf;
@@ -67,40 +70,65 @@ public class ShelfManager {
     }
 
     public void addShelfSupport(int length, int positionX) {
-    	
-    	
-    	int random = (int)((Math.random()) * 1000 + 1) ; 
-    	ShelfSupport shelfSupport = new ShelfSupport(random, length, positionX,0); //position noch unklar
-    	
-    	
-    	shelf.addShelfSupport(shelfSupport);
-    	shelfSupportProp.setValue(shelfSupport);
-    
+
+
+        //int random = (int) ((Math.random()) * 1000 + 1);
+
+
+        shelfSupportId = shelfSupportId + 1;
+        ShelfSupport shelfSupport = new ShelfSupport(shelfSupportId, length, positionX, 0); //position noch unklar
+
+
+        shelf.addShelfSupport(shelfSupport);
+        shelfSupportProp.setValue(shelfSupport);
+
 
     }
 
     public void deleteShelfSupport(int index) {
-    	
-    	shelf.removeShelfSupport(index);
-    	
-    	
+
+        shelf.removeShelfSupport(index);
+
 
     }
 
     public void addShelfFloor(float loadCapacity) {
-    	
-    	ShelfFloor shelfFloor = new ShelfFloor(0,loadCapacity,50,50); //obligatorische Werte
-    	shelf.addShelfFloor(shelfFloor);
-    	shelfFloorProp.setValue(shelfFloor);
+
+        ShelfFloor shelfFloor = new ShelfFloor(0, loadCapacity, 0, 0); //obligatorische Werte
+        shelf.addShelfFloor(shelfFloor);
+        shelfFloorProp.setValue(shelfFloor);
 
     }
 
     public void deleteShelfFloor(int index) {
-    	
-    	shelf.removeShelfFloor(index);
+
+        shelf.removeShelfFloor(index);
 
     }
-    
+
+    public void checkShelfSupports(ShelfFloor shelfFloor) {
+        ArrayList<ShelfSupport> sortedShelfSupports = new ArrayList<>(shelf.getShelfSupports());
+        Collections.sort(sortedShelfSupports);
+            for (int i = 1; i < sortedShelfSupports.size(); i++) {
+                if (shelfFloor.getPositionX() < sortedShelfSupports.get(0).getPositionX()) {
+                    System.out.println("Regalboden links von der ersten Stütze");
+                    System.out.println();
+                    return;
+                }
+                if (shelfFloor.getPositionX() < sortedShelfSupports.get(i).getPositionX()) {
+                    ShelfSupport support_left = shelf.getShelfSupportByID(sortedShelfSupports.get(i - 1).getShelfSupportID());
+                    ShelfSupport support_right = shelf.getShelfSupportByID(sortedShelfSupports.get(i).getShelfSupportID());
+                    shelfFloor.setPositionX(support_left.getPositionX());
+                    //eventuell posY aendern
+                    shelfFloor.setWidth(support_right.getPositionX() - support_left.getPositionX());
+
+
+                    System.out.println("sollte einrasten");
+                    return;
+                }
+            }
+    }
+
     public void addPackageTemplate(Package pck) {
     	packageTemplate.add(pck);
 //    	for(Package p : packageTemplate) {
@@ -118,13 +146,17 @@ public class ShelfManager {
     public SimpleObjectProperty<ShelfFloor> getShelfFloorProp() {
         return shelfFloorProp;
     }
-    
+
     public SimpleBooleanProperty newTemplateProp() {
     	return newTemplateProp;
     }
-    
+
     public SimpleObjectProperty<Package> packageProp() {
     	return packageProp;
+    }
+
+    public Shelf getShelf() {
+        return shelf;
     }
 
 }

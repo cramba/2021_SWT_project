@@ -12,7 +12,16 @@ public class Shelf {
         this.shelfFloors = new ArrayList<ShelfFloor>();
     }
 
-    public void setShelfSupports(ArrayList<ShelfSupport> shelfSupports) {
+    public ShelfSupport getShelfSupportByID(int id){
+        for(ShelfSupport support: shelfSupports){
+            if(support.getShelfSupportID() == id){
+                return support;
+            }
+        }
+        return null;
+    }
+
+    public void setShelfSupports(List<ShelfSupport> shelfSupports) {
         this.shelfSupports = shelfSupports;
     }
 
@@ -31,6 +40,7 @@ public class Shelf {
     public void removeShelfSupport(int i) {
     	shelfSupports.remove(i);
     }
+
     public void removeShelfFloor(int i) {
     	shelfFloors.remove(i);
     }
@@ -51,4 +61,5 @@ public class Shelf {
     public ArrayList<ShelfFloor> getShelfFloors(){
         return (ArrayList<ShelfFloor>) shelfFloors;
     }
+
 }

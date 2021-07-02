@@ -45,9 +45,9 @@ public class Package {
         this.weight = weight;
         this.colour = colour;
         this.loadCapacity = loadCapacity;
-//        this.positionX = positionX;
-//        this.positionY = positionY;
-        //this.incompatibility = incompatibility;
+        this.positionX = 0;
+        this.positionY = 0;
+        this.incompatibility = new ArrayList<>();
         this.packagesAbove = new ArrayList<>();
     }
 

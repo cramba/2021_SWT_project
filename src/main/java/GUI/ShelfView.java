@@ -19,9 +19,6 @@ public class ShelfView extends AnchorPane {
 	private ArrayList<Rectangle> shelfFloors;
 
 
-
-
-
 	public ShelfView(){
     	shelfSupports = new ArrayList<Rectangle>();
     	shelfFloors = new ArrayList<Rectangle>();

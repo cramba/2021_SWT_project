@@ -29,7 +29,7 @@ public class JsonHandler {
         JSONArray shelfSupportArray = new JSONArray();
         shelf.getShelfSupports().forEach(
                 singleShelfSupport -> {
-//                    JSONObject shelfSupport = new JSONObject();
+                    JSONObject shelfSupport = new JSONObject();
                     shelfSupport.put("shelfSupportID", singleShelfSupport.getShelfSupportID());
                     shelfSupport.put("shelfLength", singleShelfSupport.getLength());
                     shelfSupport.put("positionX", singleShelfSupport.getPositionX());
@@ -54,10 +54,15 @@ public class JsonHandler {
                         JSONObject packageObject = packageToJSONObject(pck);
                         packageListArray.add(packageObject);
                     }
+                    shelfFloor.put("packageList", packageListArray);
                     shelfFloorArray.add(shelfFloor);
                 }
         );
         shelfFloors.put("shelfFloors", shelfFloorArray);
+
+        JSONObject shelfObject = new JSONObject();
+        shelfObject.put("shelfSupports", shelfSupports);
+        shelfObject.put("shelfFloors", shelfFloors);
 
         //Falls das Casten zu einem JSONArray beim parsen nicht funktionieren sollte,
         //die unteren Zeilen auskommentieren
@@ -70,10 +75,10 @@ public class JsonHandler {
         try {
             //Dateipfad ist eventuell zu verändern
             FileWriter file = new FileWriter("./src/main/java/Dateien/" + dateiname + ".json");
-            file.write(shelfSupports.toJSONString());
-            file.write(shelfFloors.toJSONString());
+            file.write(shelfObject.toJSONString());
             //file.write(shelfJSONObject.toJSONString());
             file.close();
+            System.out.println("erfolgreich gespeichert");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,7 +94,7 @@ public class JsonHandler {
         packet.put("name", pck.getName());
         packet.put("height", pck.getHeight());
         packet.put("width", pck.getWidth());
-        packet.put("colour", pck.getColour());
+        packet.put("colour", pck.getColour().toString());
         packet.put("positionX", pck.getPositionX());
         packet.put("positionY", pck.getPositionY());
         JSONArray incompatibilityArray = new JSONArray();
@@ -272,5 +277,4 @@ public class JsonHandler {
         }
         return packagesList;
     }
-        return packagesList;
 }

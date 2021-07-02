@@ -32,6 +32,7 @@ public class ShelfFloor {
 
     public void setPositionX(int positionX) {
         this.positionX = positionX;
+
     }
 
     public void setPositionY(int positionY){
@@ -66,5 +67,8 @@ public class ShelfFloor {
         return height;
     }
 
-
+    public void setWidth(int width) {
+        this.width = width;
+    }
 }
+

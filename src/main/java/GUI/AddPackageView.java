@@ -77,6 +77,7 @@ public class AddPackageView extends ScrollPane {
         blueButton.setUserData(Color.BLUE);
         blueButton.setStyle("-fx-base: blue");
         colourInput = new VBox();
+        colourInput.setSpacing(5);
         colourInput.getChildren().addAll(greenButton, redButton, yellowButton, blueButton);
         colourGroup = new ToggleGroup();
         greenButton.setToggleGroup(colourGroup);
@@ -107,8 +108,8 @@ public class AddPackageView extends ScrollPane {
         incompBlue = new ToggleButton("blau");
         incompBlue.setUserData(Color.BLUE);
         incompBlue.setStyle("-fx-base: blue");
+        incompatibilityColors.setSpacing(5);
         incompatibilityColors.getChildren().addAll(incompGreen, incompRed, incompYellow, incompBlue);
-
 
         maxLoadCapacityLabel = new Label("max. Traglast:");
         maxLoadCapacityInput = new TextField();

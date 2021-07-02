@@ -33,10 +33,10 @@ public class EditShelfViewController extends ViewController{
         	
         	
         	//Informationen wernden an Logic geschickt und ShelfSupport wird erstellt
-        	Platform.runLater(() -> {    
-        		shelfManager.addShelfSupport(length,distance);
+
+        	shelfManager.addShelfSupport(length,distance);
         	
-        	});
+
         	
         	
         
