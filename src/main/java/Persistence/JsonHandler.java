@@ -230,12 +230,13 @@ public class JsonHandler {
         int width = ((Number) packageObj.get("width")).intValue();
         float weight = ((Double) packageObj.get("weight")).floatValue();
         Color colour = Color.valueOf((String) packageObj.get("colour"));
+        float loadCapacity = ((Float) packageObj.get("loadCapacity")).floatValue();
         int positionX = ((Number) packageObj.get("positionX")).intValue();
         int positionY = ((Number) packageObj.get("positionY")).intValue();
         ArrayList<Color> incompatibility = parseIncompatibilityColours((JSONArray) packageObj.get("incompatibility"));
         ArrayList<Package> packagesAbove = parsePackagesAbove((JSONArray) packageObj.get("packagesAbove"));
 
-        Package recreatedPck = new Package(name, height, width, weight);
+        Package recreatedPck = new Package(name, height, width, weight, colour, loadCapacity);
         recreatedPck.setColour(colour);
         recreatedPck.setIncompatibility(incompatibility);
         recreatedPck.setPackagesAbove(packagesAbove);

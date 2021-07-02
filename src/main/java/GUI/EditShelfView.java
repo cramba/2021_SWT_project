@@ -1,4 +1,5 @@
 package GUI;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -51,13 +52,25 @@ public class EditShelfView extends VBox {
     	hBox.getChildren().addAll(lengthLabel, lengthInput);
     	hBox2.getChildren().addAll(distanceLabel,distanceInput);
     	
-    	//zusatz f�r Regalst�tzen l�schen :
+    	hBox.setSpacing(65);
+    	hBox2.setSpacing(50);
+    	//zusatz fuer Regalstuetzen loeschen :
+    	//zusatz fuer Regalstuetzen loeschen :
     	
     	editShelfSupportLabel = new Label("Bearbeiten:");
     	deleteShelfSupportButton = new Button("L�schen");
     	deleteShelfSupportButton.setVisible(false);
     	moveShelfSupportLabel = new Label("Verschieben");
     	moveShelfSupportTextField = new TextField();
+
+    	//Regalb�den bearbeitung
+    	
+    	this.getStyleClass().addAll("background");
+    	
+    	this.setPadding(new Insets(55, 20, 20, 20));
+    	this.setSpacing(12);
+    	
+    	doneButton.setId("green");
     	
     	this.getChildren().addAll(shelfItemSelection,hBox,hBox2,doneButton, deleteShelfSupportButton);
 
@@ -143,9 +156,5 @@ public class EditShelfView extends VBox {
 	public Button getDeleteShelfFloorButton() {
 		return deleteShelfFloorButton;
 	}
-
-
-    
-    
 
 }

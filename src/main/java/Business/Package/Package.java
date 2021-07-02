@@ -13,6 +13,7 @@ public class Package {
     private Color colour;
     private int positionX;
     private int positionY;
+    private float loadCapacity;
     private List<Color> incompatibility;
     private List<Package> packagesAbove;
 
@@ -36,15 +37,17 @@ public class Package {
         this.packagesAbove = packagesAbove;
     }
 
-    public Package(String name, int height, int width, float weight){
+    public Package(String name, int height, int width, float weight, Color colour, float loadCapacity){
+    	//List<Color> incompatibility
         this.name = name;
         this.height = height;
         this.width = width;
         this.weight = weight;
-//        this.colour = colour;
+        this.colour = colour;
+        this.loadCapacity = loadCapacity;
 //        this.positionX = positionX;
 //        this.positionY = positionY;
-//        this.incompatibility = incompatibility;
+        //this.incompatibility = incompatibility;
         this.packagesAbove = new ArrayList<>();
     }
 

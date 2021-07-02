@@ -6,6 +6,7 @@ import Business.Shelf.Shelf;
 import Business.Shelf.ShelfFloor;
 import Business.Shelf.ShelfSupport;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.paint.Color;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -29,9 +30,8 @@ public class ShelfManager {
         packageTemplate = new ArrayList<Package>();
         shelfSupportProp = new SimpleObjectProperty<ShelfSupport>();
         shelfFloorProp = new  SimpleObjectProperty<ShelfFloor>();
-
-        packageTemplate.add(new Package("Testpaket", 40, 40, 3.5f));
-        packageTemplate.add(new Package("Kleines Paket", 20, 10, 1.5f));
+        packageTemplate.add(new Package("Testpaket", 40, 40, 3.5f, Color.BLACK, 6.7f));
+        //packageTemplate.add(new Package("Kleines Paket", 20, 10, 1.5f));
     }
 
     public void movePackage(Package pck, int positionX, int positionY) {
@@ -94,6 +94,10 @@ public class ShelfManager {
     	
     	shelf.removeShelfFloor(index);
 
+    }
+    
+    public void addPackageTemplate(Package pck) {
+    	packageTemplate.add(pck);
     }
 
     public ArrayList<Package> getTemplateList() {
