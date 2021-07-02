@@ -12,7 +12,7 @@ import static javafx.application.Application.launch;
 import Business.ShelfManager.ShelfManager;
 
 public class Main extends Application {
-//testkommentar2
+//testkommentar3
     private Stage primaryStage;
     private Scene scene;
     private ShelfManager shelfManager;
