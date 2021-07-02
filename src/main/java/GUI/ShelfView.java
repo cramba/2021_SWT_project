@@ -23,13 +23,12 @@ public class ShelfView extends AnchorPane {
     	shelfSupports = new ArrayList<Rectangle>();
     	shelfFloors = new ArrayList<Rectangle>();
 
-    	
+    	this.setMinSize(900, 700);
+    	this.setMaxSize(900, 700);
     	
     	this.setBorder(new Border(new BorderStroke(Color.BLACK, 
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     	
-    	
-
     }
 	
     public ArrayList<Rectangle> getShelfSupports() {
