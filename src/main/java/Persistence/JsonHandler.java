@@ -29,7 +29,7 @@ public class JsonHandler {
         JSONArray shelfSupportArray = new JSONArray();
         shelf.getShelfSupports().forEach(
                 singleShelfSupport -> {
-                    JSONObject shelfSupport = new JSONObject();
+//                    JSONObject shelfSupport = new JSONObject();
                     shelfSupport.put("shelfSupportID", singleShelfSupport.getShelfSupportID());
                     shelfSupport.put("shelfLength", singleShelfSupport.getLength());
                     shelfSupport.put("positionX", singleShelfSupport.getPositionX());
