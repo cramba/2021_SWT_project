@@ -34,9 +34,7 @@ public class TrayView extends StackPane{
     	this.setPrefWidth(200);
     	this.setBorder(new Border(new BorderStroke(Color.BLACK, 
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-    	
-    	
-       	
+
         
     }
     

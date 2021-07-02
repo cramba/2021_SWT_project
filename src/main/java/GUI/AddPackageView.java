@@ -77,8 +77,14 @@ public class AddPackageView extends ScrollPane {
         blueButton.setUserData(Color.BLUE);
         blueButton.setStyle("-fx-base: blue");
         colourInput = new VBox();
+        HBox selColors1 = new HBox();
+        selColors1.getChildren().addAll(greenButton, redButton);
+        selColors1.setSpacing(5);
         colourInput.setSpacing(5);
-        colourInput.getChildren().addAll(greenButton, redButton, yellowButton, blueButton);
+        HBox selColors2 = new HBox();
+        selColors2.getChildren().addAll(yellowButton, blueButton);
+        selColors2.setSpacing(5);
+        colourInput.getChildren().addAll(selColors1, selColors2);
         colourGroup = new ToggleGroup();
         greenButton.setToggleGroup(colourGroup);
         redButton.setToggleGroup(colourGroup);
@@ -108,8 +114,14 @@ public class AddPackageView extends ScrollPane {
         incompBlue = new ToggleButton("blau");
         incompBlue.setUserData(Color.BLUE);
         incompBlue.setStyle("-fx-base: blue");
+        HBox colors1 = new HBox();
+        colors1.getChildren().addAll(incompGreen, incompRed);
+        colors1.setSpacing(5);
+        HBox colors2 = new HBox();
+        colors2.getChildren().addAll(incompYellow, incompBlue);
+        colors2.setSpacing(5);
         incompatibilityColors.setSpacing(5);
-        incompatibilityColors.getChildren().addAll(incompGreen, incompRed, incompYellow, incompBlue);
+        incompatibilityColors.getChildren().addAll(colors1, colors2);
 
         maxLoadCapacityLabel = new Label("max. Traglast:");
         maxLoadCapacityInput = new TextField();
@@ -151,7 +163,7 @@ public class AddPackageView extends ScrollPane {
 
         buttons = new HBox(doneButton, newTemplateButton);
         buttons.setSpacing(12);
-        buttons.setPadding(new Insets(20,0,0,0));
+        buttons.setPadding(new Insets(30,0,128,0));
         
         packageadded = new HBox(new Label("Paket hinzufuegen"));
         closeButton = new Button("x");
@@ -165,7 +177,7 @@ public class AddPackageView extends ScrollPane {
 
         vbox.getStyleClass().addAll("background");
 
-        vbox.setPadding(new Insets(55, 20, 20, 20));
+        vbox.setPadding(new Insets(20, 20, 20, 20));
         vbox.setSpacing(12);
         
         closeButton.setId("rot");

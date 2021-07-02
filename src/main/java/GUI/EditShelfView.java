@@ -37,10 +37,10 @@ public class EditShelfView extends VBox {
     	
     	//Regalstuetzen bearbeitung
     	shelfItemSelection =  new ComboBox<String>();
-    	shelfItemSelection.getItems().addAll("Regalst�tze","Regalboden");
+    	shelfItemSelection.getItems().addAll("Regalstuetze","Regalboden");
     	shelfItemSelection.setId("ShelfItemSelection");
     	shelfItemSelection.getSelectionModel().selectFirst();
-    	lengthLabel = new Label("L�nge:");
+    	lengthLabel = new Label("Laenge:");
     	lengthInput = new TextField();
     	hBox = new HBox();
     	distanceLabel = new Label("Abstand:");
@@ -52,13 +52,13 @@ public class EditShelfView extends VBox {
     	hBox.getChildren().addAll(lengthLabel, lengthInput);
     	hBox2.getChildren().addAll(distanceLabel,distanceInput);
     	
-    	hBox.setSpacing(65);
-    	hBox2.setSpacing(50);
+    	hBox.setSpacing(76);
+    	hBox2.setSpacing(69);
     	//zusatz fuer Regalstuetzen loeschen :
     	//zusatz fuer Regalstuetzen loeschen :
     	
     	editShelfSupportLabel = new Label("Bearbeiten:");
-    	deleteShelfSupportButton = new Button("L�schen");
+    	deleteShelfSupportButton = new Button("Loeschen");
     	deleteShelfSupportButton.setVisible(false);
     	moveShelfSupportLabel = new Label("Verschieben");
     	moveShelfSupportTextField = new TextField();
@@ -67,7 +67,7 @@ public class EditShelfView extends VBox {
     	
     	this.getStyleClass().addAll("background");
     	
-    	this.setPadding(new Insets(55, 20, 20, 20));
+    	this.setPadding(new Insets(20, 20, 20, 20));
     	this.setSpacing(12);
     	
     	doneButton.setId("green");
@@ -80,7 +80,7 @@ public class EditShelfView extends VBox {
     	loadCapacityLabel = new Label("Tragkraft:");
     	loadCapacityTextField = new TextField();
     	doneButton2 = new Button("Fertig"); 
-    	deleteShelfFloorButton = new Button("L�schen");
+    	deleteShelfFloorButton = new Button("Loeschen");
     	deleteShelfFloorButton.setVisible(false);
 
     }

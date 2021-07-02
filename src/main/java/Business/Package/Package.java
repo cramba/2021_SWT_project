@@ -56,7 +56,7 @@ public class Package {
     }
     
     public String getSpecification() {
-    	String spec = height + " x " + width + "  " + weight + "kg";
+    	String spec = "(" + height + " x " + width + ",  " + weight + "kg)";
     	return spec;
     }
     
@@ -82,6 +82,10 @@ public class Package {
 
     public float getWeight(){
         return weight;
+    }
+    
+    public float getLoadCapacity() {
+    	return loadCapacity;
     }
     
     public int getPositionX() {

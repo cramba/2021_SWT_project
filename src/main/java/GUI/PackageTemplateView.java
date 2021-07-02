@@ -18,6 +18,7 @@ public class PackageTemplateView extends BorderPane {
     	templateView = new ListView<Package>();
     	this.setCenter(templateView);
 
+
     }
     
     public ListView<Package> getTemplateView() {
