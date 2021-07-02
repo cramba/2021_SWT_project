@@ -29,7 +29,6 @@ public class ShelfView extends AnchorPane {
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     	
     	
-    	
 
     }
 	
