@@ -22,7 +22,7 @@ public class TrayView extends StackPane{
 	Button button;
     public TrayView(){
     	
-    	 r = new Rectangle(50,50,100,100);
+    	 r = new Rectangle(-50,-50,100,100);
     	 //rectTarget = new Rectangle(150, 150, 100, 100);
     	 button = new Button();
     	

@@ -272,4 +272,5 @@ public class JsonHandler {
         }
         return packagesList;
     }
+        return packagesList;
 }

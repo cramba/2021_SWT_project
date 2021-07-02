@@ -88,14 +88,29 @@ public class ShelfViewController extends ViewController{
 		}
 
 		@Override
-		public void handle(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-
+		public void handle(MouseEvent e) {
+			view.getShelfSupports().get(i).setTranslateX(e.getX() + view.getShelfSupports().get(i).getTranslateX() - 150);
+			view.getShelfSupports().get(i).setTranslateY(e.getY() + view.getShelfSupports().get(i).getTranslateY() - 150);
+			if (view.getShelfSupports().get(i).getTranslateX() < view.getTranslateX()) {
+				view.getShelfSupports().get(i).setTranslateX(view.getTranslateX());
+			}
+			if ((view.getShelfSupports().get(i).getTranslateX()+view.getShelfSupports().get(i).getWidth()) > (view.getTranslateX() +  view.getWidth())) { //---
+				view.getShelfSupports().get(i).setTranslateX(  view.getWidth() - view.getShelfSupports().get(i).getWidth() ); //----
+			}
+			if (view.getShelfSupports().get(i).getTranslateY()+view.getShelfSupports().get(i).getHeight() >  view.getTranslateY() +  view.getHeight()) { //--
+				view.getShelfSupports().get(i).setTranslateY( ( view.getHeight()) - view.getShelfSupports().get(i).getHeight() ); //-
+			}
+			if (view.getShelfSupports().get(i).getTranslateY() < view.getTranslateY()) {
+				view.getShelfSupports().get(i).setTranslateY( view.getTranslateY() );
+			}
+			e.consume();
+		    
 			
-
 		}
-		
+
 	}
+		
+	
 	
 private class ShelfFloorHandler implements EventHandler<MouseEvent>{
 
