@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class EditShelfView extends VBox {
 	
@@ -32,6 +33,8 @@ public class EditShelfView extends VBox {
     TextField loadCapacityTextField;
     Button doneButton2 ;
     Button deleteShelfFloorButton ; 
+    
+    private Label errorMessage;
 
     public EditShelfView(){
     	
@@ -40,10 +43,10 @@ public class EditShelfView extends VBox {
     	shelfItemSelection.getItems().addAll("Regalstuetze","Regalboden");
     	shelfItemSelection.setId("ShelfItemSelection");
     	shelfItemSelection.getSelectionModel().selectFirst();
-    	lengthLabel = new Label("Laenge:");
+    	lengthLabel = new Label("Laenge (cm):");
     	lengthInput = new TextField();
     	hBox = new HBox();
-    	distanceLabel = new Label("Abstand:");
+    	distanceLabel = new Label("Abstand (cm):");
     	distanceInput = new TextField();
     	hBox2 = new HBox();
     	closeButton = new Button("x");
@@ -72,12 +75,15 @@ public class EditShelfView extends VBox {
     	
     	doneButton.setId("green");
     	
-    	this.getChildren().addAll(shelfItemSelection,hBox,hBox2,doneButton, deleteShelfSupportButton);
+    	errorMessage = new Label("");
+    	errorMessage.setTextFill(Color.RED);
+    	
+    	this.getChildren().addAll(shelfItemSelection,hBox,hBox2, errorMessage, doneButton, deleteShelfSupportButton);
 
     	//Regalb�den bearbeitung
     	
     	
-    	loadCapacityLabel = new Label("Tragkraft:");
+    	loadCapacityLabel = new Label("Tragkraft (kg):");
     	loadCapacityTextField = new TextField();
     	doneButton2 = new Button("Fertig"); 
     	deleteShelfFloorButton = new Button("Loeschen");
@@ -155,6 +161,10 @@ public class EditShelfView extends VBox {
 	
 	public Button getDeleteShelfFloorButton() {
 		return deleteShelfFloorButton;
+	}
+	
+	public Label getErrorMessage() {
+		return errorMessage;
 	}
 
 }

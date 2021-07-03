@@ -4,17 +4,19 @@ import Business.ShelfManager.ShelfManager;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 public class EditShelfViewController extends ViewController{
 
 	EditShelfView view;
+	private Label errorMessage;
 
     public EditShelfViewController(ShelfManager shelfManager){
     	
     	super(shelfManager);
     	view = new EditShelfView();
-    	
+    	errorMessage = view.getErrorMessage();
     	
     	
     	
@@ -26,26 +28,36 @@ public class EditShelfViewController extends ViewController{
     	
     	//Fertig Button - erstellt eine Regalstuetze
     	view.getDoneButton().setOnAction((e) -> {
-        	
-    		//Textfelder fuer laenge und Distance werden ausgelesen
-        	int length = Integer.parseInt(view.getLengthInput().getText());
-        	int distance = Integer.parseInt(view.getDistanceInput().getText());
-        	
-        	
-        	//Informationen wernden an Logic geschickt und ShelfSupport wird erstellt
+        	if(isInt(view.getLengthInput().getText()) && isInt(view.getDistanceInput().getText())) {
+        		errorMessage.setText("");
+        		//Textfelder fuer laenge und Distance werden ausgelesen
+            	int length = Integer.parseInt(view.getLengthInput().getText());
+            	int distance = Integer.parseInt(view.getDistanceInput().getText());
+            	
+            	
+            	//Informationen wernden an Logic geschickt und ShelfSupport wird erstellt
+            	shelfManager.addShelfSupport(length,distance);
+        	}else {
+        		errorMessage.setText("Bitte gebe eine gültige ganze Zahl ein");
+        		//System.out.println("Bitte gebe eine gültige ganze Zahl ein");
+        	}
 
-        	shelfManager.addShelfSupport(length,distance);
-        	
-
-        	
-        	
-        
         });
+    	
+    	
     	//Fertig Button - erstellt ein Regalboden
     	view.getDoneButton2().setOnAction((e)->{
-    		int loadCapacity = Integer.parseInt(view.getLoadCapacityTextField().getText());
-    		
-    		shelfManager.addShelfFloor(loadCapacity);
+    		if(isInt(view.getLoadCapacityTextField().getText())) {
+    			errorMessage.setText("");
+    			int loadCapacity = Integer.parseInt(view.getLoadCapacityTextField().getText());
+        		
+        		shelfManager.addShelfFloor(loadCapacity);
+        		shelfManager.getShelfFloorProp().getValue().setPositionX(50);
+    	    	shelfManager.getShelfFloorProp().getValue().setPositionY(50);
+    		}else {
+    			errorMessage.setText("Bitte gebe eine gültige ganze Zahl ein");
+    			//System.out.println("Bitte gebe eine gültige ganze Zahl ein");
+    		}
     	
 
     	});
@@ -71,7 +83,7 @@ public class EditShelfViewController extends ViewController{
 				}else if(newValue.equals("Regalboden")) {
 					
 					view.getChildren().remove(1, view.getChildren().size()   );
-					view.getChildren().addAll(view.getLoadCapacityLabel(),view.getLoadCapacityTextField(),view.getDoneButton2(),view.getDeleteShelfFloorButton());
+					view.getChildren().addAll(view.getLoadCapacityLabel(),view.getLoadCapacityTextField(), view.getErrorMessage(), view.getDoneButton2(),view.getDeleteShelfFloorButton());
 
 				}
 				
@@ -82,6 +94,19 @@ public class EditShelfViewController extends ViewController{
     	});
     	
         
+    }
+    
+    
+    public boolean isInt(String number) {
+    	if(number == null) {
+    		return false;
+    	}
+    	try {
+    		int i = Integer.parseInt(number);
+    	} catch(NumberFormatException nfe) {
+    		return false;
+    	}
+    	return true;
     }
     
     public EditShelfView getView() {

@@ -28,7 +28,7 @@ public class TrayView extends AnchorPane{
     	//breite x hÃ¶he
     	 r = new Rectangle();
     	 
-    	 rectTarget = new Rectangle(150, 150, 100, 100);
+    	 rectTarget = new Rectangle(-50, -50, 100, 100);
     	 button = new Button("Packet hinzufügen");
     	
     	 AnchorPane.setBottomAnchor(button, 0.0);

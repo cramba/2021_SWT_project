@@ -121,7 +121,7 @@ public class ShelfManager {
         ArrayList<ShelfSupport> sortedShelfSupports = new ArrayList<>(shelf.getShelfSupports());
         Collections.sort(sortedShelfSupports);
         if (shelfFloor.getPositionX() < sortedShelfSupports.get(0).getPositionX()) {
-            System.out.println("Regalboden links von der ersten Stuetze, d.h. außerhalb des Regals");
+            System.out.println("Regalboden links von der ersten Stuetze, d.h. auÃŸerhalb des Regals");
             return;
         }else if(shelfFloor.getPositionX() > sortedShelfSupports.get(sortedShelfSupports.size()-1).getPositionX()){
             System.out.println("Regalboden rechts von der letzten Stuetze, d.h. ausserhalb des Regals");
@@ -151,10 +151,7 @@ public class ShelfManager {
     public void addPackageTemplate(Package pck) {
     	
         packageTemplate.add(pck);
-        
-        
-        
-        
+      
 //    	for(Package p : packageTemplate) {
 //    		System.out.println(p);
 //    	}
@@ -173,6 +170,11 @@ public class ShelfManager {
     	packageTrayProp.setValue(trayPackage);
     }
 
+    public void removePackageTemplate(Package pck) {
+    	packageTemplate.remove(pck);
+    }
+    
+    
     public ArrayList<Package> getTemplateList() {
         return packageTemplate;
     }
