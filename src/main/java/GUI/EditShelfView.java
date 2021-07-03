@@ -55,8 +55,8 @@ public class EditShelfView extends VBox {
     	hBox.getChildren().addAll(lengthLabel, lengthInput);
     	hBox2.getChildren().addAll(distanceLabel,distanceInput);
     	
-    	hBox.setSpacing(76);
-    	hBox2.setSpacing(69);
+    	hBox.setSpacing(50);
+    	hBox2.setSpacing(43);
     	//zusatz fuer Regalstuetzen loeschen :
     	//zusatz fuer Regalstuetzen loeschen :
     	

@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -19,6 +20,7 @@ public class ConfigurationView extends BorderPane {
     Button safeConfigurationButton;
     HBox hBox1, hBox2, hBox3;
     VBox vBox1, vBox2;
+    TextField fehlerInput, paketInput;
 
 
     public Button getShelfEditButton() {
@@ -59,6 +61,8 @@ public class ConfigurationView extends BorderPane {
         packetInformationLabel = new Label("Paket:");
         deleteButton = new Button ("loeschen");
         hBox3 = new HBox();
+        fehlerInput = new TextField();
+        paketInput = new TextField();
         
         loadConfigurationButton = new Button("Konfiguration laden");
         safeConfigurationButton = new Button("Konfiguration speichern");
@@ -67,13 +71,13 @@ public class ConfigurationView extends BorderPane {
         vBox2 = new VBox();
         
         hBox1.getChildren().addAll(shelfEditButton,addPackageButton);
-        hBox2.getChildren().addAll(errorMessageLabel);
-        hBox3.getChildren().addAll(packetInformationLabel,deleteButton);
+        hBox2.getChildren().addAll(errorMessageLabel, fehlerInput);
+        hBox3.getChildren().addAll(packetInformationLabel, paketInput,deleteButton);
         
         hBox1.setSpacing(10);
-        hBox2.setSpacing(10);
-        hBox3.setSpacing(10);
-        
+//        hBox2.setSpacing(10);
+//        hBox3.setSpacing(10);
+//        
         vBox1.getChildren().addAll(hBox1,hBox2,hBox3);
         
         vBox2.getChildren().addAll(loadConfigurationButton,safeConfigurationButton);
@@ -88,13 +92,15 @@ public class ConfigurationView extends BorderPane {
         
         packetInformationLabel.setPadding(new Insets(05, 10, 05, 10));
         errorMessageLabel.setPadding(new Insets(05, 10, 05, 10));
+        fehlerInput.setPadding(new Insets(05, 10, 05, 935));
+        paketInput.setPadding(new Insets(05, 0, 05, 935));
         
         vBox1.setSpacing(10);
         vBox2.setSpacing(10);
         vBox1.setAlignment(Pos.BASELINE_RIGHT);
         vBox2.setAlignment(Pos.CENTER);
         vBox1.setPadding(new Insets(8, 30, 20, 20));
-        vBox2.setPadding(new Insets(8, 30, 20, 25));
+        vBox2.setPadding(new Insets(45, 50, 20, 30));
         
         this.setLeft(vBox1);
         this.setRight(vBox2);
