@@ -144,6 +144,10 @@ public class ShelfManager {
 //    		System.out.println(p);
 //    	}
     }
+    
+    public void removePackageTemplate(Package pck) {
+    	packageTemplate.remove(pck);
+    }
 
     public ArrayList<Package> getTemplateList() {
         return packageTemplate;

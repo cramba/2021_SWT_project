@@ -47,7 +47,7 @@ public class PackageTemplateViewController extends ViewController{
     				
     				@Override
     				public ListCell<Package> call(ListView<Package> v) {
-    					return new PackageTemplateCell();
+    					return new PackageTemplateCell(shelfManager);
     				}
     				
     			});

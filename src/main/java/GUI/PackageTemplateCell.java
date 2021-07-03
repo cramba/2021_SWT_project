@@ -25,16 +25,9 @@ public class PackageTemplateCell extends ListCell<Package> {
 	private ShelfManager shelfManager;
 	
 	
-//	public PackageTemplateCell(ShelfManager shelfManager) {
-//		mainRoot = new HBox();
-//		this.shelfManager = shelfManager;
-//		packageName = new Label();
-//		packageSpecification = new Label();
-//		addPackage = new Button("add");
-//		
-//		mainRoot.getChildren().addAll(packageName, packageSpecification, addPackage);
-//		this.setGraphic(mainRoot);
-//	}
+	public PackageTemplateCell(ShelfManager shelfManager) {
+		this.shelfManager = shelfManager;
+	}
 	
 	@Override
 	public void updateItem(Package item, boolean empty) {
@@ -76,8 +69,12 @@ public class PackageTemplateCell extends ListCell<Package> {
 			setGraphic(info);
 			
 			addPackage.setOnAction((e) -> {
-				System.out.println(item.getName());
-				//shelfManager.packageProp().setValue(item);
+				shelfManager.packageProp().setValue(item);
+			});
+			
+			removePackage.setOnAction((e) -> {
+				getListView().getItems().remove(getItem());
+				shelfManager.removePackageTemplate(item);
 			});
 		
 		}else {
