@@ -23,7 +23,7 @@ public class ShelfManager {
     SimpleObjectProperty<Package> packageProp;
     private SimpleBooleanProperty newTemplateProp;
     private int shelfSupportId = 0;
-
+    private int shelfFloorId = 0;
 
     public void setShelf(Shelf shelf) {
         this.shelf = shelf;
@@ -35,7 +35,7 @@ public class ShelfManager {
         tray = new Object();
         packageTemplate = new ArrayList<Package>();
         shelfSupportProp = new SimpleObjectProperty<ShelfSupport>();
-        shelfFloorProp = new  SimpleObjectProperty<ShelfFloor>();
+        shelfFloorProp = new SimpleObjectProperty<ShelfFloor>();
         packageProp = new SimpleObjectProperty<Package>();
         newTemplateProp = new SimpleBooleanProperty(false);
         packageTemplate.add(new Package("Testpaket", 40, 40, 3.5f, Color.BLACK, 6.7f));
@@ -94,7 +94,8 @@ public class ShelfManager {
 
     public void addShelfFloor(float loadCapacity) {
 
-        ShelfFloor shelfFloor = new ShelfFloor(0, loadCapacity, 0, 0); //obligatorische Werte
+        shelfFloorId = shelfFloorId + 1;
+        ShelfFloor shelfFloor = new ShelfFloor(shelfFloorId, 100, loadCapacity, 0, 0); //obligatorische Werte
         shelf.addShelfFloor(shelfFloor);
         shelfFloorProp.setValue(shelfFloor);
 
@@ -106,31 +107,39 @@ public class ShelfManager {
 
     }
 
-    public void checkShelfSupports(ShelfFloor shelfFloor) {
+    public void checkShelfSupports(ShelfFloor shelfFloor, int viewHeight) {
         ArrayList<ShelfSupport> sortedShelfSupports = new ArrayList<>(shelf.getShelfSupports());
         Collections.sort(sortedShelfSupports);
-            for (int i = 1; i < sortedShelfSupports.size(); i++) {
-                if (shelfFloor.getPositionX() < sortedShelfSupports.get(0).getPositionX()) {
-                    System.out.println("Regalboden links von der ersten StÃ¼tze");
-                    System.out.println();
-                    return;
-                }
-                if (shelfFloor.getPositionX() < sortedShelfSupports.get(i).getPositionX()) {
-                    ShelfSupport support_left = shelf.getShelfSupportByID(sortedShelfSupports.get(i - 1).getShelfSupportID());
-                    ShelfSupport support_right = shelf.getShelfSupportByID(sortedShelfSupports.get(i).getShelfSupportID());
-                    shelfFloor.setPositionX(support_left.getPositionX());
-                    //eventuell posY aendern
-                    shelfFloor.setWidth(support_right.getPositionX() - support_left.getPositionX());
+        if (shelfFloor.getPositionX() < sortedShelfSupports.get(0).getPositionX()) {
+            System.out.println("Regalboden links von der ersten Stuetze, d.h. außerhalb des Regals");
+            return;
+        }else if(shelfFloor.getPositionX() > sortedShelfSupports.get(sortedShelfSupports.size()-1).getPositionX()){
+            System.out.println("Regalboden rechts von der letzten Stuetze, d.h. ausserhalb des Regals");
+            return;
+        }
+        for (int i = 1; i < sortedShelfSupports.size(); i++) {
+            if (shelfFloor.getPositionX() < sortedShelfSupports.get(i).getPositionX()) {
+                ShelfSupport support_left = shelf.getShelfSupportByID(sortedShelfSupports.get(i - 1).getShelfSupportID());
+                ShelfSupport support_right = shelf.getShelfSupportByID(sortedShelfSupports.get(i).getShelfSupportID());
+                shelfFloor.setPositionX(support_left.getPositionX());
+                //eventuell posY aendern
+                shelfFloor.setWidth(support_right.getPositionX() - support_left.getPositionX());
 
-
-                    System.out.println("sollte einrasten");
-                    return;
+                if (shelfFloor.getPositionY() < viewHeight - support_left.getLength() || shelfFloor.getPositionY() < viewHeight - support_right.getLength()) {
+                    if (support_left.getLength() <= support_right.getLength()) {
+                        shelfFloor.setPositionY(viewHeight - support_left.getLength());
+                    }else{
+                        shelfFloor.setPositionY(viewHeight - support_right.getLength());
+                    }
                 }
+                System.out.println("sollte einrasten");
+                return;
             }
+        }
     }
 
     public void addPackageTemplate(Package pck) {
-    	packageTemplate.add(pck);
+        packageTemplate.add(pck);
 //    	for(Package p : packageTemplate) {
 //    		System.out.println(p);
 //    	}
@@ -143,16 +152,17 @@ public class ShelfManager {
     public SimpleObjectProperty<ShelfSupport> getShelfSupportProp() {
         return shelfSupportProp;
     }
+
     public SimpleObjectProperty<ShelfFloor> getShelfFloorProp() {
         return shelfFloorProp;
     }
 
     public SimpleBooleanProperty newTemplateProp() {
-    	return newTemplateProp;
+        return newTemplateProp;
     }
 
     public SimpleObjectProperty<Package> packageProp() {
-    	return packageProp;
+        return packageProp;
     }
 
     public Shelf getShelf() {

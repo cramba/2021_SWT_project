@@ -46,8 +46,7 @@ public class EditShelfViewController extends ViewController{
     		int loadCapacity = Integer.parseInt(view.getLoadCapacityTextField().getText());
     		
     		shelfManager.addShelfFloor(loadCapacity);
-    		shelfManager.getShelfFloorProp().getValue().setPositionX(50);
-	    	shelfManager.getShelfFloorProp().getValue().setPositionY(50);
+    	
 
     	});
     	

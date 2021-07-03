@@ -10,8 +10,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class ShelfViewController extends ViewController {
@@ -26,9 +24,9 @@ public class ShelfViewController extends ViewController {
 
     //innere Klasse - wird aufgerufen wenn ShelfSupport angeklickt wird
     private class ShelfSupportHandler implements EventHandler<MouseEvent> {
-        int i;
-        public ShelfSupportHandler(int i) {
-            this.i = i;
+        int id;
+        public ShelfSupportHandler(int id) {
+            this.id = id;
         }
         @Override
         public void handle(MouseEvent t) {
@@ -36,30 +34,26 @@ public class ShelfViewController extends ViewController {
 
             ((EditShelfView) editShelfViewController.getRoot()).getDeleteShelfSupportButton().setVisible(true);
 
-            if (!oldshelfSupportsList.equals(((ShelfView) root).getShelfSupports())) {
-
-                for (int i = 0; i < ((ShelfView) root).getShelfSupports().size(); i++) {
-
-                    //remove alte hanldder
-
-                    view.getShelfSupports().get(i).removeEventHandler(MouseEvent.MOUSE_CLICKED, new ShelfSupportHandler(i));
-
-                    // add neue handler
-                    view.getShelfSupports().get(i).addEventHandler(MouseEvent.MOUSE_CLICKED, new ShelfSupportHandler(i));
-                }
-
-                oldshelfSupportsList = new ArrayList<Rectangle>(((ShelfView) root).getShelfSupports());
-            }
-
             //Listener fuer Loeschbutton..
             ((EditShelfView) editShelfViewController.getRoot()).getDeleteShelfSupportButton().setOnAction((e) -> {
+            	Rectangle currentFloor;
 
-                view.getChildren().remove(view.getShelfSupports().get(i));
-                //Loescht Shelfsupport aus der Logic
-                shelfManager.deleteShelfSupport(i);
-                //Loescht Shelfsupport rectangles aus der ArrayList
-                ((ShelfView) root).getShelfSupports().remove(i);
-                //Loescht ShelfSupport rectangles aus der View
+            	for(int i=0 ; i< shelfManager.getShelf().getShelfSupports().size(); i++) {
+
+            		if(shelfManager.getShelf().getShelfSupports().get(i).getShelfSupportID() == id) {
+
+            			 currentFloor = view.getShelfSupports().get(i);
+
+
+            		       view.getChildren().remove(view.getShelfSupports().get(i)); //evtl auf index ändern
+                            //Loescht Shelfsupport aus der Logic
+                          shelfManager.deleteShelfSupport(i);
+                            //Loescht Shelfsupport rectangles aus der ArrayList
+                          ((ShelfView) root).getShelfSupports().remove(i);
+                            //Loescht ShelfSupport rectangles aus der View
+
+            		}
+            	}
 
             });
 
@@ -68,22 +62,33 @@ public class ShelfViewController extends ViewController {
 
     //innere Klasse - wird aufgerufen, wenn ShelfSupport gedragged wird
     private class ShelfSupportHandlerForDrag implements EventHandler<MouseEvent> {
-        int i;
-        public ShelfSupportHandlerForDrag(int i) {
-            this.i = i;
+        int id;
+        public ShelfSupportHandlerForDrag(int id) {
+            this.id = id;
         }
 
         @Override
         public void handle(MouseEvent e) {
+
+        	Rectangle currentFloor;
+        	for(int i=0 ; i< shelfManager.getShelf().getShelfSupports().size(); i++) {
+
+        		if(shelfManager.getShelf().getShelfSupports().get(i).getShelfSupportID() == id) {
+
+        			//currentFloor = view.getShelfSupports().get(i);
+
+
+
+
             view.getShelfSupports().get(i).setX(Math.round(e.getX() + view.getShelfSupports().get(i).getTranslateX()));
             view.getShelfSupports().get(i).setY(Math.round(e.getY() + view.getShelfSupports().get(i).getTranslateY()));
 
-            // setzen der Positionen der RegalstÃ¼tze in der Logik
+            // setzen der Positionen der Regalstütze in der Logik
             shelfManager.getShelf().getShelfSupports().get(i).setPositionX((int) Math.round(e.getX() + view.getShelfSupports().get(i).getTranslateX()));
             shelfManager.getShelf().getShelfSupports().get(i).setPositionY((int) Math.round(e.getY() + view.getShelfSupports().get(i).getTranslateY()));
 
-            System.out.println("RegalstÃ¼tzeX:" + (int) Math.round(e.getX() + view.getShelfSupports().get(i).getTranslateX()));
-            System.out.println("RegalstÃ¼tzeY:" + (int) Math.round(e.getY() + view.getShelfSupports().get(i).getTranslateY()));
+            System.out.println("RegalstützeX:" + (int) Math.round(e.getX() + view.getShelfSupports().get(i).getTranslateX()));
+            System.out.println("RegalstützeY:" + (int) Math.round(e.getY() + view.getShelfSupports().get(i).getTranslateY()));
 
             if (view.getShelfSupports().get(i).getTranslateX() < view.getTranslateX()) {
                 view.getShelfSupports().get(i).setX(Math.round(view.getTranslateX()));
@@ -107,50 +112,68 @@ public class ShelfViewController extends ViewController {
                 shelfManager.getShelf().getShelfSupports().get(i).setPositionY((int) Math.round(view.getParent().getTranslateY()));
             }
             e.consume();
+        	}
         }
-    }
+    }}
 
+    //innere Klasse - Handler beim Anklicken eines Regalbodens
     private class ShelfFloorHandler implements EventHandler<MouseEvent> {
-        int i;
-        public ShelfFloorHandler(int i) {
-            this.i = i;
+        int id;
+        public ShelfFloorHandler(int id) {
+            this.id = id;
         }
         @Override
-        public void handle(MouseEvent arg0) {
+        public void handle(MouseEvent t) {
+            //Loeschen button erscheint... Die zeile ist so gross da ich den Loeschen button dafuer hier rein bekommen musste um damit zu arbeiten
+
             ((EditShelfView) editShelfViewController.getRoot()).getDeleteShelfFloorButton().setVisible(true);
 
-            if (!oldshelfFloorsList.equals(((ShelfView) root).getShelfFloors())) {
-                for (int i = 0; i < ((ShelfView) root).getShelfFloors().size(); i++) {
 
-                    //remove alte handler
-                    view.getShelfFloors().get(i).removeEventHandler(MouseEvent.MOUSE_CLICKED, new ShelfFloorHandler(i));
 
-                    // add neue handler
-                    view.getShelfFloors().get(i).addEventHandler(MouseEvent.MOUSE_CLICKED, new ShelfFloorHandler(i));
-                }
-                oldshelfFloorsList = new ArrayList<Rectangle>(((ShelfView) root).getShelfFloors());
-            }
+            //Listener fuer Loeschbutton..
             ((EditShelfView) editShelfViewController.getRoot()).getDeleteShelfFloorButton().setOnAction((e) -> {
-                view.getChildren().remove(view.getShelfFloors().get(i));
-                //Loescht Shelfsupport aus der Logic
-                shelfManager.deleteShelfFloor(i);
-                //Loescht Shelfsupport rectangles aus der ArrayList
-                ((ShelfView) root).getShelfFloors().remove(i);
-                //Loescht ShelfSupport rectangles aus der View
+            	Rectangle currentFloor;
+
+            	for(int i=0 ; i< shelfManager.getShelf().getShelfFloors().size(); i++) {
+
+            		if(shelfManager.getShelf().getShelfFloors().get(i).getShelfFloorID() == id) {
+
+            			 currentFloor = view.getShelfFloors().get(i);
+
+
+            		       view.getChildren().remove(view.getShelfFloors().get(i)); //evtl auf index ändern
+                            //Loescht Shelfflooraus der Logic
+                          shelfManager.deleteShelfFloor(i);
+                            //Loescht Shelfloor rectangles aus der ArrayList
+                          ((ShelfView) root).getShelfFloors().remove(i);
+                            //Loescht Shelffloor rectangles aus der View
+
+            		}
+            	}
+
             });
+
         }
     }
 
+    //innere Klasse - Handler beim Draggen eines Regalbodens
     private class ShelfFloorHandlerForDrag implements EventHandler<MouseEvent> {
 
-        int i;
+        int id;
 
-        public ShelfFloorHandlerForDrag(int i) {
-            this.i = i;
+        public ShelfFloorHandlerForDrag(int id) {
+            this.id = id;
         }
 
         @Override
         public void handle(MouseEvent e) {
+
+        	Rectangle currentFloor;
+        	for(int i=0 ; i< shelfManager.getShelf().getShelfFloors().size(); i++) {
+
+        		if(shelfManager.getShelf().getShelfFloors().get(i).getShelfFloorID() == id) {
+
+
             view.getShelfFloors().get(i).setX(Math.round(e.getX() + view.getShelfFloors().get(i).getTranslateX()));
             view.getShelfFloors().get(i).setY(Math.round(e.getY() + view.getShelfFloors().get(i).getTranslateY()));
 
@@ -181,14 +204,15 @@ public class ShelfViewController extends ViewController {
 
                 shelfManager.getShelf().getShelfFloors().get(i).setPositionY((int) Math.round(view.getParent().getTranslateY()));
             }
-
-            shelfManager.checkShelfSupports(shelfManager.getShelf().getShelfFloors().get(i));
+            shelfManager.checkShelfSupports(shelfManager.getShelf().getShelfFloors().get(i), (int) view.getMaxHeight());
 
             view.getShelfFloors().get(i).setX(shelfManager.getShelf().getShelfFloors().get(i).getPositionX());
             view.getShelfFloors().get(i).setY(shelfManager.getShelf().getShelfFloors().get(i).getPositionY());
             view.getShelfFloors().get(i).setWidth(shelfManager.getShelf().getShelfFloors().get(i).getWidth());
 
             e.consume();
+        		}
+        	}
         }
     }
 
@@ -202,6 +226,7 @@ public class ShelfViewController extends ViewController {
         root = view;
         initialize();
     }
+
 
     public void initialize() {
 
@@ -234,8 +259,8 @@ public class ShelfViewController extends ViewController {
                 //shelfSupportRectangle.setLayoutX(finaldistanceX);
                 shelfManager.getShelfSupportProp().getValue().setPositionX((int) shelfSupportRectangle.getLayoutX());
                 shelfManager.getShelfSupportProp().getValue().setPositionY((int) shelfSupportRectangle.getLayoutY());
-                System.out.println("RegalstÃ¼tzeX:" + shelfManager.getShelfSupportProp().getValue().getPositionX());
-                System.out.println("RegalstÃ¼tzeY:" + shelfManager.getShelfSupportProp().getValue().getPositionY());
+                System.out.println("RegalstützeX:" + shelfManager.getShelfSupportProp().getValue().getPositionX());
+                System.out.println("RegalstützeY:" + shelfManager.getShelfSupportProp().getValue().getPositionY());
 
                 //Arraylist von Shelfsupport-Rectangles = neues Rectangle hinzufuegen
                 ((ShelfView) root).getShelfSupports().add(shelfSupportRectangle);
@@ -248,18 +273,26 @@ public class ShelfViewController extends ViewController {
 
 
                 //MouseListener fuer alle -ShelfSupport-Rectangles im Programm- Wird einer Geklickt wird Innere Klasse ShelfSupportHandler(Ganz oben in dieser Klasse zu finden) aufgerufen
-                for (int i = 0; i < ((ShelfView) root).getShelfSupports().size(); i++) {
-
-                    //view.getShelfSupports().get(i).setOnMouseClicked(new ShelfSupportHandler(i));
-                    view.getShelfSupports().get(i).addEventHandler(MouseEvent.MOUSE_CLICKED, new ShelfSupportHandler(i));
-                    view.getShelfSupports().get(i).addEventHandler(MouseEvent.MOUSE_DRAGGED, new ShelfSupportHandlerForDrag(i));
-
-                }
-                oldshelfSupportsList = new ArrayList<Rectangle>(((ShelfView) root).getShelfSupports());
+                shelfSupportRectangle.setId(shelfManager.getShelfSupportProp().getValue().getShelfSupportID()+"");
+                shelfSupportRectangle.addEventHandler(MouseEvent.MOUSE_CLICKED, new ShelfSupportHandler(shelfManager.getShelfSupportProp().getValue().getShelfSupportID()));
+                shelfSupportRectangle.addEventHandler(MouseEvent.MOUSE_DRAGGED, new ShelfSupportHandlerForDrag(shelfManager.getShelfSupportProp().getValue().getShelfSupportID()));
 
             }
 
         });
+
+//        for (int i = 0; i < ((ShelfView) root).getShelfSupports().size(); i++) {
+//
+//            //view.getShelfSupports().get(i).setOnMouseClicked(new ShelfSupportHandler(i));
+//
+//
+//        	view.getShelfSupports().get(i).setId(+shelfManager.getShelf().getShelfSupports().get(i).getShelfSupportID()+"");
+//            view.getShelfSupports().get(i).addEventHandler(MouseEvent.MOUSE_CLICKED, new ShelfSupportHandler(shelfManager.getShelf().getShelfSupports().get(i).getShelfSupportID()));
+//            view.getShelfSupports().get(i).addEventHandler(MouseEvent.MOUSE_DRAGGED, new ShelfSupportHandlerForDrag(shelfManager.getShelf().getShelfSupports().get(i).getShelfSupportID()));
+//
+//
+//        }
+        oldshelfSupportsList = new ArrayList<Rectangle>(((ShelfView) root).getShelfSupports());
 
         shelfManager.getShelfFloorProp().addListener(new ChangeListener<ShelfFloor>() {
 
@@ -274,32 +307,12 @@ public class ShelfViewController extends ViewController {
 
                 ((ShelfView) root).getChildren().addAll(shelfFloorRectangle);
 
-                for (int i = 0; i < ((ShelfView) root).getShelfFloors().size(); i++) {
+                shelfFloorRectangle.setId(shelfManager.getShelfFloorProp().getValue().getShelfFloorID()+"");
+                shelfFloorRectangle.addEventHandler(MouseEvent.MOUSE_CLICKED, new ShelfFloorHandler(shelfManager.getShelfFloorProp().getValue().getShelfFloorID()));
+                shelfFloorRectangle.addEventHandler(MouseEvent.MOUSE_DRAGGED, new ShelfFloorHandlerForDrag(shelfManager.getShelfFloorProp().getValue().getShelfFloorID()));
 
-                    view.getShelfFloors().get(i).addEventHandler(MouseEvent.MOUSE_CLICKED, new ShelfFloorHandler(i));
-                    view.getShelfFloors().get(i).addEventHandler(MouseEvent.MOUSE_DRAGGED, new ShelfFloorHandlerForDrag(i));
-                    view.getShelfFloors().get(i).addEventHandler(MouseEvent.MOUSE_RELEASED, new ShelfFloorHandler(i));
-
-                }
-
-                oldshelfFloorsList = new ArrayList<Rectangle>(((ShelfView) root).getShelfFloors());
             }
 
         });
-
-//    	shelfSupports.get(0).setOnMouseClicked(new EventHandler<MouseEvent>()
-//         {
-//             @Override
-//             public void handle(MouseEvent t) {
-//            	 
-//             }
-//         });
-
-
     }
-//	private void click(MouseEvent event) {
-//		// TODO Auto-generated method stub
-//
-//		System.out.println("halloooo");
-//	}
 }

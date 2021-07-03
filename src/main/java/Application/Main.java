@@ -32,7 +32,7 @@ public class Main extends Application {
         Pane root = rootController.getRoot();
         primaryStage.setTitle("Warehouse Masters!");
         scene = new Scene(root, 1450, 740);
-        scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+      //  scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
         
         primaryStage.setScene(scene);
         System.out.println("Fertig");

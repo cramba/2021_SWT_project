@@ -12,18 +12,18 @@ public class ShelfFloor {
     List<Package> packageList;
     private int height;
 
-    private int id_nr = 0;
+   
 
 
 
-    public ShelfFloor(int width, float loadCapacity, int posX, int posY){
+    public ShelfFloor(int id_nr, int width, float loadCapacity, int posX, int posY){
         this.shelfFloorID = id_nr;
         this.width = width;
         this.loadCapacity = loadCapacity;
         this.positionX = posX;
         this. positionY = posY;
         this.packageList = new ArrayList<>();
-        id_nr++;
+       
     }
 
     public void addPackage(Package newPackage){
