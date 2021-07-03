@@ -5,6 +5,24 @@
  	-fx-background-color: white;
  }
  
+ .icon_button{
+ 	
+ 	-fx-min-width: 25;
+ 	-fx-min-height: 25;
+ 	-fx-background-color: transparent;
+ 	-fx-background-repeat: no-repeat no-repeat;
+ 	-fx-background-size: 25 25;
+ 	-fx-background-position: center;
+ }
+ 
+ #addButton{
+ 	-fx-background-image: url(addIcon.png);
+ }
+ 
+ #removeButton{
+ 	-fx-background-image: url(delIcon.png);
+ }
+ 
  #grau{
  	-fx-background-color: #bdbdbd;
  }
