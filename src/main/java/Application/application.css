@@ -19,8 +19,24 @@
  	-fx-background-image: url(addIcon.png);
  }
  
+ #addButton:hover{
+ 	-fx-background-image: url(addIconHover.png);
+ }
+ #addButton:pressed{
+ 	-fx-background-image: url(addIconPressed.png);
+ }
+ 
+ 
  #removeButton{
  	-fx-background-image: url(delIcon.png);
+ }
+ 
+ #removeButton:hover{
+ 	-fx-background-image: url(delIconHover.png);
+ }
+ 
+ #removeButton:pressed{
+ 	-fx-background-image: url(delIconPressed.png);
  }
  
  #grau{
