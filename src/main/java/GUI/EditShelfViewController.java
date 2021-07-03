@@ -60,7 +60,7 @@ public class EditShelfViewController extends ViewController{
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				
 				//Wenn du Regalstuetze auswaehltst werden die GUI-Elemente .. fuer die Regalstuetze angezeigt
-				if(newValue.equals("Regalst�tze")) {
+				if(newValue.equals("Regalstuetze")) {
 					
 					//Alte	GUI-Elemente.. werden geloescht ausser der erste da das die Kombobox ist
 					view.getChildren().remove(1, view.getChildren().size()  );
