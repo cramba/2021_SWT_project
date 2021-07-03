@@ -2,6 +2,7 @@ package GUI;
 
 import Business.ShelfManager.ShelfManager;
 import Business.Package.Package;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -46,7 +47,9 @@ public class PackageTemplateCell extends ListCell<Package> {
 			color.setFill(item.getColour());
 			packageName = new Label(item.getName() + " ");
 			packageSpecification = new Label(item.getSpecification());
-			addPackage = new Button("add");
+			addPackage = new Button();
+			addPackage.setId("addButton");
+			addPackage.getStyleClass().addAll("icon_button");
 			
 			info1.setSpacing(5);
 			info1.getChildren().addAll(color, packageName, packageSpecification, addPackage);
@@ -62,13 +65,20 @@ public class PackageTemplateCell extends ListCell<Package> {
 				inc.setFill(c);
 				info2.getChildren().add(inc);
 			}
-			removePackage = new Button("del.");
+			removePackage = new Button();
+			removePackage.setId("removeButton");
+			removePackage.getStyleClass().addAll("icon_button");
 			info2.getChildren().add(removePackage);
 			
 			info = new VBox();
 			info.getChildren().addAll(info1, info2);
 			
 			setGraphic(info);
+			
+			addPackage.setOnAction((e) -> {
+				System.out.println(item.getName());
+				//shelfManager.packageProp().setValue(item);
+			});
 		
 		}else {
 			setGraphic(null);
