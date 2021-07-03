@@ -38,6 +38,7 @@ public class AddPackageViewController extends ViewController {
 
     Color packageColour;
     TrayViewController trayViewController;
+    private int packageID = 0;
 
     public AddPackageViewController(ShelfManager shelfManager, TrayViewController trayViewController) {
         super(shelfManager);
@@ -81,7 +82,8 @@ public class AddPackageViewController extends ViewController {
 
         doneButton.setOnAction((e) -> {
             if (validInput()) {
-               shelfManager.packageProp().setValue(newPackage());
+               //shelfManager.packageProp().setValue(newPackage());
+            	shelfManager.setTrayPackage(newPackage());
             }
         });
         
@@ -162,13 +164,16 @@ public class AddPackageViewController extends ViewController {
     }
     
     public Package newPackage() {
+    	
+    	packageID = packageID + 1;
         String name = view.getNameInput().getText();
+     
         int height = Integer.parseInt(view.getHeightInput().getText());
         int width = Integer.parseInt(view.getWidthInput().getText());
         float weight = Float.parseFloat(view.getWeightInput().getText());
         Color colour = packageColour;
         float loadCapacity = Float.parseFloat(view.getMaxLoadCapacityInput().getText());
-        Package newPck = new Package(name, height, width, weight, colour, loadCapacity);
+        Package newPck = new Package(name, height, width, weight, colour, loadCapacity,packageID);
         List<Color> incompColours = new ArrayList<>();
         if(blueToggle.isSelected())
             incompColours.add((Color) blueToggle.getUserData());

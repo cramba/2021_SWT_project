@@ -16,10 +16,11 @@ import java.util.ArrayList;
 public class ShelfManager {
 
     Shelf shelf;
-    Object tray;
+    Package trayPackage;
     ArrayList<Package> packageTemplate;
     SimpleObjectProperty<ShelfSupport> shelfSupportProp;
     SimpleObjectProperty<ShelfFloor> shelfFloorProp;
+    SimpleObjectProperty<Package> packageTrayProp;
     SimpleObjectProperty<Package> packageProp;
     private SimpleBooleanProperty newTemplateProp;
     private int shelfSupportId = 0;
@@ -32,13 +33,14 @@ public class ShelfManager {
     public ShelfManager() {
 
         shelf = new Shelf();
-        tray = new Object();
+       
         packageTemplate = new ArrayList<Package>();
         shelfSupportProp = new SimpleObjectProperty<ShelfSupport>();
         shelfFloorProp = new SimpleObjectProperty<ShelfFloor>();
+        packageTrayProp = new SimpleObjectProperty<Package>();
         packageProp = new SimpleObjectProperty<Package>();
         newTemplateProp = new SimpleBooleanProperty(false);
-        packageTemplate.add(new Package("Testpaket", 40, 40, 3.5f, Color.BLACK, 6.7f));
+        packageTemplate.add(new Package("Testpaket", 40, 40, 3.5f, Color.BLACK, 6.7f,9999));
         //packageTemplate.add(new Package("Kleines Paket", 20, 10, 1.5f));
     }
 
@@ -65,7 +67,9 @@ public class ShelfManager {
 
     }
 
-    public void deletePackage(Package pck) {
+    public void deletePackage(int index) {
+    	
+    	shelf.removePackage(index);
 
     }
 
@@ -106,6 +110,12 @@ public class ShelfManager {
         shelf.removeShelfFloor(index);
 
     }
+    
+    public void addPackage(Package pack) {
+    	shelf.addPackage(pack);
+    	packageProp.setValue(pack);
+    	
+    }
 
     public void checkShelfSupports(ShelfFloor shelfFloor, int viewHeight) {
         ArrayList<ShelfSupport> sortedShelfSupports = new ArrayList<>(shelf.getShelfSupports());
@@ -139,10 +149,28 @@ public class ShelfManager {
     }
 
     public void addPackageTemplate(Package pck) {
+    	
         packageTemplate.add(pck);
+        
+        
+        
+        
 //    	for(Package p : packageTemplate) {
 //    		System.out.println(p);
 //    	}
+    }
+    
+    public void setTrayPackage(Package pck) {
+    	
+    	trayPackage = pck;
+    	packageTrayProp.setValue(trayPackage);
+    	
+    }
+    
+    public void removeTrayPackage() {
+    	
+    	trayPackage = null ; 
+    	packageTrayProp.setValue(trayPackage);
     }
 
     public ArrayList<Package> getTemplateList() {
@@ -161,6 +189,10 @@ public class ShelfManager {
         return newTemplateProp;
     }
 
+    public SimpleObjectProperty<Package> packageTrayProp() {
+        return packageTrayProp;
+    }
+    
     public SimpleObjectProperty<Package> packageProp() {
         return packageProp;
     }

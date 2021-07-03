@@ -2,6 +2,7 @@ package GUI;
 
 import java.util.ArrayList;
 
+import Business.Package.Package;
 import Business.Shelf.ShelfFloor;
 import Business.Shelf.ShelfSupport;
 import Business.ShelfManager.ShelfManager;
@@ -20,6 +21,7 @@ public class ShelfViewController extends ViewController {
     private ArrayList<Rectangle> oldshelfFloorsList;
     int lastdistanceX = 0;
     EditShelfViewController editShelfViewController;
+   private  ConfigurationViewController configurationViewController;
 
 
     //innere Klasse - wird aufgerufen wenn ShelfSupport angeklickt wird
@@ -215,13 +217,99 @@ public class ShelfViewController extends ViewController {
         	}
         }
     }
+    
+    private class PackageHandler implements EventHandler<MouseEvent> {
+        int id;
+        public PackageHandler(int id) {
+            this.id = id;
+        }
+        @Override
+        public void handle(MouseEvent t) {
+            //Loeschen button erscheint... Die zeile ist so gross da ich den Loeschen button dafuer hier rein bekommen musste um damit zu arbeiten
 
-    public ShelfViewController(ShelfManager shelfManager, EditShelfViewController editShelfViewController) {
+           
+        	
+        	
+        	configurationViewController.getView().getDeleteButton().setOnAction((e) -> {
+        		
+        		for(int i=0 ; i< shelfManager.getShelf().getAllPackages().size(); i++) {
+        			if(shelfManager.getShelf().getAllPackages().get(i).getPackageID() == id) {
+        				
+        				view.getChildren().remove(view.getAllPackages().get(i));
+        				shelfManager.deletePackage(i);
+        				view.getAllPackages().remove(i);
+        				
+        			}
+        		}
+
+        	 });
+
+   
+
+        }
+    }
+    
+    private class PackageHandlerForDrag implements EventHandler<MouseEvent> {
+        int id;
+        public PackageHandlerForDrag(int id) {
+            this.id = id;
+        }
+        @Override
+        public void handle(MouseEvent e) {
+        	
+        	for(int i=0 ; i< shelfManager.getShelf().getAllPackages().size(); i++) {
+    			if(shelfManager.getShelf().getAllPackages().get(i).getPackageID() == id) {
+    				
+    				
+    			        view.getAllPackages().get(i).setX(Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX()));
+    		            view.getAllPackages().get(i).setY(Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY()));
+
+    		            // setzen der Positionen der Regalstütze in der Logik
+    		            shelfManager.getShelf().getAllPackages().get(i).setPositionX((int) Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX()));
+    		            shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY()));
+
+    		            System.out.println("RegalstützeX:" + (int) Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX()));
+    		            System.out.println("RegalstützeY:" + (int) Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY()));
+
+    		            if (view.getAllPackages().get(i).getTranslateX() < view.getTranslateX()) {
+    		                view.getAllPackages().get(i).setX(Math.round(view.getTranslateX()));
+    		                shelfManager.getShelf().getAllPackages().get(i).setPositionX((int) Math.round(view.getTranslateX()));
+    		            }
+    		            if ((view.getAllPackages().get(i).getTranslateX() + view.getAllPackages().get(i).getWidth()) > (view.getTranslateX() + view.getWidth())) { //---
+    		                view.getAllPackages().get(i).setX((int) Math.round(view.getWidth() - view.getAllPackages().get(i).getWidth())); //----
+
+    		                shelfManager.getShelf().getAllPackages().get(i).setPositionX((int) Math.round(view.getWidth() - view.getAllPackages().get(i).getWidth()));
+
+    		            }
+    		            if (view.getAllPackages().get(i).getTranslateY() + view.getAllPackages().get(i).getHeight() > view.getTranslateY() + view.getHeight()) { //--
+    		                view.getAllPackages().get(i).setY(Math.round((view.getHeight()) - view.getAllPackages().get(i).getHeight())); //-
+
+    		                shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round((view.getHeight()) - view.getAllPackages().get(i).getHeight()));
+
+    		            }
+    		            if (view.getAllPackages().get(i).getTranslateY() < view.getTranslateY()) {
+    		                view.getAllPackages().get(i).setY(Math.round(view.getParent().getTranslateY()));
+
+    		                shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round(view.getParent().getTranslateY()));
+    		            }
+    		            e.consume();
+    				
+    			}
+        	}
+        	
+        	
+        }
+    }
+    
+    
+
+    public ShelfViewController(ShelfManager shelfManager, EditShelfViewController editShelfViewController, ConfigurationViewController configurationViewController) {
         super(shelfManager);
         view = new ShelfView();
         this.editShelfViewController = editShelfViewController;
-
+        this.configurationViewController = configurationViewController;
         shelfSupports = new ArrayList<Rectangle>();
+       
 
         root = view;
         initialize();
@@ -314,5 +402,43 @@ public class ShelfViewController extends ViewController {
             }
 
         });
+        
+        
+        //packetProperty:
+        
+
+        shelfManager.packageProp().addListener(new ChangeListener<Package>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Package> observable, Package oldValue, Package newValue) {
+				// TODO Auto-generated method stub
+				
+					Rectangle packet = new Rectangle();
+		    		Package pack = newValue;
+		    		int width = pack.getWidth();
+		        	int height = pack.getHeight();
+		        	int posWidth = (width/2)*(-1);
+		        	int posHeight = (height/2)*(-1);
+		        	packet.setX(0);
+		        	packet.setY(0);
+		        	packet.setWidth(width);
+		        	packet.setHeight(height);
+		        	packet.setFill(pack.getColour());
+		        	view.getAllPackages().add(packet);
+		        	view.getChildren().addAll(packet);
+		        	
+	                packet.setId(pack.getPackageID()+"");
+	                packet.addEventHandler(MouseEvent.MOUSE_CLICKED,new PackageHandler(pack.getPackageID()));
+	                packet.addEventHandler(MouseEvent.MOUSE_DRAGGED,new PackageHandlerForDrag(pack.getPackageID()));
+
+		    
+		    	
+		    }
+				
+			
+
+        });
+
+        
     }
 }

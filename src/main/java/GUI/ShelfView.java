@@ -17,11 +17,12 @@ public class ShelfView extends AnchorPane {
 	
 	private ArrayList<Rectangle> shelfSupports;
 	private ArrayList<Rectangle> shelfFloors;
-
+	private ArrayList<Rectangle> allPackages;
 
 	public ShelfView(){
     	shelfSupports = new ArrayList<Rectangle>();
     	shelfFloors = new ArrayList<Rectangle>();
+    	allPackages = new ArrayList<Rectangle>();
 
     	this.setMinSize(900, 620);
     	this.setMaxSize(900, 620);
@@ -38,4 +39,8 @@ public class ShelfView extends AnchorPane {
     public ArrayList<Rectangle> getShelfFloors() {
 		return shelfFloors;
 	}
+    
+    public ArrayList<Rectangle> getAllPackages() {
+ 		return allPackages;
+ 	}
 }

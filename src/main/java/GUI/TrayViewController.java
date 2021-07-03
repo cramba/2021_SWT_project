@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Business.Package.Package;
 import Business.Shelf.ShelfFloor;
+import Business.Shelf.ShelfSupport;
 import Business.ShelfManager.ShelfManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -26,6 +27,7 @@ public class TrayViewController extends ViewController{
 	Rectangle rectTarget;
 	private ArrayList<Rectangle> nodes;
 	private Button button;
+	private Package trayPackage; 
 
 
     public TrayViewController(ShelfManager shelfManager){
@@ -50,19 +52,39 @@ public class TrayViewController extends ViewController{
     }
     public void initialize(){
     	
-    	 r.setOnMouseDragged(event -> drag(event));
+    	 //r.setOnMouseDragged(event -> drag(event));
 
-    	 shelfManager.packageProp().addListener(new ChangeListener<Package>() {
+    	 shelfManager.packageTrayProp().addListener(new ChangeListener<Package>() {
 
     			@Override
     			public void changed(ObservableValue<? extends Package> observable, Package oldValue, Package newValue) {
     				// TODO Auto-generated method stub
-    				view.setTrayPackage(newValue);
-    				System.out.println("NIX");
+    				
+    				if(newValue !=(null)) {
+    					
+    					trayPackage = newValue ; 
+        				view.setTrayPackage(newValue);
+        				System.out.println("NIX");
+    					
+    				}
+    			
 
     			}
     			
     		});
+    	 
+    	 button.setOnAction((e) -> {
+    		 
+    			 
+    		 view.removeTrayPackage();
+    		 shelfManager.addPackage(trayPackage);
+    		 shelfManager.removeTrayPackage();    		 
+    		 
+    		 
+    		 
+    	
+    	 });
+    	 
 
 
     }
@@ -96,7 +118,10 @@ public class TrayViewController extends ViewController{
     
 
     public void setPackageinTray(Package p){
-        //Paket in Ablage setzen
+    	
+        //Rectangle packet = new Rectangle();
+
+        
     }
     
     public TrayView getView() {

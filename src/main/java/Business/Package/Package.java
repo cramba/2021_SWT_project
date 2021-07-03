@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Package {
-    private String name;
+	
+	private int packageID;
+
+	private String name;
     private int height;
     private int width;
     private float weight;
@@ -37,7 +40,7 @@ public class Package {
         this.packagesAbove = packagesAbove;
     }
 
-    public Package(String name, int height, int width, float weight, Color colour, float loadCapacity){
+    public Package(String name, int height, int width, float weight, Color colour, float loadCapacity, int packageID){
     	//List<Color> incompatibility
         this.name = name;
         this.height = height;
@@ -49,6 +52,8 @@ public class Package {
         this.positionY = 0;
         this.incompatibility = new ArrayList<>();
         this.packagesAbove = new ArrayList<>();
+        this.packageID = packageID;
+        
     }
 
     public String getName() {
@@ -95,4 +100,7 @@ public class Package {
     public int getPositionY() {
         return positionY;
     }
+    public int getPackageID() {
+ 		return packageID;
+ 	}
 }

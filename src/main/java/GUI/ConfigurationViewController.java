@@ -15,6 +15,7 @@ public class ConfigurationViewController extends ViewController{
     	view = new ConfigurationView() ;
     	loadConfigurationButton = view.getLoadConfigurationButton();
     	saveConfigurationButton = view.getSafeConfigurationButton();
+    	
 
     	root = view;
     	

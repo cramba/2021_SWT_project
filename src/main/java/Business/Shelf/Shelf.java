@@ -3,13 +3,19 @@ package Business.Shelf;
 import java.util.ArrayList;
 import java.util.List;
 
+import Business.Package.Package;
+
 public class Shelf {
     private List<ShelfSupport> shelfSupports;
     private List<ShelfFloor> shelfFloors;
+    private List<Package> allPackages;
     
-    public Shelf(){
+ 
+
+	public Shelf(){
         this.shelfSupports = new ArrayList<ShelfSupport>();
         this.shelfFloors = new ArrayList<ShelfFloor>();
+        this.allPackages = new ArrayList<Package>();
     }
 
     public ShelfSupport getShelfSupportByID(int id){
@@ -37,12 +43,22 @@ public class Shelf {
         shelfSupports.add(newShelfSupport);
     }
     
+    public void addPackage(Package pack) {
+    	
+    	allPackages.add(pack);
+    	
+    }
+    
     public void removeShelfSupport(int i) {
     	shelfSupports.remove(i);
     }
 
     public void removeShelfFloor(int i) {
     	shelfFloors.remove(i);
+    }
+    public void removePackage(int i) {
+    	
+    	allPackages.remove(i);
     }
     
     public void setNewShelfFloorPos(int shelfFloorID, int positionX, int positionY){
@@ -61,5 +77,8 @@ public class Shelf {
     public ArrayList<ShelfFloor> getShelfFloors(){
         return (ArrayList<ShelfFloor>) shelfFloors;
     }
+    public ArrayList<Package> getAllPackages() {
+ 		return (ArrayList<Package>) allPackages;
+ 	}
 
 }
