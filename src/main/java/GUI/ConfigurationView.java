@@ -20,7 +20,8 @@ public class ConfigurationView extends BorderPane {
     Button safeConfigurationButton;
     HBox hBox1, hBox2, hBox3;
     VBox vBox1, vBox2;
-    TextField fehlerInput, paketInput;
+//    TextField fehleroutput, paketoutput;
+    Label fehleroutput, paketoutput;
 
 
     public Button getShelfEditButton() {
@@ -61,8 +62,8 @@ public class ConfigurationView extends BorderPane {
         packetInformationLabel = new Label("Paket:");
         deleteButton = new Button ("loeschen");
         hBox3 = new HBox();
-        fehlerInput = new TextField();
-        paketInput = new TextField();
+        fehleroutput = new Label("Text...");
+        paketoutput = new Label("Text...");
         
         loadConfigurationButton = new Button("Konfiguration laden");
         safeConfigurationButton = new Button("Konfiguration speichern");
@@ -71,13 +72,11 @@ public class ConfigurationView extends BorderPane {
         vBox2 = new VBox();
         
         hBox1.getChildren().addAll(shelfEditButton,addPackageButton);
-        hBox2.getChildren().addAll(errorMessageLabel, fehlerInput);
-        hBox3.getChildren().addAll(packetInformationLabel, paketInput,deleteButton);
+        hBox2.getChildren().addAll(errorMessageLabel, fehleroutput);
+        hBox3.getChildren().addAll(packetInformationLabel, paketoutput,deleteButton);
         
-        hBox1.setSpacing(10);
-//        hBox2.setSpacing(10);
-//        hBox3.setSpacing(10);
-//        
+        hBox1.setSpacing(10);   
+        
         vBox1.getChildren().addAll(hBox1,hBox2,hBox3);
         
         vBox2.getChildren().addAll(loadConfigurationButton,safeConfigurationButton);
@@ -89,11 +88,11 @@ public class ConfigurationView extends BorderPane {
         deleteButton.setId("rot");
         shelfEditButton.setId("orange");
         addPackageButton.setId("green");
+        fehleroutput.setId("solid1");
+        paketoutput.setId("solid2");
         
         packetInformationLabel.setPadding(new Insets(05, 10, 05, 10));
         errorMessageLabel.setPadding(new Insets(05, 10, 05, 10));
-        fehlerInput.setPadding(new Insets(05, 10, 05, 935));
-        paketInput.setPadding(new Insets(05, 0, 05, 935));
         
         vBox1.setSpacing(10);
         vBox2.setSpacing(10);

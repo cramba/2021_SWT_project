@@ -109,31 +109,31 @@ public class AddPackageViewController extends ViewController {
     		return false;
 
     	}else if(view.getNameInput().getText().length() >= 15) {
-    		errorMessage.setText("Der Name darf nicht länger als 15 Zeichen sein");
+    		errorMessage.setText("Der Name darf nicht laenger als 15 Zeichen sein");
     		return false;
     	}
 
     	//Breite
     	if(!isInt(view.getWidthInput().getText())) {
-    		errorMessage.setText("Bitte gebe eine gültige Breite ein");
+    		errorMessage.setText("Bitte gebe eine gueltige Breite ein");
     		return false;
     	}
 
     	//Höhe
     	if(!isInt(view.getHeightInput().getText())) {
-    		errorMessage.setText("Bitte gebe eine gültige Höhe ein");
+    		errorMessage.setText("Bitte gebe eine gueltige Hoehe ein");
     		return false;
     	}
 
     	//Gewicht
     	if(!isFloat(view.getWeightInput().getText())) {
-    		errorMessage.setText("Bitte gebe ein gültiges Gewicht ein");
+    		errorMessage.setText("Bitte gebe ein gueltiges Gewicht ein");
     		return false;
     	}
 
     	//Traglast
     	if(!isFloat(view.getMaxLoadCapacityInput().getText())) {
-    		errorMessage.setText("Bitte gebe eine gültige Traglast ein");
+    		errorMessage.setText("Bitte gebe eine gueltige Traglast ein");
     		return false;
     	}
     	return true;

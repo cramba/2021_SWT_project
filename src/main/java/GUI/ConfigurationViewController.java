@@ -25,6 +25,8 @@ public class ConfigurationViewController extends ViewController{
 
     }
     
+    
+    
     public ConfigurationView getView(){
         return view;
     }
