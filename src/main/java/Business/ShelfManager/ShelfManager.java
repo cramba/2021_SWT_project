@@ -7,6 +7,7 @@ import Business.Shelf.ShelfFloor;
 import Business.Shelf.ShelfSupport;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.scene.paint.Color;
 
 import java.util.Collections;
@@ -33,14 +34,14 @@ public class ShelfManager {
     public ShelfManager() {
 
         shelf = new Shelf();
-       
+
         packageTemplate = new ArrayList<Package>();
         shelfSupportProp = new SimpleObjectProperty<ShelfSupport>();
         shelfFloorProp = new SimpleObjectProperty<ShelfFloor>();
         packageTrayProp = new SimpleObjectProperty<Package>();
         packageProp = new SimpleObjectProperty<Package>();
         newTemplateProp = new SimpleBooleanProperty(false);
-        packageTemplate.add(new Package("Testpaket", 40, 40, 3.5f, Color.BLACK, 6.7f,9999));
+        packageTemplate.add(new Package("Testpaket", 120, 80, 3.5f, Color.BLUE, 6.7f,9999));
         //packageTemplate.add(new Package("Kleines Paket", 20, 10, 1.5f));
     }
 
@@ -68,7 +69,7 @@ public class ShelfManager {
     }
 
     public void deletePackage(int index) {
-    	
+
     	shelf.removePackage(index);
 
     }
@@ -110,11 +111,11 @@ public class ShelfManager {
         shelf.removeShelfFloor(index);
 
     }
-    
-    public void addPackage(Package pack) {
+
+    public void addPackageToList(Package pack) {
     	shelf.addPackage(pack);
     	packageProp.setValue(pack);
-    	
+
     }
 
     public void checkShelfSupports(ShelfFloor shelfFloor, int viewHeight) {
@@ -123,7 +124,7 @@ public class ShelfManager {
         if (shelfFloor.getPositionX() < sortedShelfSupports.get(0).getPositionX()) {
             System.out.println("Regalboden links von der ersten Stuetze, d.h. außerhalb des Regals");
             return;
-        }else if(shelfFloor.getPositionX() > sortedShelfSupports.get(sortedShelfSupports.size()-1).getPositionX()){
+        } else if (shelfFloor.getPositionX() > sortedShelfSupports.get(sortedShelfSupports.size() - 1).getPositionX()) {
             System.out.println("Regalboden rechts von der letzten Stuetze, d.h. ausserhalb des Regals");
             return;
         }
@@ -138,7 +139,7 @@ public class ShelfManager {
                 if (shelfFloor.getPositionY() < viewHeight - support_left.getLength() || shelfFloor.getPositionY() < viewHeight - support_right.getLength()) {
                     if (support_left.getLength() <= support_right.getLength()) {
                         shelfFloor.setPositionY(viewHeight - support_left.getLength());
-                    }else{
+                    } else {
                         shelfFloor.setPositionY(viewHeight - support_right.getLength());
                     }
                 }
@@ -148,33 +149,47 @@ public class ShelfManager {
         }
     }
 
+    public void addPackageToShelfFloor(Package pck) {
+        int pckX = pck.getPositionX();
+        int pckY = pck.getPositionY() + pck.getHeight();
+        ArrayList<ShelfFloor> sortedShelfFloors = new ArrayList<>(shelf.getShelfFloors());
+        Collections.sort(sortedShelfFloors);
+        for (int i = 0; i < sortedShelfFloors.size(); i++) {
+            if(pckY <= sortedShelfFloors.get(i).getPositionY()){
+                if(pckX >= sortedShelfFloors.get(i).getPositionX() &&
+                        pckX <= sortedShelfFloors.get(i).getPositionX()+sortedShelfFloors.get(i).getWidth()-pck.getWidth()){
+                    shelf.getShelfFloorByID(sortedShelfFloors.get(i).getShelfFloorID()).addPackage(pck);
+                    System.out.println("Paket sollte einrasten");
+                    return;
+                }
+            }
+        }
+    }
+
     public void addPackageTemplate(Package pck) {
-    	
         packageTemplate.add(pck);
-      
 //    	for(Package p : packageTemplate) {
 //    		System.out.println(p);
 //    	}
     }
-    
+
     public void setTrayPackage(Package pck) {
-    	
+
     	trayPackage = pck;
     	packageTrayProp.setValue(trayPackage);
-    	
+
     }
-    
+
     public void removeTrayPackage() {
-    	
-    	trayPackage = null ; 
+
+    	trayPackage = null ;
     	packageTrayProp.setValue(trayPackage);
     }
 
     public void removePackageTemplate(Package pck) {
     	packageTemplate.remove(pck);
     }
-    
-    
+
     public ArrayList<Package> getTemplateList() {
         return packageTemplate;
     }
@@ -194,7 +209,7 @@ public class ShelfManager {
     public SimpleObjectProperty<Package> packageTrayProp() {
         return packageTrayProp;
     }
-    
+
     public SimpleObjectProperty<Package> packageProp() {
         return packageProp;
     }

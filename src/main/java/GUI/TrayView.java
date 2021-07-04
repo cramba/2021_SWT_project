@@ -23,23 +23,22 @@ public class TrayView extends AnchorPane{
 	StackPane group;
 	Button button;
 	private Package trayPackage;
-	
     public TrayView(){
     	//breite x hÃ¶he
     	 r = new Rectangle();
-    	 
+
     	 rectTarget = new Rectangle(-50, -50, 100, 100);
-    	 button = new Button("Packet hinzufügen");
-    	
+    	 button = new Button("Packet hinzufuegen");
+
     	 AnchorPane.setBottomAnchor(button, 0.0);
-    	 
+
     	r.setFill(Color.RED);
     	
     	this.setPrefHeight(200);
     	this.setPrefWidth(200);
     	this.setBorder(new Border(new BorderStroke(Color.BLACK, 
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-    	
+
     	this.getChildren().addAll(button);
 
         
@@ -56,9 +55,7 @@ public class TrayView extends AnchorPane{
     }
     
     public void setTrayPackage(Package pack) {
-    	
     		trayPackage = pack;
-    		//if(trayPackage == null ) {
     		int width = trayPackage.getWidth();
         	int height = trayPackage.getHeight();
         	int posWidth = (width/2)*(-1);
@@ -69,13 +66,11 @@ public class TrayView extends AnchorPane{
         	r.setHeight(height);
         	r.setFill(trayPackage.getColour());
         	this.getChildren().addAll(r);
-    	//}else {
-    		//System.out.println("Es befindet sich bereits ein Paket in der Ablage");
-    	//}
-    	
+
+
     }
     public void removeTrayPackage(){
-    	
+
     	this.getChildren().remove(r);
     	
     }

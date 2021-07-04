@@ -3,19 +3,13 @@ package GUI;
 import java.util.ArrayList;
 
 import Business.Package.Package;
-import Business.Shelf.ShelfFloor;
-import Business.Shelf.ShelfSupport;
 import Business.ShelfManager.ShelfManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import javafx.scene.Node;
 
 
@@ -77,7 +71,7 @@ public class TrayViewController extends ViewController{
     		 
     			 
     		 view.removeTrayPackage();
-    		 shelfManager.addPackage(trayPackage);
+    		 shelfManager.addPackageToList(trayPackage);
     		 shelfManager.removeTrayPackage();    		 
     		 
     		 

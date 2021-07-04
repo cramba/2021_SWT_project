@@ -1,6 +1,7 @@
 package GUI;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Business.Package.Package;
 import Business.Shelf.ShelfFloor;
@@ -47,7 +48,7 @@ public class ShelfViewController extends ViewController {
             			 currentFloor = view.getShelfSupports().get(i);
 
 
-            		       view.getChildren().remove(view.getShelfSupports().get(i)); //evtl auf index ändern
+            		       view.getChildren().remove(view.getShelfSupports().get(i)); //evtl auf index aendern
                             //Loescht Shelfsupport aus der Logic
                           shelfManager.deleteShelfSupport(i);
                             //Loescht Shelfsupport rectangles aus der ArrayList
@@ -85,12 +86,12 @@ public class ShelfViewController extends ViewController {
             view.getShelfSupports().get(i).setX(Math.round(e.getX() + view.getShelfSupports().get(i).getTranslateX()));
             view.getShelfSupports().get(i).setY(Math.round(e.getY() + view.getShelfSupports().get(i).getTranslateY()));
 
-            // setzen der Positionen der Regalstütze in der Logik
+            // setzen der Positionen der Regalstï¿½tze in der Logik
             shelfManager.getShelf().getShelfSupports().get(i).setPositionX((int) Math.round(e.getX() + view.getShelfSupports().get(i).getTranslateX()));
             shelfManager.getShelf().getShelfSupports().get(i).setPositionY((int) Math.round(e.getY() + view.getShelfSupports().get(i).getTranslateY()));
 
-            System.out.println("RegalstützeX:" + (int) Math.round(e.getX() + view.getShelfSupports().get(i).getTranslateX()));
-            System.out.println("RegalstützeY:" + (int) Math.round(e.getY() + view.getShelfSupports().get(i).getTranslateY()));
+            System.out.println("Regalstï¿½tzeX:" + (int) Math.round(e.getX() + view.getShelfSupports().get(i).getTranslateX()));
+            System.out.println("Regalstï¿½tzeY:" + (int) Math.round(e.getY() + view.getShelfSupports().get(i).getTranslateY()));
 
             if (view.getShelfSupports().get(i).getTranslateX() < view.getTranslateX()) {
                 view.getShelfSupports().get(i).setX(Math.round(view.getTranslateX()));
@@ -143,7 +144,7 @@ public class ShelfViewController extends ViewController {
             			 currentFloor = view.getShelfFloors().get(i);
 
 
-            		       view.getChildren().remove(view.getShelfFloors().get(i)); //evtl auf index ändern
+            		       view.getChildren().remove(view.getShelfFloors().get(i)); //evtl auf index ï¿½ndern
                             //Loescht Shelfflooraus der Logic
                           shelfManager.deleteShelfFloor(i);
                             //Loescht Shelfloor rectangles aus der ArrayList
@@ -259,17 +260,18 @@ public class ShelfViewController extends ViewController {
         	
         	for(int i=0 ; i< shelfManager.getShelf().getAllPackages().size(); i++) {
     			if(shelfManager.getShelf().getAllPackages().get(i).getPackageID() == id) {
-    				
+                    
+
     				
     			        view.getAllPackages().get(i).setX(Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX()));
     		            view.getAllPackages().get(i).setY(Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY()));
 
-    		            // setzen der Positionen der Regalstütze in der Logik
+    		            // setzen der Positionen der Pakete in der Logik
     		            shelfManager.getShelf().getAllPackages().get(i).setPositionX((int) Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX()));
     		            shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY()));
 
-    		            System.out.println("RegalstützeX:" + (int) Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX()));
-    		            System.out.println("RegalstützeY:" + (int) Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY()));
+    		            System.out.println("Package X:" + (int) Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX()));
+    		            System.out.println("Package Y:" + (int) Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY()));
 
     		            if (view.getAllPackages().get(i).getTranslateX() < view.getTranslateX()) {
     		                view.getAllPackages().get(i).setX(Math.round(view.getTranslateX()));
@@ -292,14 +294,46 @@ public class ShelfViewController extends ViewController {
 
     		                shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round(view.getParent().getTranslateY()));
     		            }
+    		            ShelfFloor floor;
+    		            
+
+
+    		            shelfManager.addPackageToShelfFloor(shelfManager.getShelf().getAllPackages().get(i));
+    		            System.out.println("handler Methode wird ausgefuehrt");
+                        view.getAllPackages().get(i).setX(shelfManager.getShelf().getAllPackages().get(i).getPositionX());
+                        view.getAllPackages().get(i).setY(shelfManager.getShelf().getAllPackages().get(i).getPositionY());
+
+
+                        //floor.getPackageList();
+
+//                        for(Package p: floor.getPackageList()){
+//                            if(p.getPackageID() == id){
+//                               // view.getAllPackages().get(i).setX(p.getPositionX());
+//                                //view.getAllPackages().get(i).setY(p.getPositionY());
+//
+//
+//                            }
+//                        }
+
+                        //setRectanglePositions(floor.getPackageList(), id, i);
     		            e.consume();
-    				
     			}
         	}
         	
         	
         }
     }
+
+//    public void setRectanglePositions(List<Package> packageList, int pckID, int index){
+//        for(Package p: packageList){
+//            if(p.getPackageID() == pckID){
+//                view.getAllPackages().get(index).setX(p.getPositionX());
+//                view.getAllPackages().get(index).setY(p.getPositionY());
+//            }else {
+//                setRectanglePositions(p.getPackagesAbove(), pckID, index);
+//            }
+//        }
+//    }
     
     
 
@@ -347,8 +381,8 @@ public class ShelfViewController extends ViewController {
                 //shelfSupportRectangle.setLayoutX(finaldistanceX);
                 shelfManager.getShelfSupportProp().getValue().setPositionX((int) shelfSupportRectangle.getLayoutX());
                 shelfManager.getShelfSupportProp().getValue().setPositionY((int) shelfSupportRectangle.getLayoutY());
-                System.out.println("RegalstützeX:" + shelfManager.getShelfSupportProp().getValue().getPositionX());
-                System.out.println("RegalstützeY:" + shelfManager.getShelfSupportProp().getValue().getPositionY());
+                System.out.println("Regalstï¿½tzeX:" + shelfManager.getShelfSupportProp().getValue().getPositionX());
+                System.out.println("Regalstï¿½tzeY:" + shelfManager.getShelfSupportProp().getValue().getPositionY());
 
                 //Arraylist von Shelfsupport-Rectangles = neues Rectangle hinzufuegen
                 ((ShelfView) root).getShelfSupports().add(shelfSupportRectangle);

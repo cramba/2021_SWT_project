@@ -27,6 +27,15 @@ public class Shelf {
         return null;
     }
 
+    public ShelfFloor getShelfFloorByID(int id){
+        for(ShelfFloor floor: shelfFloors){
+            if(floor.getShelfFloorID() == id){
+                return floor;
+            }
+        }
+        return null;
+    }
+
     public void setShelfSupports(List<ShelfSupport> shelfSupports) {
         this.shelfSupports = shelfSupports;
     }
