@@ -26,62 +26,113 @@ public class ShelfFloor implements Comparable<ShelfFloor> {
     }
 
     public void addPackage(Package newPackage) {
-        if (packageList.size() == 0 || !lowerPackageAvailable(newPackage)) {
-            newPackage.setPositionY(positionY);
+        Package p;
+        //wenn Paketliste (1. ebene) leer ist
+        if (packageList.size() == 0) {
+            newPackage.setPositionY(positionY - newPackage.getHeight());
             packageList.add(newPackage);
+            newPackage.setShelfFloorID(shelfFloorID);
             return;
-        } else {
+        }
+        //wenn das bewegende Paket sich bereits im Regalboden befindet, wird das bereits vorhandene genommen
+        else if ((p = availableInPackageList(packageList, newPackage)) != null) {
+            //p.setPositionY(positionY - p.getHeight());
+            p.setPositionX(newPackage.getPositionX());
+            p.setPositionY(newPackage.getPositionY());
+            newPackage = p;
+        }
+        if(!lowerPackageAvailable(newPackage)){
+            newPackage.setPositionY(positionY - newPackage.getHeight());
+            if(availableInPackageList(packageList, newPackage) == null){
+                packageList.add(newPackage);
+            }
+            return;
+        }else if (lowerPackageAvailable(newPackage)) {
             for (int i = 0; i < packageList.size(); i++) {
                 Package lowPck = packageList.get(i);
                 if (newPackage.getPositionX() + newPackage.getWidth() > lowPck.getPositionX() && newPackage.getPositionX() < lowPck.getPositionX() + lowPck.getWidth()) {
-
                     putPackageOnPackage(lowPck, newPackage);
-
                     return;
                 }
             }
         }
-        newPackage.setPositionY(positionY - newPackage.getHeight());
-        packageList.add(newPackage);
+//        newPackage.setPositionY(positionY - newPackage.getHeight());
+//        packageList.add(newPackage);
     }
 
-    public boolean availableInPackageList(Package pck) {
-        for (Package p : packageList) {
-            if (p == pck) {
-                return true;
+    public Package availableInPackageList(List<Package> pckList, Package pck) {
+//        for (Package p: pckList) {
+//            if (p.getPackageID() == pck.getPackageID()) {
+//                return p;
+//            }
+//        }
+        Package pckFound = null;
+        if(pckList.size() != 0){
+            for (Package p : pckList) {
+                if (p.getPackageID() == pck.getPackageID()) {
+                    return p;
+                }
+            }
+
+            for(Package p: pckList){
+                if((pckFound = availableInPackageList(p.getPackagesAbove(), pck)) != null){
+                    return pckFound;
+                }
             }
         }
-        return false;
+        return null;
     }
 
     public boolean lowerPackageAvailable(Package newPackage) {
         for (int i = 0; i < packageList.size(); i++) {
             Package lowerPack = packageList.get(i);
-            if (newPackage.getPositionX() > lowerPack.getPositionX() + lowerPack.getWidth()
-                    && newPackage.getPositionX() + newPackage.getWidth() < lowerPack.getPositionX()) {
-                return false;
+            if(lowerPack.getPackageID() != newPackage.getPackageID()){
+                if (newPackage.getPositionX() < lowerPack.getPositionX() + lowerPack.getWidth()
+                        && newPackage.getPositionX() + newPackage.getWidth() > lowerPack.getPositionX()) {
+                    return true;
+                }
             }
         }
-        return true;
+        return false;
     }
-
 
     public void putPackageOnPackage(Package lowerPck, Package newPackage) {
         List<Package> pckList = lowerPck.getPackagesAbove();
-        if(lowerPck != newPackage){
-            if (pckList.size() == 0) {
-                newPackage.setPositionY(lowerPck.getPositionY() + newPackage.getHeight());
-                pckList.add(newPackage);
-            } else {
-                for (int i = 0; i < pckList.size(); i++) {
-                    if (newPackage.getPositionX() + newPackage.getWidth() > pckList.get(i).getPositionX() && newPackage.getPositionX() < pckList.get(i).getPositionX() + pckList.get(i).getWidth()) {
-                        System.out.println("i: " + i + " Size: " + pckList.size());
-                        putPackageOnPackage(pckList.get(i), newPackage);
+
+        if (pckList.size() == 0 /*|| !lowerPackageAvailable(newPackage)*/) {
+            newPackage.setPositionY(lowerPck.getPositionY() - newPackage.getHeight());
+            pckList.add(newPackage);
+            newPackage.setShelfFloorID(shelfFloorID);
+            System.out.println("Paket wird gestapelt");
+            return;
+        } /*else if (lowerPck == newPackage) {
+            lowerPck.setPositionY(lowerPck.getPositionY() - newPackage.getHeight());
+            newPackage.setShelfFloorID(shelfFloorID);
+            return;
+        }*/ else {
+            for (int i = 0; i < pckList.size(); i++) {
+                Package lowPck = pckList.get(i);
+                if(lowPck.getPackageID() != newPackage.getPackageID()){
+                    if (newPackage.getPositionX() + newPackage.getWidth() > lowPck.getPositionX() && newPackage.getPositionX() < lowPck.getPositionX() + lowPck.getWidth()) {
+                        putPackageOnPackage(lowPck, newPackage);
                         return;
                     }
                 }
             }
         }
+    }
+
+    public void removePackage(List<Package> pckList, int pckID) {
+        for (int i = 0; i < pckList.size(); i++) {
+            if (pckList.get(i).getPackageID() == pckID) {
+                pckList.remove(pckList.get(i));
+                System.out.println("Paket wurde aus dem alten Boden entfernt");
+                return;
+            } else {
+                removePackage(pckList.get(i).getPackagesAbove(), pckID);
+            }
+        }
+
     }
 
     public void setPositionX(int positionX) {

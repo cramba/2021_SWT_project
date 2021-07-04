@@ -58,7 +58,7 @@ public class TrayViewController extends ViewController{
     					
     					trayPackage = newValue ; 
         				view.setTrayPackage(newValue);
-        				System.out.println("NIX");
+
     					
     				}
     			

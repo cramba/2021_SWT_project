@@ -90,4 +90,11 @@ public class Shelf {
  		return (ArrayList<Package>) allPackages;
  	}
 
+    public int getLastPackageID(){
+        if(allPackages.size() == 0){
+            return 0;
+        }
+        return allPackages.get(allPackages.size()-1).getPackageID();
+    }
+
 }

@@ -28,15 +28,14 @@ public class EditShelfViewController extends ViewController{
     	
     	//Fertig Button - erstellt eine Regalstuetze
     	view.getDoneButton().setOnAction((e) -> {
-        	if(isInt(view.getLengthInput().getText()) && isInt(view.getDistanceInput().getText())) {
+        	if(isInt(view.getLengthInput().getText())) {
         		errorMessage.setText("");
         		//Textfelder fuer laenge und Distance werden ausgelesen
             	int length = Integer.parseInt(view.getLengthInput().getText());
-            	int distance = Integer.parseInt(view.getDistanceInput().getText());
             	
             	
             	//Informationen wernden an Logic geschickt und ShelfSupport wird erstellt
-            	shelfManager.addShelfSupport(length,distance);
+            	shelfManager.addShelfSupport(length);
         	}else {
         		errorMessage.setText("Bitte gebe eine gültige ganze Zahl ein");
         		//System.out.println("Bitte gebe eine gültige ganze Zahl ein");
@@ -76,7 +75,7 @@ public class EditShelfViewController extends ViewController{
 					//Alte	GUI-Elemente.. werden geloescht ausser der erste da das die Kombobox ist
 					view.getChildren().remove(1, view.getChildren().size()  );
 
-					view.getChildren().addAll(view.getHBox(),view.getHBox2(),view.getDoneButton(),view.getDeleteShelfSupportButton());
+					view.getChildren().addAll(view.getHBox(),view.getDoneButton(),view.getDeleteShelfSupportButton());
 					
 					//Wenn du Regalboden auswaehltst werden die GUI-Elemente .. fuer den Regalboden angezeigt
 

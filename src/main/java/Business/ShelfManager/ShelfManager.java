@@ -41,7 +41,8 @@ public class ShelfManager {
         packageTrayProp = new SimpleObjectProperty<Package>();
         packageProp = new SimpleObjectProperty<Package>();
         newTemplateProp = new SimpleBooleanProperty(false);
-        packageTemplate.add(new Package("Testpaket", 120, 80, 3.5f, Color.BLUE, 6.7f,9999));
+        packageTemplate.add(new Package("Testpaket", 80, 120, 3.5f, Color.BLUE, 6.7f,9999));
+        packageTemplate.add(new Package("Testpaket2", 60, 100, 3.5f, Color.RED, 6.7f,9998));
         //packageTemplate.add(new Package("Kleines Paket", 20, 10, 1.5f));
     }
 
@@ -74,14 +75,14 @@ public class ShelfManager {
 
     }
 
-    public void addShelfSupport(int length, int positionX) {
+    public void addShelfSupport(int length) {
 
 
         //int random = (int) ((Math.random()) * 1000 + 1);
 
 
         shelfSupportId = shelfSupportId + 1;
-        ShelfSupport shelfSupport = new ShelfSupport(shelfSupportId, length, positionX, 0); //position noch unklar
+        ShelfSupport shelfSupport = new ShelfSupport(shelfSupportId, length, 0, 0); //position noch unklar
 
 
         shelf.addShelfSupport(shelfSupport);
@@ -149,21 +150,27 @@ public class ShelfManager {
         }
     }
 
-    public void addPackageToShelfFloor(Package pck) {
+    public ShelfFloor addPackageToShelfFloor(Package pck) {
         int pckX = pck.getPositionX();
-        int pckY = pck.getPositionY() + pck.getHeight();
+        int pckY = pck.getPositionY();
         ArrayList<ShelfFloor> sortedShelfFloors = new ArrayList<>(shelf.getShelfFloors());
         Collections.sort(sortedShelfFloors);
         for (int i = 0; i < sortedShelfFloors.size(); i++) {
             if(pckY <= sortedShelfFloors.get(i).getPositionY()){
                 if(pckX >= sortedShelfFloors.get(i).getPositionX() &&
                         pckX <= sortedShelfFloors.get(i).getPositionX()+sortedShelfFloors.get(i).getWidth()-pck.getWidth()){
+                    int oldFloor = pck.getShelfFloorID();
                     shelf.getShelfFloorByID(sortedShelfFloors.get(i).getShelfFloorID()).addPackage(pck);
+                    if(pck.getShelfFloorID() != oldFloor && oldFloor != 0){
+                        shelf.getShelfFloorByID(oldFloor).removePackage(shelf.getShelfFloorByID(oldFloor).getPackageList(), pck.getPackageID());
+                    }
                     System.out.println("Paket sollte einrasten");
-                    return;
+                    return shelf.getShelfFloorByID(sortedShelfFloors.get(i).getShelfFloorID());
                 }
             }
         }
+        //return null, wenn kein passender Regalboen für das Paket gefunden wurde, wo das Paket abgesetzt werden kann
+        return null;
     }
 
     public void addPackageTemplate(Package pck) {
@@ -174,7 +181,7 @@ public class ShelfManager {
     }
 
     public void setTrayPackage(Package pck) {
-
+        pck.setPackageID(shelf.getLastPackageID () + 1);
     	trayPackage = pck;
     	packageTrayProp.setValue(trayPackage);
 

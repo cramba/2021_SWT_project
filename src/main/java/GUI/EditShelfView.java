@@ -15,9 +15,7 @@ public class EditShelfView extends VBox {
 	
 	Label lengthLabel;
 	TextField lengthInput;
-	Label distanceLabel;
 
-	TextField distanceInput;
 	HBox hBox;
 	HBox hBox2;
 	Button closeButton;
@@ -46,17 +44,13 @@ public class EditShelfView extends VBox {
     	lengthLabel = new Label("Laenge (cm):");
     	lengthInput = new TextField();
     	hBox = new HBox();
-    	distanceLabel = new Label("Abstand (cm):");
-    	distanceInput = new TextField();
     	hBox2 = new HBox();
     	closeButton = new Button("x");
     	doneButton = new Button("Fertig"); 
     	
     	hBox.getChildren().addAll(lengthLabel, lengthInput);
-    	hBox2.getChildren().addAll(distanceLabel,distanceInput);
     	
     	hBox.setSpacing(50);
-    	hBox2.setSpacing(43);
     	//zusatz fuer Regalstuetzen loeschen :
     	//zusatz fuer Regalstuetzen loeschen :
     	
@@ -78,7 +72,7 @@ public class EditShelfView extends VBox {
     	errorMessage = new Label("");
     	errorMessage.setTextFill(Color.RED);
     	
-    	this.getChildren().addAll(shelfItemSelection,hBox,hBox2, errorMessage, doneButton, deleteShelfSupportButton);
+    	this.getChildren().addAll(shelfItemSelection,hBox, errorMessage, doneButton, deleteShelfSupportButton);
 
     	//Regalb�den bearbeitung
     	
@@ -142,19 +136,11 @@ public class EditShelfView extends VBox {
 	public TextField getLengthInput() {
 		return lengthInput;
 	}
-	
-	public TextField getDistanceInput() {
-		return distanceInput;
-	}
+
 
 	public HBox getHBox() {
 		// TODO Auto-generated method stub
 		return hBox;
-	}
-	
-	public HBox getHBox2() {
-		// TODO Auto-generated method stub
-		return hBox2;
 	}
 	
 	

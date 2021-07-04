@@ -19,6 +19,7 @@ public class Package {
     private float loadCapacity;
     private List<Color> incompatibility;
     private List<Package> packagesAbove;
+    private int shelfFloorID;
 
     public void setColour(Color colour) {
         this.colour = colour;
@@ -103,4 +104,16 @@ public class Package {
     public int getPackageID() {
  		return packageID;
  	}
+
+     public void setPackageID(int newID){
+         packageID = newID;
+     }
+
+     public int getShelfFloorID(){
+         return shelfFloorID;
+     }
+
+     public void setShelfFloorID(int floorID){
+         shelfFloorID = floorID;
+     }
 }
