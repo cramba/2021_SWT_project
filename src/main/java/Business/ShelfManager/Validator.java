@@ -11,20 +11,20 @@ public   class Validator {
 
     private String errorMessage;
 
-    public boolean checkCompatibility(ArrayList<Package> packageList) {
+    public static boolean checkCompatibility(ArrayList<Package> packageList) throws CheckCompatibilityException {
 		// fuer jedes aktuelle Paket wird verglichen, ob in der FarbListe der neuen
 		// PaketListe die Farbe enthalten ist
 		for (Package pck : packageList) {
 			for (Color color1 : pck.getIncompatibility()) {
 				for (Package pckS : packageList) {
 					if (pckS.getColour() == color1) {
-						// UNVERTRÄGLICHKEIT
-                        return false;
+						 throw new CheckCompatibilityException();
+
 					}
 					while (pckS.getPackagesAbove().size() != 0) {
 						if (pckS.getColour() == color1) {
-							// UNVERTRÄGLICHKEIT
-                            return false;
+							 throw new CheckCompatibilityException();
+
 						}
 						pckS.getPackagesAbove().get(0);
 					}
@@ -35,13 +35,13 @@ public   class Validator {
 					for (Color color : pck.getIncompatibility()) {
 						for (Package pckS : packageList) {
 							if (pckS.getColour() == color) {
-								// UNVERTRÄGLICHKEIT
-                                return false;
+								 throw new CheckCompatibilityException();
+
 							}
 							while (pckS.getPackagesAbove().size() != 0) {
 								if (pckS.getColour() == color) {
-									// UNVERTRÄGLICHKEIT
-                                    return false;
+									 throw new CheckCompatibilityException();
+
 								}
 								pckS.getPackagesAbove().get(0);
 							}
@@ -83,7 +83,7 @@ public   class Validator {
             		p = p.getPackagesAbove().get(0);
             	}
             }while(p.getPackagesAbove().size() != 0);
-            
+
             if(loadWeight > loadCapacity) {
             	throw new LoadCapacityException();
             }
@@ -101,7 +101,6 @@ public   class Validator {
     		return pack.getWeight();
     	}else {
     		for(int i=0; i< pack.getPackagesAbove().size(); i++) {
-
 
     			weight+= calculateLoadWeight(pack.getPackagesAbove().get(i));
 
@@ -133,9 +132,20 @@ public   class Validator {
         return 0.0f;
     }
 
-    // public float checkPackageCapacity(Package pck){
-    //     float load = 0;
-    //     if(pck.getPackagesAbove()fef)
-    // }
+     public static void checkPackageCapacity(Package pck) throws PackageCapacityException{
+         Package ori = pck;
+         float load = 0;
+         if(pck.getPackagesAbove().size() != 0){
+             while(pck.getPackagesAbove().size() != 0){
+                 pck = pck.getPackagesAbove().get(0);
+                 load += pck.getWeight();
+                 if(load > ori.getLoadCapacity()){
+                    throw new PackageCapacityException();
+                 }
+             }
+
+         }
+
+     }
 
 }

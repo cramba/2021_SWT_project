@@ -1,6 +1,8 @@
 package Business.Shelf;
 
 import Business.Package.Package;
+import Business.ShelfManager.LoadCapacityException;
+import Business.ShelfManager.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ public class ShelfFloor implements Comparable<ShelfFloor> {
         this.positionY = posY;
         this.packageList = new ArrayList<>();
 
+
     }
 
     public void addPackage(Package newPackage) {
@@ -32,13 +35,15 @@ public class ShelfFloor implements Comparable<ShelfFloor> {
             newPackage.setPositionY(positionY - newPackage.getHeight());
             packageList.add(newPackage);
             newPackage.setShelfFloorID(shelfFloorID);
+
+
             return;
         }
         //wenn das bewegende Paket sich bereits im Regalboden befindet, wird das bereits vorhandene genommen
-        else{
+        else {
             p = availableInPackageList(packageList, newPackage);
         }
-            //deletePackageFromStaple(p.getPackageID());
+        //deletePackageFromStaple(p.getPackageID());
 //            int oldPosX = p.getPositionX();
 //            int oldPosY = p.getPositionY();
 //            p.setPositionX(newPackage.getPositionX());
@@ -63,13 +68,13 @@ public class ShelfFloor implements Comparable<ShelfFloor> {
                 currentP.setPositionY(positionY - currentP.getHeight());
                 translationX = currentP.getPositionX() - oldX;
                 translationY = currentP.getPositionY() - oldY;
-                System.out.println("oX: "+translationX +", oY: "+translationY);
-                if(currentP.getPackagesAbove().size() != 0){
-                    for(Package pck: currentP.getPackagesAbove()){
+                System.out.println("transX: " + translationX + ", transY: " + translationY);
+                if (currentP.getPackagesAbove().size() != 0) {
+                    for (Package pck : currentP.getPackagesAbove()) {
                         pck.setPositionX(pck.getPositionX() + translationX);
                         pck.setPositionY(pck.getPositionY() + translationY);
 
-                        while (pck.getPackagesAbove().size() != 0){
+                        while (pck.getPackagesAbove().size() != 0) {
                             Package currentPck = pck.getPackagesAbove().get(0);
                             currentPck.setPositionX(currentPck.getPositionX() + translationX);
                             currentPck.setPositionY(currentPck.getPositionY() + translationY);
@@ -85,7 +90,6 @@ public class ShelfFloor implements Comparable<ShelfFloor> {
                     Package lowPck = packageList.get(i);
                     if (currentP.getPositionX() + currentP.getWidth() > lowPck.getPositionX() && currentP.getPositionX() < lowPck.getPositionX() + lowPck.getWidth()) {
                         putPackageOnPackage(lowPck, currentP);
-                        return;
                     }
                 }
             }
@@ -129,7 +133,7 @@ public class ShelfFloor implements Comparable<ShelfFloor> {
 //                    return;
 //                }
 //            }
-        }
+    }
 //        newPackage.setPositionY(positionY - newPackage.getHeight());
 //        packageList.add(newPackage);
 //    }
@@ -227,12 +231,12 @@ public class ShelfFloor implements Comparable<ShelfFloor> {
         int translationX = newPackage.getPositionX() - oldPosX;
         int translationY = newPackage.getPositionY() - oldPosY;
 
-        if(newPackage.getPackagesAbove().size() != 0){
-            for(Package p: newPackage.getPackagesAbove()){
+        if (newPackage.getPackagesAbove().size() != 0) {
+            for (Package p : newPackage.getPackagesAbove()) {
                 p.setPositionX(p.getPositionX() + translationX);
                 p.setPositionY(p.getPositionY() + translationY);
 
-                while (p.getPackagesAbove().size() != 0){
+                while (p.getPackagesAbove().size() != 0) {
                     Package currentPck = p.getPackagesAbove().get(0);
                     currentPck.setPositionX(p.getPositionX() + translationX);
                     currentPck.setPositionY(p.getPositionY() + translationY);
@@ -241,7 +245,13 @@ public class ShelfFloor implements Comparable<ShelfFloor> {
             }
         }
 
-        lowerPck.getPackagesAbove().add(newPackage);
+
+        try {
+            lowerPck.getPackagesAbove().add(newPackage);
+            Validator.checkLoadCapacityOld((ArrayList<Package>) lowerPck.getPackagesAbove(), this.getLoadCapacity());
+        } catch (LoadCapacityException e) {
+            e.printStackTrace();
+        }
     }
 
     public void removePackage(List<Package> pckList, int pckID) {
@@ -278,7 +288,7 @@ public class ShelfFloor implements Comparable<ShelfFloor> {
                         Package newReferenz = curPck.getPackagesAbove().get(0).getPackagesAbove().get(0);
                         curPck.getPackagesAbove().remove(0);
                         curPck.getPackagesAbove().add(newReferenz);
-                        System.out.println("Paket drüber gesetzt!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
                         return;
                     }
                     return;
@@ -339,5 +349,7 @@ public class ShelfFloor implements Comparable<ShelfFloor> {
             return 1;
         }
     }
+
+
 }
 

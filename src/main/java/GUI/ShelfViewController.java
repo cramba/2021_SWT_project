@@ -94,8 +94,7 @@ public class ShelfViewController extends ViewController {
                     shelfManager.getShelf().getShelfSupports().get(i).setPositionX((int) Math.round(e.getX() + view.getShelfSupports().get(i).getTranslateX()));
                     shelfManager.getShelf().getShelfSupports().get(i).setPositionY((int) Math.round(e.getY() + view.getShelfSupports().get(i).getTranslateY()));
 
-                    System.out.println("Regalst�tzeX:" + (int) Math.round(e.getX() + view.getShelfSupports().get(i).getTranslateX()));
-                    System.out.println("Regalst�tzeY:" + (int) Math.round(e.getY() + view.getShelfSupports().get(i).getTranslateY()));
+
 
                     if (view.getShelfSupports().get(i).getTranslateX() < view.getTranslateX()) {
                         view.getShelfSupports().get(i).setX(Math.round(view.getTranslateX()));
@@ -189,8 +188,7 @@ public class ShelfViewController extends ViewController {
                     // Positionen des Regalbodens
                     shelfManager.getShelf().getShelfFloors().get(i).setPositionX((int) Math.round(e.getX() + view.getShelfFloors().get(i).getTranslateX()));
                     shelfManager.getShelf().getShelfFloors().get(i).setPositionY((int) Math.round(e.getY() + view.getShelfFloors().get(i).getTranslateY()));
-                    //System.out.println("BodenX:" + (int) Math.round(e.getX() + view.getShelfFloors().get(i).getTranslateX()));
-                    //System.out.println("BodenY:" + (int) Math.round(e.getY() + view.getShelfFloors().get(i).getTranslateY()));
+
 
                     if (view.getShelfFloors().get(i).getTranslateX() < view.getTranslateX()) {
                         view.getShelfFloors().get(i).setX(Math.round(view.getTranslateX()));
@@ -275,20 +273,19 @@ public class ShelfViewController extends ViewController {
                         view.getAllPackages().get(i).setY(Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY()));
 
                         // setzen der Positionen der Pakete in der Logik
-                        shelfManager.getShelf().getAllPackages().get(i).setPositionX((int) Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX()));
-                        shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY()));
+                        shelfManager.getShelf().getAllPackages().get(i).setPositionX( (int) Math.round(view.getAllPackages().get(i).getX()));
+                        shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round(view.getAllPackages().get(i).getY()));
 
-                        // System.out.println("Package X:" + view.getAllPackages().get(i).getX());
-                        //System.out.println("Package Y:" +  view.getAllPackages().get(i).getY());
+
 
                         view.getAllPackages().get(i).getX();
 
                         if (view.getAllPackages().get(i).getTranslateX() < view.getTranslateX()) {
                             view.getAllPackages().get(i).setX(Math.round(view.getTranslateX()));
-                            shelfManager.getShelf().getAllPackages().get(i).setPositionX((int) Math.round(view.getTranslateX()));
+                            shelfManager.getShelf().getAllPackages().get(i).setPositionX( (int) Math.round(view.getAllPackages().get(i).getX()));
                         }
                         if ((view.getAllPackages().get(i).getTranslateX() + view.getAllPackages().get(i).getWidth()) > (view.getTranslateX() + view.getWidth())) { //---
-                            view.getAllPackages().get(i).setX((int) Math.round(view.getWidth() - view.getAllPackages().get(i).getWidth())); //----
+                            view.getAllPackages().get(i).setX( (int) Math.round(view.getAllPackages().get(i).getX())); //----
 
                             shelfManager.getShelf().getAllPackages().get(i).setPositionX((int) Math.round(view.getWidth() - view.getAllPackages().get(i).getWidth()));
 
@@ -296,13 +293,13 @@ public class ShelfViewController extends ViewController {
                         if (view.getAllPackages().get(i).getTranslateY() + view.getAllPackages().get(i).getHeight() > view.getTranslateY() + view.getHeight()) { //--
                             view.getAllPackages().get(i).setY(Math.round((view.getHeight()) - view.getAllPackages().get(i).getHeight())); //-
 
-                            shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round((view.getHeight()) - view.getAllPackages().get(i).getHeight()));
+                            shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round(view.getAllPackages().get(i).getY()));
 
                         }
                         if (view.getAllPackages().get(i).getTranslateY() < view.getTranslateY()) {
                             view.getAllPackages().get(i).setY(Math.round(view.getParent().getTranslateY()));
 
-                            shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round(view.getParent().getTranslateY()));
+                            shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round(view.getAllPackages().get(i).getY()));
                         }
 
 
@@ -388,8 +385,7 @@ public class ShelfViewController extends ViewController {
                 //shelfSupportRectangle.setLayoutX(finaldistanceX);
                 shelfManager.getShelfSupportProp().getValue().setPositionX((int) shelfSupportRectangle.getLayoutX());
                 shelfManager.getShelfSupportProp().getValue().setPositionY((int) shelfSupportRectangle.getLayoutY());
-                System.out.println("RegalstuetzeX:" + shelfManager.getShelfSupportProp().getValue().getPositionX());
-                System.out.println("RegalstuetzeY:" + shelfManager.getShelfSupportProp().getValue().getPositionY());
+
 
                 //Arraylist von Shelfsupport-Rectangles = neues Rectangle hinzufuegen
                 ((ShelfView) root).getShelfSupports().add(shelfSupportRectangle);
@@ -483,7 +479,7 @@ public class ShelfViewController extends ViewController {
 
                         packet.setY(newValue.doubleValue());
                         pack.setPositionY(newValue.intValue());
-                        System.out.println("Y:"+newValue.intValue());
+
 
 
                     }
@@ -496,7 +492,6 @@ public class ShelfViewController extends ViewController {
 
                         packet.setX(newValue.doubleValue());
                         pack.setPositionX(newValue.intValue());
-                        System.out.println("X:"+newValue.intValue());
 
 
                     }

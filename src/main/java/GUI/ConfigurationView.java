@@ -16,8 +16,8 @@ public class ConfigurationView extends BorderPane {
     Label errorMessageLabel;
     Label packetInformationLabel;
     Button deleteButton; 
-    Button loadConfigurationButton;
-    Button safeConfigurationButton;
+ //   Button loadConfigurationButton;
+   // Button safeConfigurationButton;
     HBox hBox1, hBox2, hBox3;
     VBox vBox1, vBox2;
 //    TextField fehleroutput, paketoutput;
@@ -26,6 +26,10 @@ public class ConfigurationView extends BorderPane {
 
     public Button getShelfEditButton() {
         return shelfEditButton;
+    }
+
+    public Label getFehleroutput() {
+        return fehleroutput;
     }
 
     public Button getAddPackageButton() {
@@ -44,13 +48,13 @@ public class ConfigurationView extends BorderPane {
         return deleteButton;
     }
 
-    public Button getLoadConfigurationButton() {
-        return loadConfigurationButton;
-    }
-
-    public Button getSafeConfigurationButton() {
-        return safeConfigurationButton;
-    }
+//    public Button getLoadConfigurationButton() {
+//        return loadConfigurationButton;
+//    }
+//
+//    public Button getSafeConfigurationButton() {
+//        return safeConfigurationButton;
+//    }
 
     public Label getPaketOutput(){
         return paketoutput;
@@ -66,11 +70,11 @@ public class ConfigurationView extends BorderPane {
         packetInformationLabel = new Label("Paket:");
         deleteButton = new Button ("loeschen");
         hBox3 = new HBox();
-        fehleroutput = new Label("Text...");
+        fehleroutput = new Label();
         paketoutput = new Label(" klicke ein Paket an");
         
-        loadConfigurationButton = new Button("Konfiguration laden");
-        safeConfigurationButton = new Button("Konfiguration speichern");
+       // loadConfigurationButton = new Button("Konfiguration laden");
+       // safeConfigurationButton = new Button("Konfiguration speichern");
         
         vBox1 = new VBox();
         vBox2 = new VBox();
@@ -83,10 +87,10 @@ public class ConfigurationView extends BorderPane {
         
         vBox1.getChildren().addAll(hBox1,hBox2,hBox3);
         
-        vBox2.getChildren().addAll(loadConfigurationButton,safeConfigurationButton);
+       // vBox2.getChildren().addAll(loadConfigurationButton,safeConfigurationButton);
         
-        loadConfigurationButton.setId("grau");
-        safeConfigurationButton.setId("grau");
+//        loadConfigurationButton.setId("grau");
+//        safeConfigurationButton.setId("grau");
         packetInformationLabel.setId("grau");
         errorMessageLabel.setId("grau");
         deleteButton.setId("rot");

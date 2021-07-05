@@ -29,6 +29,7 @@ public class ShelfManager {
     private int shelfFloorId = 0;
     private int lastPosX = 0;
     private int lastPosY = 0;
+    private SimpleStringProperty errorMessage;
 
     SimpleStringProperty packageInformationProp;
 
@@ -52,6 +53,7 @@ public class ShelfManager {
         packageTemplate.add(new Package("Testpaket2", 60, 100, 3.5f, Color.RED, 6.7f, 9998));
         packageTemplate.add(new Package("Testpaket3", 90, 90, 3.5f, Color.RED, 6.7f, 9997));
         //packageTemplate.add(new Package("Kleines Paket", 20, 10, 1.5f));
+        errorMessage = new SimpleStringProperty();
     }
 
     public void movePackage(Package pck, int positionX, int positionY) {
@@ -106,6 +108,14 @@ public class ShelfManager {
 
     }
 
+    public String getPackageInformationProp() {
+        return packageInformationProp.get();
+    }
+
+    public SimpleStringProperty packageInformationPropProperty() {
+        return packageInformationProp;
+    }
+
     public void addShelfFloor(float loadCapacity) {
 
         shelfFloorId = shelfFloorId + 1;
@@ -152,7 +162,7 @@ public class ShelfManager {
                         shelfFloor.setPositionY(viewHeight - support_right.getLength());
                     }
                 }
-                System.out.println("sollte einrasten");
+              
                 return;
             }
         }
@@ -174,6 +184,27 @@ public class ShelfManager {
                         lastPosX = pck.getPositionX();
                         lastPosY = pck.getPositionY();
                         shelf.getShelfFloorByID(sortedShelfFloors.get(i).getShelfFloorID()).addPackage(pck);
+                        try {
+                            Validator.checkLoadCapacityOld((ArrayList<Package>) shelf.getShelfFloorByID(sortedShelfFloors.get(i).getShelfFloorID()).getPackageList(), shelf.getShelfFloorByID(sortedShelfFloors.get(i).getShelfFloorID()).getLoadCapacity());
+                            Validator.checkCompatibility((ArrayList<Package>) shelf.getShelfFloorByID(sortedShelfFloors.get(i).getShelfFloorID()).getPackageList());
+                            for(Package p: shelf.getShelfFloorByID(sortedShelfFloors.get(i).getShelfFloorID()).getPackageList()){
+                                Validator.checkPackageCapacity(p);
+                            }
+
+                        } catch (LoadCapacityException e) {
+                            //Nachricht setzen
+                            errorMessage.setValue(e.getError());
+
+
+                        } catch(CheckCompatibilityException e){
+                            errorMessage.setValue(e.getError());
+
+
+                        } catch (PackageCapacityException e) {
+                            errorMessage.setValue(e.getError());
+                        }
+
+
                         if (pck.getShelfFloorID() != oldFloor && oldFloor != 0) {
                             shelf.getShelfFloorByID(oldFloor).removePackage(shelf.getShelfFloorByID(oldFloor).getPackageList(), pck.getPackageID());
                         }
@@ -251,6 +282,10 @@ public class ShelfManager {
 
     public SimpleStringProperty packageInformationProp() {
     	return packageInformationProp;
+    }
+
+    public SimpleStringProperty errorMesageProp(){
+        return errorMessage;
     }
 
 }
