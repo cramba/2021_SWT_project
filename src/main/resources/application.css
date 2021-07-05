@@ -55,3 +55,15 @@
  #gelb{
  	-fx-background-color: #e6e64d;
  }
+#solid1{
+ 	-fx-border-style: solid;
+ 	-fx-border-width: 1;
+ 	-fx-pref-width: 1077px;
+ 	-fx-pref-height: 27px;
+ }
+  #solid2{
+ 	-fx-border-style: solid;
+ 	-fx-border-width: 1;
+ 	-fx-pref-width: 1065px;
+ 	-fx-pref-height: 27px;
+ }

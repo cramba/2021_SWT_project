@@ -7,6 +7,7 @@ import Business.Shelf.ShelfFloor;
 import Business.Shelf.ShelfSupport;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.paint.Color;
 
@@ -26,6 +27,11 @@ public class ShelfManager {
     private SimpleBooleanProperty newTemplateProp;
     private int shelfSupportId = 0;
     private int shelfFloorId = 0;
+    private int lastPosX = 0;
+    private int lastPosY = 0;
+
+    SimpleStringProperty packageInformationProp;
+
 
     public void setShelf(Shelf shelf) {
         this.shelf = shelf;
@@ -40,9 +46,11 @@ public class ShelfManager {
         shelfFloorProp = new SimpleObjectProperty<ShelfFloor>();
         packageTrayProp = new SimpleObjectProperty<Package>();
         packageProp = new SimpleObjectProperty<Package>();
+        packageInformationProp = new SimpleStringProperty();
         newTemplateProp = new SimpleBooleanProperty(false);
-        packageTemplate.add(new Package("Testpaket", 80, 120, 3.5f, Color.BLUE, 6.7f,9999));
-        packageTemplate.add(new Package("Testpaket2", 60, 100, 3.5f, Color.RED, 6.7f,9998));
+        packageTemplate.add(new Package("Testpaket", 80, 120, 3.5f, Color.BLUE, 6.7f, 9999));
+        packageTemplate.add(new Package("Testpaket2", 60, 100, 3.5f, Color.RED, 6.7f, 9998));
+        packageTemplate.add(new Package("Testpaket3", 90, 90, 3.5f, Color.RED, 6.7f, 9997));
         //packageTemplate.add(new Package("Kleines Paket", 20, 10, 1.5f));
     }
 
@@ -71,7 +79,7 @@ public class ShelfManager {
 
     public void deletePackage(int index) {
 
-    	shelf.removePackage(index);
+        shelf.removePackage(index);
 
     }
 
@@ -114,8 +122,8 @@ public class ShelfManager {
     }
 
     public void addPackageToList(Package pack) {
-    	shelf.addPackage(pack);
-    	packageProp.setValue(pack);
+        shelf.addPackage(pack);
+        packageProp.setValue(pack);
 
     }
 
@@ -151,27 +159,34 @@ public class ShelfManager {
     }
 
     public ShelfFloor addPackageToShelfFloor(Package pck) {
-        int pckX = pck.getPositionX();
-        int pckY = pck.getPositionY();
-        ArrayList<ShelfFloor> sortedShelfFloors = new ArrayList<>(shelf.getShelfFloors());
-        Collections.sort(sortedShelfFloors);
-        for (int i = 0; i < sortedShelfFloors.size(); i++) {
-            if(pckY <= sortedShelfFloors.get(i).getPositionY()){
-                if(pckX >= sortedShelfFloors.get(i).getPositionX() &&
-                        pckX <= sortedShelfFloors.get(i).getPositionX()+sortedShelfFloors.get(i).getWidth()-pck.getWidth()){
-                    int oldFloor = pck.getShelfFloorID();
-                    shelf.getShelfFloorByID(sortedShelfFloors.get(i).getShelfFloorID()).addPackage(pck);
-                    if(pck.getShelfFloorID() != oldFloor && oldFloor != 0){
-                        shelf.getShelfFloorByID(oldFloor).removePackage(shelf.getShelfFloorByID(oldFloor).getPackageList(), pck.getPackageID());
+
+        if (pck.getPositionX() != lastPosX && pck.getPositionY() != lastPosY) {
+
+            int pckX = pck.getPositionX();
+            int pckY = pck.getPositionY();
+            ArrayList<ShelfFloor> sortedShelfFloors = new ArrayList<>(shelf.getShelfFloors());
+            Collections.sort(sortedShelfFloors);
+            for (int i = 0; i < sortedShelfFloors.size(); i++) {
+                if (pckY <= sortedShelfFloors.get(i).getPositionY()) {
+                    if (pckX >= sortedShelfFloors.get(i).getPositionX() &&
+                            pckX <= sortedShelfFloors.get(i).getPositionX() + sortedShelfFloors.get(i).getWidth() - pck.getWidth()) {
+                        int oldFloor = pck.getShelfFloorID();
+                        lastPosX = pck.getPositionX();
+                        lastPosY = pck.getPositionY();
+                        shelf.getShelfFloorByID(sortedShelfFloors.get(i).getShelfFloorID()).addPackage(pck);
+                        if (pck.getShelfFloorID() != oldFloor && oldFloor != 0) {
+                            shelf.getShelfFloorByID(oldFloor).removePackage(shelf.getShelfFloorByID(oldFloor).getPackageList(), pck.getPackageID());
+                        }
+                        return shelf.getShelfFloorByID(sortedShelfFloors.get(i).getShelfFloorID());
                     }
-                    System.out.println("Paket sollte einrasten");
-                    return shelf.getShelfFloorByID(sortedShelfFloors.get(i).getShelfFloorID());
                 }
             }
+            //return null, wenn kein passender Regalboen fÃ¼r das Paket gefunden wurde, wo das Paket abgesetzt werden kann
+
         }
-        //return null, wenn kein passender Regalboen für das Paket gefunden wurde, wo das Paket abgesetzt werden kann
         return null;
     }
+
 
     public void addPackageTemplate(Package pck) {
         packageTemplate.add(pck);
@@ -181,20 +196,20 @@ public class ShelfManager {
     }
 
     public void setTrayPackage(Package pck) {
-        pck.setPackageID(shelf.getLastPackageID () + 1);
-    	trayPackage = pck;
-    	packageTrayProp.setValue(trayPackage);
+        pck.setPackageID(shelf.getLastPackageID() + 1);
+        trayPackage = pck;
+        packageTrayProp.setValue(trayPackage);
 
     }
 
     public void removeTrayPackage() {
 
-    	trayPackage = null ;
-    	packageTrayProp.setValue(trayPackage);
+        trayPackage = null;
+        packageTrayProp.setValue(trayPackage);
     }
 
     public void removePackageTemplate(Package pck) {
-    	packageTemplate.remove(pck);
+        packageTemplate.remove(pck);
     }
 
     public ArrayList<Package> getTemplateList() {
@@ -223,6 +238,19 @@ public class ShelfManager {
 
     public Shelf getShelf() {
         return shelf;
+    }
+
+    public String getInformationByID(int id) {
+    	for(Package curPck : shelf.getAllPackages()) {
+    		if(curPck.getPackageID() == id) {
+    			return " " + curPck.getName() + " " + curPck.getSpecification() + " Traglast: " + String.valueOf(curPck.getLoadCapacity());
+    		}
+    	}
+    	return null;
+    }
+
+    public SimpleStringProperty packageInformationProp() {
+    	return packageInformationProp;
     }
 
 }

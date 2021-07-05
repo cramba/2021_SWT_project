@@ -189,8 +189,8 @@ public class ShelfViewController extends ViewController {
                     // Positionen des Regalbodens
                     shelfManager.getShelf().getShelfFloors().get(i).setPositionX((int) Math.round(e.getX() + view.getShelfFloors().get(i).getTranslateX()));
                     shelfManager.getShelf().getShelfFloors().get(i).setPositionY((int) Math.round(e.getY() + view.getShelfFloors().get(i).getTranslateY()));
-                    System.out.println("x:" + (int) Math.round(e.getX() + view.getShelfFloors().get(i).getTranslateX()));
-                    System.out.println("y:" + (int) Math.round(e.getY() + view.getShelfFloors().get(i).getTranslateY()));
+                    //System.out.println("BodenX:" + (int) Math.round(e.getX() + view.getShelfFloors().get(i).getTranslateX()));
+                    //System.out.println("BodenY:" + (int) Math.round(e.getY() + view.getShelfFloors().get(i).getTranslateY()));
 
                     if (view.getShelfFloors().get(i).getTranslateX() < view.getTranslateX()) {
                         view.getShelfFloors().get(i).setX(Math.round(view.getTranslateX()));
@@ -236,6 +236,7 @@ public class ShelfViewController extends ViewController {
         public void handle(MouseEvent t) {
             //Loeschen button erscheint... Die zeile ist so gross da ich den Loeschen button dafuer hier rein bekommen musste um damit zu arbeiten
 
+            shelfManager.packageInformationProp().setValue(shelfManager.getInformationByID(id));
 
             configurationViewController.getView().getDeleteButton().setOnAction((e) -> {
 
@@ -252,58 +253,57 @@ public class ShelfViewController extends ViewController {
     }
 
     private class PackageHandlerForDrag implements EventHandler<MouseEvent> {
-        int i;
+        int id;
 
-        public PackageHandlerForDrag(int i) {
-            this.i = i;
+        public PackageHandlerForDrag(int id) {
+            this.id = id;
         }
 
         @Override
         public void handle(MouseEvent e) {
 
-            //for (int i = 0; i < shelfManager.getShelf().getAllPackages().size(); i++) {
-                //if (shelfManager.getShelf().getAllPackages().get(i).getPackageID() == id) {
+            for (int i = 0; i < shelfManager.getShelf().getAllPackages().size(); i++) {
+                if (shelfManager.getShelf().getAllPackages().get(i).getPackageID() == id) {
 
 
+                    if ((int) Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX()) != posX && (int) Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY()) != posY) {
 
-                    if((int) Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX()) != posX &&(int) Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY()) != posY){
 
+                        posX = (int) Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX());
+                        posY = (int) Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY());
+                        view.getAllPackages().get(i).setX(Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX()));
+                        view.getAllPackages().get(i).setY(Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY()));
 
-                    posX = (int) Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX());
-                    posY = (int) Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY());
-                    view.getAllPackages().get(i).setX(Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX()));
-                    view.getAllPackages().get(i).setY(Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY()));
+                        // setzen der Positionen der Pakete in der Logik
+                        shelfManager.getShelf().getAllPackages().get(i).setPositionX((int) Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX()));
+                        shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY()));
 
-                    // setzen der Positionen der Pakete in der Logik
-                    shelfManager.getShelf().getAllPackages().get(i).setPositionX((int) Math.round(e.getX() + view.getAllPackages().get(i).getTranslateX()));
-                    shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round(e.getY() + view.getAllPackages().get(i).getTranslateY()));
+                        // System.out.println("Package X:" + view.getAllPackages().get(i).getX());
+                        //System.out.println("Package Y:" +  view.getAllPackages().get(i).getY());
 
-                    System.out.println("Package X:" + view.getAllPackages().get(i).getX());
-                    System.out.println("Package Y:" +  view.getAllPackages().get(i).getY());
+                        view.getAllPackages().get(i).getX();
 
-                    view.getAllPackages().get(i).getX();
+                        if (view.getAllPackages().get(i).getTranslateX() < view.getTranslateX()) {
+                            view.getAllPackages().get(i).setX(Math.round(view.getTranslateX()));
+                            shelfManager.getShelf().getAllPackages().get(i).setPositionX((int) Math.round(view.getTranslateX()));
+                        }
+                        if ((view.getAllPackages().get(i).getTranslateX() + view.getAllPackages().get(i).getWidth()) > (view.getTranslateX() + view.getWidth())) { //---
+                            view.getAllPackages().get(i).setX((int) Math.round(view.getWidth() - view.getAllPackages().get(i).getWidth())); //----
 
-                    if (view.getAllPackages().get(i).getTranslateX() < view.getTranslateX()) {
-                        view.getAllPackages().get(i).setX(Math.round(view.getTranslateX()));
-                        shelfManager.getShelf().getAllPackages().get(i).setPositionX((int) Math.round(view.getTranslateX()));
-                    }
-                    if ((view.getAllPackages().get(i).getTranslateX() + view.getAllPackages().get(i).getWidth()) > (view.getTranslateX() + view.getWidth())) { //---
-                        view.getAllPackages().get(i).setX((int) Math.round(view.getWidth() - view.getAllPackages().get(i).getWidth())); //----
+                            shelfManager.getShelf().getAllPackages().get(i).setPositionX((int) Math.round(view.getWidth() - view.getAllPackages().get(i).getWidth()));
 
-                        shelfManager.getShelf().getAllPackages().get(i).setPositionX((int) Math.round(view.getWidth() - view.getAllPackages().get(i).getWidth()));
+                        }
+                        if (view.getAllPackages().get(i).getTranslateY() + view.getAllPackages().get(i).getHeight() > view.getTranslateY() + view.getHeight()) { //--
+                            view.getAllPackages().get(i).setY(Math.round((view.getHeight()) - view.getAllPackages().get(i).getHeight())); //-
 
-                    }
-                    if (view.getAllPackages().get(i).getTranslateY() + view.getAllPackages().get(i).getHeight() > view.getTranslateY() + view.getHeight()) { //--
-                        view.getAllPackages().get(i).setY(Math.round((view.getHeight()) - view.getAllPackages().get(i).getHeight())); //-
+                            shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round((view.getHeight()) - view.getAllPackages().get(i).getHeight()));
 
-                        shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round((view.getHeight()) - view.getAllPackages().get(i).getHeight()));
+                        }
+                        if (view.getAllPackages().get(i).getTranslateY() < view.getTranslateY()) {
+                            view.getAllPackages().get(i).setY(Math.round(view.getParent().getTranslateY()));
 
-                    }
-                    if (view.getAllPackages().get(i).getTranslateY() < view.getTranslateY()) {
-                        view.getAllPackages().get(i).setY(Math.round(view.getParent().getTranslateY()));
-
-                        shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round(view.getParent().getTranslateY()));
-                    }
+                            shelfManager.getShelf().getAllPackages().get(i).setPositionY((int) Math.round(view.getParent().getTranslateY()));
+                        }
 
 
 //    		            shelfManager.addPackageToShelfFloor(shelfManager.getShelf().getAllPackages().get(i));
@@ -311,27 +311,25 @@ public class ShelfViewController extends ViewController {
 //                        view.getAllPackages().get(i).setX(shelfManager.getShelf().getAllPackages().get(i).getPositionX());
 //                        view.getAllPackages().get(i).setY(shelfManager.getShelf().getAllPackages().get(i).getPositionY());
 
-                    ShelfFloor floor;
-                    floor = shelfManager.addPackageToShelfFloor(shelfManager.getShelf().getAllPackages().get(i));
+                        ShelfFloor floor;
+                        floor = shelfManager.addPackageToShelfFloor(shelfManager.getShelf().getAllPackages().get(i));
 //                    if (floor != null && floor.getPackageList().contains(shelfManager.getShelf().getAllPackages().get(i))) {
 //                        floor.getPackageList().remove(shelfManager.getShelf().getAllPackages().get(i));
 //                    }
-                    view.getAllPackages().get(i).setX(shelfManager.getShelf().getAllPackages().get(i).getPositionX());
-                    view.getAllPackages().get(i).setY(shelfManager.getShelf().getAllPackages().get(i).getPositionY());
+                        view.getAllPackages().get(i).setX(shelfManager.getShelf().getAllPackages().get(i).getPositionX());
+                        view.getAllPackages().get(i).setY(shelfManager.getShelf().getAllPackages().get(i).getPositionY());
 
 
-                    //System.out.println("PaketID"+id);
+                        //System.out.println("PaketID"+id);
 
 
-
-                    //setRectanglePositions(floor.getPackageList(), id, i);
-                    //e.consume();
-             }
-
+                        //setRectanglePositions(floor.getPackageList(), id, i);
+                        //e.consume();
+                    }
+                }
             }
-
-
         }
+    }
 
 
 //    public void setRectanglePositions(List<Package> packageList, int pckID, int index){
@@ -390,8 +388,8 @@ public class ShelfViewController extends ViewController {
                 //shelfSupportRectangle.setLayoutX(finaldistanceX);
                 shelfManager.getShelfSupportProp().getValue().setPositionX((int) shelfSupportRectangle.getLayoutX());
                 shelfManager.getShelfSupportProp().getValue().setPositionY((int) shelfSupportRectangle.getLayoutY());
-                System.out.println("Regalst�tzeX:" + shelfManager.getShelfSupportProp().getValue().getPositionX());
-                System.out.println("Regalst�tzeY:" + shelfManager.getShelfSupportProp().getValue().getPositionY());
+                System.out.println("RegalstuetzeX:" + shelfManager.getShelfSupportProp().getValue().getPositionX());
+                System.out.println("RegalstuetzeY:" + shelfManager.getShelfSupportProp().getValue().getPositionY());
 
                 //Arraylist von Shelfsupport-Rectangles = neues Rectangle hinzufuegen
                 ((ShelfView) root).getShelfSupports().add(shelfSupportRectangle);
@@ -471,23 +469,44 @@ public class ShelfViewController extends ViewController {
                 view.getChildren().addAll(packet);
 
 
-
                 packet.setId(pack.getPackageID() + "");
 
 
-
                 packet.addEventHandler(MouseEvent.MOUSE_CLICKED, new PackageHandler(pack.getPackageID()));
-                //packet.addEventHandler(MouseEvent.MOUSE_DRAGGED, new PackageHandlerForDrag(pack.getPackageID()));
-                packet.addEventHandler(MouseEvent.MOUSE_DRAGGED,new PackageHandlerForDrag(shelfManager.getShelf().getAllPackages().indexOf(pack)));
+                packet.addEventHandler(MouseEvent.MOUSE_DRAGGED, new PackageHandlerForDrag(pack.getPackageID()));
+                //packet.addEventHandler(MouseEvent.MOUSE_DRAGGED,new PackageHandlerForDrag(shelfManager.getShelf().getAllPackages().indexOf(pack)));
+
+                pack.getPositionYProp().addListener(new ChangeListener<Number>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
 
+                        packet.setY(newValue.doubleValue());
+                        pack.setPositionY(newValue.intValue());
+                        System.out.println("Y:"+newValue.intValue());
+
+
+                    }
+                });
+
+
+                pack.getPositionXProp().addListener(new ChangeListener<Number>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                        packet.setX(newValue.doubleValue());
+                        pack.setPositionX(newValue.intValue());
+                        System.out.println("X:"+newValue.intValue());
+
+
+                    }
+                });
 
 
             }
 
 
         });
-
 
     }
 }

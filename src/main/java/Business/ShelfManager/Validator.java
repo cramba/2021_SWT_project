@@ -7,48 +7,115 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Validator {
+public   class Validator {
 
     private String errorMessage;
 
-    public boolean checkCompatibility(ArrayList<Package> packageList, ArrayList<Package> newPackageList){
-        // für jedes aktuelle Paket wird verglichen, ob in der FarbListe der neuen PaketListe die Farbe enthalten ist
-        for(Package pck: packageList){
-            for(Package nPck: newPackageList){
-                for(Color color: nPck.getIncompatibility()){
-                    if(pck.getColour() == color){
+    public boolean checkCompatibility(ArrayList<Package> packageList) {
+		// fuer jedes aktuelle Paket wird verglichen, ob in der FarbListe der neuen
+		// PaketListe die Farbe enthalten ist
+		for (Package pck : packageList) {
+			for (Color color1 : pck.getIncompatibility()) {
+				for (Package pckS : packageList) {
+					if (pckS.getColour() == color1) {
+						// UNVERTRÄGLICHKEIT
                         return false;
-                    }
-                }
+					}
+					while (pckS.getPackagesAbove().size() != 0) {
+						if (pckS.getColour() == color1) {
+							// UNVERTRÄGLICHKEIT
+                            return false;
+						}
+						pckS.getPackagesAbove().get(0);
+					}
+				}
+			}
+			while (pck.getPackagesAbove().size() != 0) {
+				if (pck.getIncompatibility().size() != 0) {
+					for (Color color : pck.getIncompatibility()) {
+						for (Package pckS : packageList) {
+							if (pckS.getColour() == color) {
+								// UNVERTRÄGLICHKEIT
+                                return false;
+							}
+							while (pckS.getPackagesAbove().size() != 0) {
+								if (pckS.getColour() == color) {
+									// UNVERTRÄGLICHKEIT
+                                    return false;
+								}
+								pckS.getPackagesAbove().get(0);
+							}
+						}
+					}
+				}
+				pck = pck.getPackagesAbove().get(0);
+			}
+		}
+
+		return true;
+
+	}
+    
+    public static float checkLoadCapacityOld(ArrayList<Package> packageList, float loadCapacity) throws LoadCapacityException {
+        float loadWeight = 0;
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+        for(Package p: packageList){
+            //loadWeight += p.getWeight();
+        	loadWeight += calculateLoadWeight(p);
+            if(loadWeight > loadCapacity) {
+
+            	throw new LoadCapacityException();
+
             }
         }
-        
-        //neue PaketListe mit den aktuellen Paketen vergleichen, falls sich immer Farbkombinationen
-        //sich nicht vertragen sollten, reicht ein Vergleichsblock aus
-        for(Package nPck: newPackageList){
-            for(Package pck: packageList){
-                for(Color color: pck.getIncompatibility()){
-                    if(nPck.getColour() == color){
-                        return false;
-                    }
-                }
+
+        return loadWeight;
+    }
+
+    public static float checkLoadCapacity(ArrayList<Package> packageList, float loadCapacity) throws LoadCapacityException {
+        float loadWeight = 0;
+
+        for(Package p: packageList){
+            do {
+            	loadWeight += p.getWeight();
+            	if(p.getPackagesAbove().size() != 0) {
+            		p = p.getPackagesAbove().get(0);
+            	}
+            }while(p.getPackagesAbove().size() != 0);
+            
+            if(loadWeight > loadCapacity) {
+            	throw new LoadCapacityException();
             }
         }
-        
-        return true;
+
+        return loadWeight;
+    }
+
+    public static float calculateLoadWeight(Package pack) {
+
+    	float weight = 0 ;
+
+
+    	if(pack.getPackagesAbove().size()== 0) {
+    		return pack.getWeight();
+    	}else {
+    		for(int i=0; i< pack.getPackagesAbove().size(); i++) {
+
+
+    			weight+= calculateLoadWeight(pack.getPackagesAbove().get(i));
+
+    		}
+    	}
+
+		return weight + pack.getWeight();
 
     }
-    
-    public float checkLoadCapacity(ArrayList<Package> packageList, float loadCapacity){
-        float loadWeight = 0;
-        for(Package p: packageList){
-            loadWeight += p.getWeight();
-        }
-        
-        return loadCapacity - loadWeight;
-    }
+
+
     
     public boolean checkOverhang(ArrayList<Package> packageList){
+
         return false;
     }
     
@@ -65,5 +132,10 @@ public class Validator {
         
         return 0.0f;
     }
+
+    // public float checkPackageCapacity(Package pck){
+    //     float load = 0;
+    //     if(pck.getPackagesAbove()fef)
+    // }
 
 }

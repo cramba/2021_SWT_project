@@ -69,7 +69,8 @@ public class PackageTemplateCell extends ListCell<Package> {
 			setGraphic(info);
 			
 			addPackage.setOnAction((e) -> {
-					shelfManager.setTrayPackage(item);
+				Package newPackage = new Package(item.getName(), item.getHeight(), item.getWidth(), item.getWeight(), item.getColour(), item.getLoadCapacity(), item.getPackageID());
+				shelfManager.setTrayPackage(newPackage);
 
 			});
 			

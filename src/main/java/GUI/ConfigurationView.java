@@ -52,6 +52,10 @@ public class ConfigurationView extends BorderPane {
         return safeConfigurationButton;
     }
 
+    public Label getPaketOutput(){
+        return paketoutput;
+    }
+
     public ConfigurationView(){
 
         shelfEditButton = new Button("Regal bearbeiten");
@@ -63,7 +67,7 @@ public class ConfigurationView extends BorderPane {
         deleteButton = new Button ("loeschen");
         hBox3 = new HBox();
         fehleroutput = new Label("Text...");
-        paketoutput = new Label("Text...");
+        paketoutput = new Label(" klicke ein Paket an");
         
         loadConfigurationButton = new Button("Konfiguration laden");
         safeConfigurationButton = new Button("Konfiguration speichern");

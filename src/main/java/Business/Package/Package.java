@@ -1,5 +1,6 @@
 package Business.Package;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -14,8 +15,8 @@ public class Package {
     private int width;
     private float weight;
     private Color colour;
-    private int positionX;
-    private int positionY;
+    private SimpleIntegerProperty positionX;
+    private SimpleIntegerProperty positionY;
     private float loadCapacity;
     private List<Color> incompatibility;
     private List<Package> packagesAbove;
@@ -26,11 +27,11 @@ public class Package {
     }
 
     public void setPositionX(int positionX) {
-        this.positionX = positionX;
+        this.positionX.setValue(positionX);
     }
 
     public void setPositionY(int positionY) {
-        this.positionY = positionY;
+        this.positionY.setValue(positionY);
     }
 
     public void setIncompatibility(List<Color> incompatibility) {
@@ -49,8 +50,8 @@ public class Package {
         this.weight = weight;
         this.colour = colour;
         this.loadCapacity = loadCapacity;
-        this.positionX = 0;
-        this.positionY = 0;
+        positionX = new SimpleIntegerProperty(0);
+        positionY = new SimpleIntegerProperty(0);
         this.incompatibility = new ArrayList<>();
         this.packagesAbove = new ArrayList<>();
         this.packageID = packageID;
@@ -62,7 +63,7 @@ public class Package {
     }
     
     public String getSpecification() {
-    	String spec = "(" + height + " x " + width + ",  " + weight + "kg)";
+    	String spec = "(" + height + " x " + width + ", " + weight + "kg)";
     	return spec;
     }
     
@@ -95,12 +96,21 @@ public class Package {
     }
     
     public int getPositionX() {
-        return positionX;
+        return positionX.getValue();
     }
     
     public int getPositionY() {
+        return positionY.getValue();
+    }
+
+    public SimpleIntegerProperty getPositionXProp(){
+        return positionX;
+    }
+
+    public SimpleIntegerProperty getPositionYProp(){
         return positionY;
     }
+
     public int getPackageID() {
  		return packageID;
  	}
